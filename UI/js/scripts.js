@@ -5,5 +5,3 @@ navbar_toggle.addEventListener('click', function() {
 	this.classList.toggle("close");
 	navbar_links.classList.toggle("active");
 });
-
-
