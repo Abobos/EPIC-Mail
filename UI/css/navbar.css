@@ -3,7 +3,8 @@
 	--white:#ffffff;
  }
 
-*{
+
+* {
 	font-size: 18px;
 	font-family: "Courier New", Monospace;
 	box-sizing:border-box;
@@ -11,25 +12,28 @@
 	margin: 0;
 }
 
+
 /*Navbar for mobile devices*/
-.navbar{
+nav{
 	background-color:var(--blue);
 	padding-bottom: 10px;
 }
+
 .navbar_links{
 	list-style-type: none;
 	display: none;
-   transition: width 4s, height 4s;
 
 }
-.navbar_links li{
+
+.navbar_links li {
 	text-align: center;
 	margin: 15px auto;
 }
-.navbar_links li a{
+
+.navbar_links li a {
 	color:var(--white);
 }
- .navbar a {
+ nav a {
  	display: inline-block;
  	margin-top: 10px;
  	margin-left: 20px;
@@ -85,10 +89,11 @@
 }
 .navbar_brand {
 	font-weight: bold;
+
 }
 /*Navbar for desktops*/
 @media only screen and (min-width: 768px) {
-		.navbar {
+		nav {
 			display:flex;
 			justify-content: space-between;
 			align-items: center;
