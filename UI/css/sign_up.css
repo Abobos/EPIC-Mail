@@ -1,14 +1,15 @@
 @import "navbar.css";
 
-.sign_up_form {
 
-margin-left: 40%;
-margin-top:60px;
+.sign_up_form {
+text-align: center;
 }
 
 
-/*.form_group {
+.form_group {
 	border:none;
+
+	width: 60%;
 	border-bottom: 2px solid var(--blue);
 	padding: 10px;
 	margin-bottom:6px;
@@ -22,6 +23,11 @@ margin-top:60px;
 
 .btn_display {
 	display: block;
+	width:50%;
+	margin-top:20px;
+	margin-left: auto;
+	margin-right:auto;
+	text-align:center;
 	padding: 7px;
 	border-radius: 30px;
 	border:3px solid var(--blue);
@@ -34,38 +40,54 @@ margin-top:60px;
   color:white;
 }
 
-@media only screen and (max-width:767px){
-	.logo{
-		width: 100%;
-	}
-	.logo img {
-		width:80%;
-	}
-
-}
-@media only screen and (max-width:560px){
-	.sign_up_form {
-		margin-right: 30%;		
-	}
+.sign_up_form a {
+	text-decoration: none;
+	color:var(--blue);
+	font-weight: bold;
 }
 
 
-*/
+
 footer {
 	text-align:center;
-	margin-top:5%;
+	margin-top:10%;
 	padding:10px;
 	background-color:#f2f2f2;
 }
 
 .logo {
-	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:20px;
 	cursor: pointer;
-}
-
-.logo img {
 	width:10%;
 
 }
+
+.logo img {
+	
+	width:60%;
+	height: auto;
+
+}
+
+@media only screen and (max-width:767px){
+	.btn_display {
+		width: 60%;
+	}
+	.form_group{
+		width: 90%;
+	}
+
+
+.logo img {
+	
+	width:100%;
+	height: auto;
+
+}
+	
+}
+
 
 
