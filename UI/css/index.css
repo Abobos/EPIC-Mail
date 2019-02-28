@@ -1,0 +1,85 @@
+
+@import "navbar.css";
+/*Welcome Div*/
+.welcome {
+margin-top:8px;
+margin: auto;
+animation: slide_up 1s ease-in-out;
+}
+
+.welcome h1 {
+	text-align:center;
+	font-size: 30px;
+	color: var(--blue);
+}
+.welcome_item p {
+	text-align: center;
+}
+
+.logo {
+		margin-left:47%;
+		margin-top:40px;
+}
+.logo img {
+	width: 10%;
+	height: auto;	
+}
+
+.btn {
+	display: block;
+	width: 30%;
+	margin: auto;
+	padding: 10px;
+	border-radius: 30px;
+	border:3px solid var(--blue);
+	text-decoration: none;
+	color:var(--blue);
+	text-align:center;
+}
+.btn:hover {
+  background-color: var(--blue);
+  color:white;
+}
+
+@keyframes slide_up {
+	0% {
+		transform: translateY(400px);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
+footer {
+	text-align:center;
+	margin-top:15%;
+	padding:10px;
+	background-color:#f2f2f2;
+	}
+/*Styling Welcome menu for mobile devices*/
+
+@media only screen and (max-width:768px) {
+	.logo{
+		margin-left: 43%;
+	}
+	.logo img{
+		width: 30%;
+		height: auto;	
+	}
+
+	.btn{
+		width:80%;
+	}
+
+	.welcome_item {
+		padding: 12px;
+		width:100%;
+	}
+	footer {
+		margin-top:0.5rem;
+		}
+
+}
+
+	
