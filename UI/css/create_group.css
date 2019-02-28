@@ -8,12 +8,30 @@
  
  .form_group {
  	margin-bottom: 2rem;
- 	width: 80vw;
+ 	width: 60vw;
  	border:3px solid #d7d7c1;
  	padding: 1em;
  	border-radius: 1rem;
  }
 
+ .select_users {
+	width:60vw;
+	
+}
+ 
+ .select {
+
+	width:60vw;
+
+  }
+
+ button {
+	 background-color:#33ccff;
+	 margin-top:0;
+	 padding: 1em;
+	
+ }
+ 
 .form_group:focus-within {
  	outline: none;
  }
@@ -32,7 +50,7 @@
 	margin-left:2rem;
 	margin-top: 1rem;
 	cursor: pointer;
- }
+  }
 
 .logo img {
 	width:10vw;
@@ -44,5 +62,4 @@
 	color:var(--blue);
 	margin-bottom:2rem;
 	font-weight: bold;
-	
 }
