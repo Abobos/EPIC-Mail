@@ -1,9 +1,6 @@
-let navbar_toggle=document.querySelector('.navbar_toggle');
-let navbar_links=document.querySelector('.navbar_links');
-
-navbar_toggle.addEventListener('click', function() {
-	this.classList.toggle("close");
-	navbar_links.classList.toggle("active");
+const navbarToggle = document.querySelector('.navbar_toggle');
+const navbarLinks = document.querySelector('.navbar_links');
+navbarToggle.addEventListener('click', function(){
+	this.classList.toggle('close');
+	navbarLinks.classList.toggle('active');
 });
-
-
