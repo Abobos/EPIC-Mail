@@ -6,31 +6,26 @@
 	width: 70vw;
 }
  
-
- .form_group {
- 	margin-bottom: 2rem;
- 	width:60vw;
- 	border:3px solid #d7d7c1;
+.form_group {
+ 	margin-bottom: 1rem;
+ 	width:65vw;
+ 	border:1px solid var(--blue) ;
  	padding: 1em;
  	border-radius: 1rem;
  }
 
- .select_users {
-	width:80vw;
-}
- 
  .select {
-	width:60vw;
+	width:43vw;
   }
 
   select option[data-default] {
 	  color:#888;
   }
+
  button {
 	 background-color:#33ccff;
 	 margin-top:0;
 	 padding: 1em;
-	
  }
  
 .form_group:focus-within {
@@ -38,7 +33,7 @@
  }
 
  input[type="submit"] {
- 	width: 80vw;
+ 	width: 60vw;
  	padding:1.5rem;
  	color:white;
  	font-weight: bold;
@@ -63,4 +58,42 @@
 	color:var(--blue);
 	margin-bottom:2rem;
 	font-weight: bold;
+}
+
+/* create group form desktops */
+@media only screen and (min-width:768px){
+	.create_group {
+		margin:auto;
+	}
+
+	.select {
+		width:56vw;
+	}
+
+	 .logo img { 
+		width:5vw;
+		height: auto;
+	}
+}
+
+@media only screen and (max-width:767px){
+	.create_group {
+	margin-left:14vw;
+	}
+
+	.select{
+		font-size:15px;
+	}
+
+	.logo {
+		margin-left:0.5rem;
+		
+	  }
+	  .admin_details {
+		margin-left:0.5rem;
+	}
+}
+
+.selected_users{
+	color:red;
 }
