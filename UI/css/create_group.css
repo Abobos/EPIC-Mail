@@ -18,9 +18,6 @@
 	width:43vw;
   }
 
-  select option[data-default] {
-	  color:#888;
-  }
 
  button {
 	 background-color:#33ccff;
@@ -92,8 +89,4 @@
 	  .admin_details {
 		margin-left:0.5rem;
 	}
-}
-
-.selected_users{
-	color:red;
 }
