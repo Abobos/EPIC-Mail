@@ -1,0 +1,92 @@
+@import "navbar.css";
+
+.create_group {
+	text-align:center;
+	margin:0rem 2rem;
+	width: 70vw;
+}
+ 
+.form_group {
+ 	margin-bottom: 1rem;
+ 	width:65vw;
+ 	border:1px solid var(--blue) ;
+ 	padding: 1em;
+ 	border-radius: 1rem;
+ }
+
+ .select {
+	width:43vw;
+  }
+
+
+ button {
+	 background-color:#33ccff;
+	 margin-top:0;
+	 padding: 1em;
+ }
+ 
+.form_group:focus-within {
+ 	outline: none;
+ }
+
+ input[type="submit"] {
+ 	width: 60vw;
+ 	padding:1.5rem;
+ 	color:white;
+ 	font-weight: bold;
+	font-size: 20px;
+ 	background-color: var(--blue);
+ 	cursor: pointer;
+ }
+
+ .logo {
+	margin-left:2rem;
+	margin-top: 1rem;
+	cursor: pointer;
+  }
+
+.logo img {
+	width:10vw;
+	height: auto;
+}
+
+.admin_details {
+	margin-left:2rem;
+	color:var(--blue);
+	margin-bottom:2rem;
+	font-weight: bold;
+}
+
+/* create group form desktops */
+@media only screen and (min-width:768px){
+	.create_group {
+		margin:auto;
+	}
+
+	.select {
+		width:56vw;
+	}
+
+	 .logo img { 
+		width:5vw;
+		height: auto;
+	}
+}
+
+@media only screen and (max-width:767px){
+	.create_group {
+	margin-left:14vw;
+	}
+
+	.select{
+		font-size:15px;
+	}
+
+	.logo {
+		margin-left:0.5rem;
+		
+	  }
+	  .admin_details {
+		margin-left:0.5rem;
+	}
+}
