@@ -24,7 +24,7 @@
     color:var(--blue);
 }
 .navbar a, .navbar img {
-    margin-left:2rem;
+    margin-left:3rem;
 }
 .navbar img {
     width: 10vw;
@@ -77,12 +77,12 @@ ul {
 }
 
 .display {
+
     text-align:center;
 }
 #compose {
-    margin-top:2rem;
+    margin-top:rem;
 }
-
 
 .form_group {
  	margin-bottom: 1rem;
@@ -92,7 +92,6 @@ ul {
  	border-radius: 1rem;
  }
 
-
 .form_group:focus{
 	outline: none;
     background-color:none;
@@ -101,6 +100,53 @@ ul {
 
 textarea {
     resize:none;
+}
+
+#send {
+    width:30vw;
+    margin-top:5px;
+    text-align:center;
+    padding: 7px;
+    border-radius: 30px;
+    color:var(--white);
+    font-weight: bold;
+    background-color: var(--blue);
+}
+
+
+#send:focus, #send:active {
+  outline: none;
+    border:none;
+    cursor:pointer;
+}
+
+
+#save {
+     width:30vw;
+    margin-top:5px;
+    text-align:center;
+    padding: 7px;
+    border-radius: 30px;
+    color:var(--white);
+    font-weight: bold;
+    background-color: #33ccff;
+}
+
+#send:focus, #send:active {
+    outline: none;
+    border:none;
+    cursor:pointer;
+}
+
+#delete {
+    width:30vw;
+    margin-top:5px;
+    text-align:center;
+    padding: 7px;
+    border-radius: 30px;
+    color:var(--white);
+    font-weight: bold;
+    background-color: red;
 }
 /*sidenav and logo for desktops*/
 
@@ -124,7 +170,6 @@ textarea {
         margin-left:20rem;
     }
   
-    
     #closeNav {
         display:none;
     }
@@ -135,9 +180,11 @@ textarea {
     }
 
     .logo img {
+        margin-top: 2rem;
         width:6vw;
     }
     /* .navbar a, .navbar img {
        
     } */
 }
+

@@ -9,3 +9,4 @@ openNav.addEventListener('click', () => {
 closeNav.addEventListener('click', () => {
     sideNav.style.width='0';
 });
+
