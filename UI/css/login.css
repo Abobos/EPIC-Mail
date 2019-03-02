@@ -52,7 +52,14 @@
 
 .forgot_password {
 	width: 100%;
-	margin-left: 100px;
+	margin-left: 100p
+}
+
+@media only screen and (min-width:767px) {
+	.form_group {
+		width: 150%;
+	}
+	
 }
 
 @media only screen and (max-width:767px) {
