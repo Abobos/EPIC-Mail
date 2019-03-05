@@ -1,0 +1,25 @@
+{
+  "name": "EPIC-Mail",
+  "version": "1.0.0",
+  "description": "EPIC Mail is a web application that helps people exchange messages and informaion over the internet.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abobos/EPIC-Mail.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abobos/EPIC-Mail/issues"
+  },
+  "homepage": "https://github.com/Abobos/EPIC-Mail#readme",
+  "devDependencies": {
+    "eslint": "^5.15.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
