@@ -2,13 +2,13 @@
 @import "navbar.css";
 /*Welcome Div*/
 .welcome {
-	margin-top:5rem;
+	margin-top:3rem;
 	margin: auto;
 	animation: slide_up 1s ease-in-out;
 }
 
 .welcome_text {
-	margin-top:2rem;
+	margin-top:1rem;
 }
 
 
@@ -70,6 +70,7 @@ footer {
 	.logo{
 		margin-left: 43%;
 	}
+	
 	.logo img{
 		width: 30%;
 		height: auto;	
@@ -81,8 +82,13 @@ footer {
 
 	.welcome_item {
 		padding: 12px;
-		width:100%;
+		width:100vw;
 	}
+
+	.welcome_text {
+		margin-top:0.7rem;
+	}
+
 }
 
 	
