@@ -2,9 +2,9 @@
 @import "navbar.css";
 /*Welcome Div*/
 .welcome {
-margin-top:8px;
-margin: auto;
-animation: slide_up 1s ease-in-out;
+	margin-top:8px;
+	margin: auto;
+	animation: slide_up 1s ease-in-out;
 }
 
 .welcome h1 {
