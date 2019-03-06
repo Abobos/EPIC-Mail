@@ -1,14 +1,14 @@
 :root{
-	--blue: #3399ff;
-	--white:#ffffff;
+    --blue: #3399ff;
+    --white:#ffffff;
  }
 
 * {
-	font-size: 18px;
-	font-family: "Courier New", Monospace;
-	box-sizing:border-box;
-	padding:0;
-	margin: 0;
+    font-size: 18px;
+    font-family: "Courier New", Monospace;
+    box-sizing:border-box;
+    padding:0;
+    margin: 0;
 }
 
 /*sidenav for mobile devices*/
@@ -83,17 +83,17 @@ ul {
 
 
 .form_group {
- 	margin-bottom: 1rem;
- 	width:65vw;
- 	border:1px solid var(--blue) ;
- 	padding: 1em;
- 	border-radius: 1rem;
+     margin-bottom: 1rem;
+     width:65vw;
+     border:1px solid var(--blue) ;
+     padding: 1em;
+     border-radius: 1rem;
  }
 
 .form_group:focus{
-	outline: none;
+    outline: none;
     background-color:none;
-	border-bottom: 2px solid var(--blue);
+    border-bottom: 2px solid var(--blue);
 }
 
 textarea {
