@@ -1,18 +1,18 @@
 :root{
-	--blue: #3399ff;
-	--white:#ffffff;
+    --blue: #3399ff;
+    --white:#ffffff;
  }
 
 * {
-	font-size: 18px;
-	font-family: "Courier New", Monospace;
-	box-sizing:border-box;
-	padding:0;
-	margin: 0;
+    font-size: 18px;
+    font-family: "Courier New", Monospace;
+    box-sizing:border-box;
+    padding:0;
+    margin: 0;
+    line-height:1.5rem;
 }
 
 /*sidenav for mobile devices*/
-
 .navbar {
     background-color:var(--white);
     border-bottom:3px solid var(--blue);
@@ -77,23 +77,22 @@ ul {
 }
 
 .display {
-
     text-align:center;
 }
 
 
 .form_group {
- 	margin-bottom: 1rem;
- 	width:65vw;
- 	border:1px solid var(--blue) ;
- 	padding: 1em;
- 	border-radius: 1rem;
+     margin-bottom: 1rem;
+     width:55vw;
+     border:1px solid var(--blue) ;
+     padding: 1em;
+     border-radius: 1rem;
  }
 
 .form_group:focus{
-	outline: none;
+    outline: none;
     background-color:none;
-	border-bottom: 2px solid var(--blue);
+    border-bottom: 2px solid var(--blue);
 }
 
 textarea {
@@ -101,7 +100,7 @@ textarea {
 }
 
 #send {
-    width:30vw;
+    width:25vw;
     margin-top:3px;
     text-align:center;
     padding: 7px;
@@ -111,16 +110,14 @@ textarea {
     background-color: var(--blue);
 }
 
-
 #send:focus, #send:active {
-  outline: none;
+    outline: none;
     border:none;
     cursor:pointer;
 }
 
-
 #save {
-     width:30vw;
+    width:25vw;
     margin-top:5px;
     text-align:center;
     padding: 7px;

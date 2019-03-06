@@ -2,10 +2,15 @@
 @import "navbar.css";
 /*Welcome Div*/
 .welcome {
-margin-top:8px;
-margin: auto;
-animation: slide_up 1s ease-in-out;
+	margin-top:3rem;
+	margin: auto;
+	animation: slide_up 1s ease-in-out;
 }
+
+.welcome_text {
+	margin-top:1rem;
+}
+
 
 .welcome h1 {
 	text-align:center;
@@ -53,16 +58,19 @@ animation: slide_up 1s ease-in-out;
 
 footer {
 	text-align:center;
-	margin-top:15%;
+	bottom:0;
 	padding:10px;
+	position:fixed;
+	width:100vw;
 	background-color:#f2f2f2;
 	}
-/*Styling Welcome menu for mobile devices*/
 
+/*Styling Welcome menu for mobile devices*/
 @media only screen and (max-width:768px) {
 	.logo{
 		margin-left: 43%;
 	}
+	
 	.logo img{
 		width: 30%;
 		height: auto;	
@@ -74,11 +82,12 @@ footer {
 
 	.welcome_item {
 		padding: 12px;
-		width:100%;
+		width:100vw;
 	}
-	footer {
-		margin-top:0.5rem;
-		}
+
+	.welcome_text {
+		margin-top:0.7rem;
+	}
 
 }
 

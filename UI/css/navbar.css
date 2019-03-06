@@ -10,29 +10,29 @@
 	box-sizing:border-box;
 	padding:0;
 	margin: 0;
+	line-height:1.3rem;
 }
-
 
 /*Navbar for mobile devices*/
 nav{
 	background-color:var(--blue);
 	padding-bottom: 10px;
+	width:100vw;
 }
 
 .navbar_links{
 	list-style-type: none;
 	display: none;
-
 }
 
 .navbar_links li {
 	text-align: center;
 	margin: 15px auto;
 }
-
 .navbar_links li a {
 	color:var(--white);
 }
+
  nav a {
  	display: inline-block;
  	margin-top: 10px;
@@ -84,8 +84,7 @@ nav{
 }
 .navbar_links.active li a {
 	color:var(--blue);
-	font-size: 50px;
-	border-bottom: 3px solid var(--blue);
+	font-size: 30px;
 }
 .navbar_brand {
 	font-weight: bold;
