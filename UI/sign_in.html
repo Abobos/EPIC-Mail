@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no"> 
 	<link rel="icon" type="image/png" href="images/logo.png">
-	<link rel="stylesheet" type="text/css" href="css/login.css">
-	<title>EPIC-Mail | Login</title>
+	<link rel="stylesheet" type="text/css" href="css/sign_in.css">
+	<title>EPIC-Mail | Sign in</title>
 </head>
 
 <body>
@@ -23,6 +23,11 @@
 			<ul class="navbar_links">
 				<li class="nav_items"><a href="index.html">Home</a></li>
 				<li class="nav_items"><a href="#">Docs</a></li>
+				<li class="nav_items"><a href="compose_message.html">Compose Message</a></li>
+				<li class="nav_items"><a href="inbox.html">Inbox</a></li>
+				<li class="nav_items"><a href="sent_message.html">Sent</a></li>
+				<li class="nav_items"><a href="draft.html">Draft</a></li>
+				<li class="nav_items"><a href="create_group.html">Create Group</a></li>
 			</ul>
 	</nav>
 
@@ -34,13 +39,18 @@
 			<form action="compose_message.html" method="get">
 				<input type="email" name="first_name" placeholder="Email" class="form_group"/><br>
 				<input type="password" name="password" placeholder="Password" class="form_group"/><br>
-				<input type="submit" class="btn_display" value="Login"/><br>
-					<div class="forgot_password">
-						<a href="forgot_password.html">forgot password?</a>...
+				<input type="submit" class="btn_display" value="Sign in"/><br>
+				
+				<div class="forgot_password">
+						<a href="forgot_password.html">forgot password?</a><br>
 						<a href="sign_up.html">Sign Up</a>
-					</div>
+				</div>
+				
 			</form>
 	</div>
+
+	<footer>&copy; 2019 EPIC Mail Inc.</footer>
+	
 	<script src="js/scripts.js"></script>
 </body>
 </html>
