@@ -7,8 +7,7 @@
     "test": "./node_modules/.bin/mocha --require @babel/register ./Server/test/*.test.js",
     "start": "nodemon --exec babel-node app.js",
     "build": "babel src --out-dir ./dist --source-maps",
-    "serve": "node ./dist/app.js",
-    "debug": "node --inspect-brk ./dist/app.js"
+    "serve": "node ./dist/app.js"
   },
   "repository": {
     "type": "git",
@@ -28,9 +27,11 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
     "eslint": "^5.15.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "istanbul": "^0.4.5",
     "mocha": "^6.0.2",
     "nodemon": "^1.18.10"
   },
@@ -40,6 +41,7 @@
     "express": "^4.16.4",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.0",
-    "kill-all-node-on-windows": "0.0.4"
+    "kill-all-node-on-windows": "0.0.4",
+    "nyc": "^13.3.0"
   }
 }
