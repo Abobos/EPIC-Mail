@@ -18,7 +18,7 @@ EPIC Mail is a web application that helps people exchange messages and informaio
 #####User Features
 * Send mail to individuals or groups.
 * View inbox.
-* Read an email message and any resulting thread.
+* Read an emailmessage and any resulting thread.
 * View sent messages and retract a sent message
 * Save a message as draft.
 

@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/v1/auth', router);
 
-
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Listening to the port ${PORT}`);
