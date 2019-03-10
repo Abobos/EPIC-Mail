@@ -1,14 +1,22 @@
 import Joi from 'joi';
 
-function validateUserDetails(userDetails) {
+function validateUserSignUpDetails(userDetails) {
   const schema = {
-    firstname: Joi.string().required(),
-    lastname: Joi.string().required(),
+    firstname: Joi.string().trim().required(),
+    lastname: Joi.string().trim().required(),
     email: Joi.string().trim().email().required(),
-    password: Joi.string().alphanum().min(6).required(),
+    password: Joi.string().trim().min(6).required(),
     confirm_password: Joi.any().equal(Joi.ref('password')).required(),
   };
   return Joi.validate(userDetails, schema);
 }
 
-export default validateUserDetails;
+function validateUserSignInDetails(userDetails) {
+  const schema = {
+    email: Joi.string().trim().email().required(),
+    password: Joi.string().min(6).required(),
+  };
+  return Joi.validate(userDetails, schema);
+}
+
+export { validateUserSignUpDetails, validateUserSignInDetails };
