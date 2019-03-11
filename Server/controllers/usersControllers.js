@@ -56,18 +56,20 @@ class UsersControllers {
       });
     }
     const user = users.find(k => k.email === req.body.email);
-    const { authData, password } = user;
     if (!user) {
       return res.status(404).json({
         status: 404,
         error: 'Details not found, Sign Up!',
       });
     }
-    if (password !== req.body.password) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Incorrect password!',
-      });
+    const { authData, password } = user;
+    if (user) {
+      if (password !== req.body.password) {
+        return res.status(401).json({
+          status: 401,
+          error: 'Incorrect password!',
+        });
+      }
     }
     return res.status(200).json({
       status: 200,
@@ -79,6 +81,5 @@ class UsersControllers {
     });
   }
 }
-
 
 export default UsersControllers;
