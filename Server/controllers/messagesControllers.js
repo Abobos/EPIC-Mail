@@ -24,6 +24,16 @@ class messagesControllers {
       ],
     });
   }
+
+  static receivedMessage(req, res) {
+    const receivedMessage = messages.filter(message => message.status === 'read');
+    return res.status(200).json({
+      status: 200,
+      data: [
+        receivedMessage,
+      ],
+    });
+  }
 }
 
 

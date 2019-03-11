@@ -74,6 +74,27 @@ const messages = [
     parentMessageId: 2,
     status: 'unread',
   },
+  {
+    id: 1,
+    createdOn: 'Mar 11 2019 04:34:50',
+    subject: 'Andela',
+    message: 'Brilliance is evenly disrtributed',
+    senderId: 1,
+    receiverId: 1,
+    parentMessageId: 1,
+    status: 'read',
+  },
+
+  {
+    id: 2,
+    createdOn: 'Mar 11 2019 04:34:50',
+    subject: 'Andela',
+    message: 'Brilliance is evenly disrtributed',
+    senderId: 2,
+    receiverId: 2,
+    parentMessageId: 2,
+    status: 'read',
+  },
 ];
 
 export { users, messages };
