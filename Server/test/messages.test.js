@@ -83,5 +83,19 @@ describe('POST /messages', () => {
         done();
       });
   });
-
+});
+describe('GET /messages', () => {
+  it('should return a status of 200 and show all received messages', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages')
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        done();
+      });
+  });
 });
