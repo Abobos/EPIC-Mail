@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Abobos/EPIC-Mail.svg?branch=develop)](https://travis-ci.org/Abobos/EPIC-Mail)
+[![Coverage Status](https://coveralls.io/repos/github/Abobos/EPIC-Mail/badge.svg?branch=develop)](https://coveralls.io/github/Abobos/EPIC-Mail?branch=develop)
 
 ### EPIC-Mail
 EPIC Mail is a web application that helps people exchange messages and informaion over the internet.
