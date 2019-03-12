@@ -8,27 +8,26 @@
 	font-family: "Courier New", Monospace;
 	box-sizing:border-box;
 	padding:0;
-    margin: 0;
-    line-height:1.5rem;
+	margin: 0;
+	line-height:1.2rem;
 }
 
 /*sidenav for mobile devices*/
-
 .navbar {
-    background-color:var(--white);
-    border-bottom:3px solid var(--blue);
+	background-color:var(--white);
+	border-bottom:3px solid var(--blue);
 }
 
 .navbar a {
-    text-decoration:none;
-    font-weight: bold;
-    color:var(--blue);
+	text-decoration:none;
+	font-weight: bold;
+	color:var(--blue);
 }
 .navbar a, .navbar img {
-    margin-left:3rem;
+	margin-left:3rem;
 }
 .navbar img {
-    width: 10vw;
+	width: 10vw;
 }
 
 #openNav, #closeNav {
@@ -37,49 +36,49 @@
 }
 
 #closeNav {
-    color:white;
+	color:white;
 }
 ul {
-    list-style-type: none;
+	list-style-type: none;
 }
 
 .sidenav {
-    background-color:var(--blue);
-    height: 100vh;
-    width:0;
-    top:0;
-    left:0;
-    position: fixed;
-    z-index:1;
-    overflow-x: hidden;
-    padding-top:60px;
-    transition:0.5s
+	background-color:var(--blue);
+	height: 100vh;
+	width:0;
+	top:0;
+	left:0;
+	position: fixed;
+	z-index:1;
+	overflow-x: hidden;
+	padding-top:60px;
+	transition:0.5s
 }
 
 .nav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration:none;
-    font-size:25px;
-    color:var(--white);
-    display:block;
-    transition:0.4s;
+	padding: 8px 8px 8px 32px;
+	text-decoration:none;
+	font-size:25px;
+	color:var(--white);
+	display:block;
+	transition:0.4s;
 }
 
 #closeNav {
-    position:absolute;
-    top:0;
-    right:25px;
-    font-size:36px;
-    margin-left:50px;
+	position:absolute;
+	top:0;
+	right:25px;
+	font-size:36px;
+	margin-left:50px;
 }
 
 .logo {
-    display:none;
+	display:none;
 }
 
 .display {
 
-    text-align:center;
+	text-align:center;
 }
 
 
@@ -93,164 +92,217 @@ ul {
 
 .form_group:focus{
 	outline: none;
-    background-color:none;
+	background-color:none;
 	border-bottom: 2px solid var(--blue);
 }
 
-textarea {
-    resize:none;
-}
-
-#send {
-    width:30vw;
-    margin-top:3px;
-    text-align:center;
-    padding: 7px;
-    border-radius: 30px;
-    color:var(--white);
-    font-weight: bold;
-    background-color: var(--blue);
-}
-
-
-#send:focus, #send:active {
-  outline: none;
-    border:none;
-    cursor:pointer;
-}
-
-
-#save {
-     width:30vw;
-    margin-top:5px;
-    text-align:center;
-    padding: 7px;
-    border-radius: 30px;
-    color:var(--white);
-    font-weight: bold;
-    background-color: #33ccff;
-}
-
-#send:focus, #send:active {
-    outline: none;
-    border:none;
-    cursor:pointer;
-}
-
 #delete {
-    width:30vw;
-    margin-top:5px;
-    text-align:center;
-    padding: 7px;
-    border-radius: 30px;
-    color:var(--white);
-    font-weight: bold;
-    background-color: red;
+	width:30vw;
+	margin-top:5px;
+	text-align:center;
+	padding: 7px;
+	border-radius: 30px;
+	color:var(--white);
+	font-weight: bold;
+	background-color: red;
 }
 
-#Draft {
+#Inbox {
 margin-top: 1.5rem;
 }
 
-@media only screen and (max-height:450px) {
-    .sidenav {
-        padding-top:15px;
-    }    
-    .sidenav a {
-        font-size: 15px;
-    }
+#delete {
+	width:7vw;
+	margin-top:5px;
+	text-align:center;
+	padding: 7px;
+	border-radius: 30px;
+	color:var(--white);
+	font-weight: bold;
+	background-color:#b30000;
+	cursor:pointer;
 }
+
+.view {
+	width:7vw;
+	margin-top:5px;
+	text-align:center;
+	padding: 7px;
+	border-radius: 30px;
+	color:var(--white);
+	font-weight: bold;
+	background-color:#009933;
+	cursor:pointer;
+}
+
+#send {
+  width:7vw;
+  margin-top:3px;
+  text-align:center;
+  padding: 7px;
+  border-radius: 30px;
+  color:var(--white);
+  font-weight: bold;
+  background-color: var(--blue);
+}
+
+#delete:focus, #delete:active, .view:focus, .view:active {
+	border:none;
+}
+
+.message {
+	margin-left: 2rem;
+	margin-bottom:2rem;
+	padding: 1rem;
+	width:70vw;
+	background-color:#ccccb3;
+	border:3px solid #f2f2f2;
+	text-align: left;
+}
+
+.messageTitle {
+	font-weight: bold;
+	border-bottom: 3px solid #f2f2f2;
+}
+
+.messageBody {
+	padding: 1rem;
+	line-height:1.5rem;
+	height:2vh;
+	overflow-y:hidden;
+	background-color: #ffffff;
+	transition:0.5s;
+}
+
+.hide {
+  height:50vh;
+  overflow-y: scroll;
+}
+
+
+@media only screen and (max-height:450px) {
+	.sidenav {
+		padding-top:15px;
+	}    
+	.sidenav a {
+		font-size: 15px;
+	}
+}
+
 /*sidenav and logo for desktops*/
-
-
 @media only screen and (min-width:768px) {
 
-    .sidenav {
-        height: 100vh;
-        width:25vw;
-        position: fixed;
-        z-index:1;
-        overflow-x: hidden;
-        padding-top:20px;
-        transition:0.5s
-    }
+	.sidenav {
+		height: 100vh;
+		width:25vw;
+		position: fixed;
+		padding-top:20px;
+	}
 
-    .navbar {
-     display:none;
-        }
+	.navbar {
+	 display:none;
+		}
 
-    .display {
-        margin-left:10rem;
-    }
-
+	.display {
+    margin-left:10rem;
+	}
+	#closeNav {
+		display:none;
+	}
    
-    .message {
-        margin-left: 2rem;
-    }
-    #closeNav {
-        display:none;
-    }
-   
-    .logo{
-    
-        display:block;
-    }
+	.logo{
+	
+		display:block;
+	}
 
-    .logo img {
-        margin-top: 1rem;
-        width:6vw;
-    }
+	.logo img {
+		margin-top: 1rem;
+		width:6vw;
+	}
+	#delete {
+		width: 10vw;
+	}
+	.view {
+		width:10vw;
+  }
+  
+  #send {
+    width:10vw;
+  }
    
 }
 
 
 @media only screen and (min-width:900px) {
-     .display {
-        margin-left:13rem;
-    }
-    .message {
-       margin-left:2rem;
-    }
+	 .display {
+		margin-left:13rem;
+	}
+	.message {
+	   margin-left:2rem;
+	}
 
 }
 
 @media only screen and (min-width:1300px) {
-     .display {
-        margin-left:20rem;
-    }
+	 .display {
+		margin-left:20rem;
+	}
 
-    .message {
-       margin-left:1.5rem;
-    }
+	.message {
+	   margin-left:1.5rem;
+	}
 
 }
 
-.message {
-    font-weight: bold;
-    padding: 1rem;
-    width:70vw;
-    border:3px solid #f2f2f2;
-    text-align: left;
-}
-
-.messageTitle {
-    border-bottom: 3px solid #f2f2f2;
-}
-
-.messageBody {
-    padding: 2rem;
-}
 
 @media only screen and (max-width:760px) {
-    .message {
-        margin-left: 6rem;
-    }
-       
- }
+	.message {
+		margin-left: 6rem;
+	}
+	
+	#delete {
+		width: 15vw;
+	}
+	.view {
+		width:15vw;
+  }
+  #send {
+    width:15vw
+  }
+}
 
-    
 @media only screen and (max-width:550px) {
-    .message {
-        margin-left: 3rem;
-    }
- }
+	.message {
+		margin-left: 3rem;
+	}
+	
+	#save {
+		width: 60vw;
+	}	
+	#delete {
+		width: 20vw;
+	}
+	.view {
+		width:20vw;
+  }
+  #send {
+    width:20vw;
+  }
+}
+
+@media only screen and (max-width:640px) {
+	.message {
+		margin-left: 3rem;
+  }
+  
+	#delete {
+		width: 20vw;
+	}
+	.view {
+		width:20vw;
+  }
+  #send {
+    width:20vw;
+  }
+}
+

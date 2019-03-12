@@ -96,46 +96,6 @@ ul {
 	border-bottom: 2px solid var(--blue);
 }
 
-textarea {
-	resize:none;
-}
-
-#send {
-	width:30vw;
-	margin-top:3px;
-	text-align:center;
-	padding: 7px;
-	border-radius: 30px;
-	color:var(--white);
-	font-weight: bold;
-	background-color: var(--blue);
-}
-
-
-#send:focus, #send:active {
-  outline: none;
-	border:none;
-	cursor:pointer;
-}
-
-
-#save {
-	 width:30vw;
-	margin-top:5px;
-	text-align:center;
-	padding: 7px;
-	border-radius: 30px;
-	color:var(--white);
-	font-weight: bold;
-	background-color: #33ccff;
-}
-
-#send:focus, #send:active {
-	outline: none;
-	border:none;
-	cursor:pointer;
-}
-
 #delete {
 	width:30vw;
 	margin-top:5px;
@@ -150,6 +110,64 @@ textarea {
 #Inbox {
 margin-top: 1.5rem;
 }
+
+#delete {
+	width:7vw;
+	margin-top:5px;
+	text-align:center;
+	padding: 7px;
+	border-radius: 30px;
+	color:var(--white);
+	font-weight: bold;
+	background-color:#b30000;
+	cursor:pointer;
+}
+
+.view {
+	width:7vw;
+	margin-top:5px;
+	text-align:center;
+	padding: 7px;
+	border-radius: 30px;
+	color:var(--white);
+	font-weight: bold;
+	background-color:#009933;
+	cursor:pointer;
+}
+
+#delete:focus, #delete:active, .view:focus, .view:active {
+	border:none;
+}
+
+.message {
+	margin-left: 2rem;
+	margin-bottom:2rem;
+	padding: 1rem;
+	width:70vw;
+	background-color:#ccccb3;
+	border:3px solid #f2f2f2;
+	text-align: left;
+}
+
+.messageTitle {
+	font-weight: bold;
+	border-bottom: 3px solid #f2f2f2;
+}
+
+.messageBody {
+	padding: 1rem;
+	line-height:1.5rem;
+	height:2vh;
+	overflow-y:hidden;
+	background-color: #ffffff;
+	transition:0.5s;
+}
+
+.hide {
+	height:50vh;
+	overflow-y: scroll;
+}
+
 
 @media only screen and (max-height:450px) {
 	.sidenav {
@@ -167,10 +185,8 @@ margin-top: 1.5rem;
 		height: 100vh;
 		width:25vw;
 		position: fixed;
-		z-index:1;
-		overflow-x: hidden;
+
 		padding-top:20px;
-		transition:0.5s
 	}
 
 	.navbar {
@@ -179,11 +195,6 @@ margin-top: 1.5rem;
 
 	.display {
 		margin-left:10rem;
-	}
-
-   
-	.message {
-		margin-left: 2rem;
 	}
 	#closeNav {
 		display:none;
@@ -198,6 +209,12 @@ margin-top: 1.5rem;
 		margin-top: 1rem;
 		width:6vw;
 	}
+	#delete {
+		width: 10vw;
+	}
+	.view {
+		width:10vw;
+	}
    
 }
 
@@ -209,38 +226,16 @@ margin-top: 1.5rem;
 	.message {
 	   margin-left:2rem;
 	}
-
 }
 
 @media only screen and (min-width:1300px) {
 	 .display {
 		margin-left:20rem;
 	}
-
 	.message {
 	   margin-left:1.5rem;
 	}
-
 }
-
-.message {
-	font-weight: bold;
-	padding: 1rem;
-	width:70vw;
-	border:3px solid #f2f2f2;
-	text-align: left;
-}
-
-.messageTitle {
-	border-bottom: 3px solid #f2f2f2;
-}
-
-.messageBody {
-	padding: 2rem;
-}
-
-
-
 
 
 @media only screen and (max-width:760px) {
@@ -248,21 +243,25 @@ margin-top: 1.5rem;
 		margin-left: 6rem;
 	}
 	
-	#save {
-		margin:auto;
-		width: 60vw;
+	#delete {
+		width: 25vw;
 	}
-	
+	.view {
+		width:15vw;
 	}
+}
 
-	
 @media only screen and (max-width:550px) {
 	.message {
 		margin-left: 3rem;
 	}
-	
-	#save {
-		width: 60vw;
+
+	#delete {
+		width: 25vw;
 	}
-	
+	.view {
+		width:20vw;
 	}
+}
+
+
