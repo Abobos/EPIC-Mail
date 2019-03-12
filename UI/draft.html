@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" type="text/css"  href="css/draft.css">
@@ -11,16 +11,16 @@
 </head>
 
 <body>
-    
+
     <div class="navbar">
         <span id="openNav">&#9776;</span>
          <a class="navbar_brand" href="index.html"><img src="images/logo.png"/>EPIC Mail</a>
     </div>
-                   
-            
+
+
     <div class="sidenav">
         <span id="closeNav">&times;</span>
-        <ul class="nav">   
+        <ul class="nav">
             <li class="nav_items"><a href="index.html">Home</a></li>
             <li class="nav_items"><a href="#">Docs</a></li>
             <li class="nav tabs"><a href="compose_message.html" id="compose">Compose Message</a></li>
@@ -31,28 +31,125 @@
         </ul>
     </div>
 
-    <div class="display">
-            <div class="logo">
-                <a class="navbar_brand" href="index.html"><img src="images/logo.png"/></a>
-            </div> 
+ <div class="display">
+    <div class="logo">
+      <a class="navbar_brand" href="index.html"><img src="images/logo.png"/></a>
+  </div>
 
-        <div id="Draft" class="hide">
+        <div id="Draft">
                 <h3>Draft</h3>
-            <div class="message">
-                    <div class="messageTitle">
-                            <p>Subject</p>
-                            </p>Sender<p>
-                    </div>
+             <div class="message">
+                <div class="messageTitle">
+                    <p>Life is Race</p>
+                    <p>From : Blessing Makaraba</p>
+                </div>
 
-                    <div class="messageBody">
-                            <p>Message body</p>
-                    </div>
+                <div class="messageBody" id="firstMessage" >
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                </div>
+                <button type="button" id="delete">delete</button>
+                <button type="button" id="viewFirstMessage" class="view" data-type="firstMessage">view</button>
+                <button id="send" type="button">Send</button>
+          </div>
+          
+            <div class="message">
+                <div class="messageTitle">
+                    <p>Life is Race</p>
+                    <p>From : Victory Abobo</p>
+                </div>
+
+                <div class="messageBody" id="SecondMessage">
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                    <p>Life is but a walking shadow, a player that
+                        strut and fret his life upon a stage is like
+                        a fool signifying nothing.
+                        This is my story, This is my song, And I
+                         will praise him my saviour on the day long
+                    </p>
+                </div>
+                <button type="button" id="delete">delete</button>
+                <button type="button" id="viewSecondMessage" class="view" data-type="SecondMessage">view</button>
+                <button id="send" type="button">Send</button>
             </div>
-            <button id="delete" type="button">Delete</button>
-            <button id="send" type="button">Send</button>
-        </div>
+        
+        <div class="message">
+          <div class="messageTitle">
+              <p>Life is Race</p>
+              <p>From : Gift Abobo</p>
+          </div>
+
+          <div class="messageBody" id="ThirdMessage">
+              <p>Life is but a walking shadow, a player that 
+                  strut and fret his life upon a stage is like
+                  a fool signifying nothing.
+                  This is my story, This is my song, And I
+                   will praise him my saviour on the day long
+              </p>
+              <p>Life is but a walking shadow, a player that 
+                  strut and fret his life upon a stage is like
+                  a fool signifying nothing.
+                  This is my story, This is my song, And I
+                   will praise him my saviour on the day long
+              </p>
+              <p>Life is but a walking shadow, a player that 
+                  strut and fret his life upon a stage is like
+                  a fool signifying nothing.
+                  This is my story, This is my song, And I
+                   will praise him my saviour on the day long
+              </p>
+              <p>Life is but a walking shadow, a player that 
+                  strut and fret his life upon a stage is like
+                  a fool signifying nothing.
+                  This is my story, This is my song, And I
+                   will praise him my saviour on the day long
+              </p>
+          </div>
+          <button type="button" id="delete" >delete</button>
+          <button type="button" id="viewThirdMessage" class="view" data-type="ThirdMessage">view</button>
+          <button id="send" type="button">Send</button>
+      </div>
+
     </div>
     <script src="js/profile.js"></script>
 </body>
 </html>
-    

@@ -8,7 +8,7 @@
 
 .form_group {
    margin-bottom: 1rem;
-   width:50vw;
+   width:40vw;
    border:1px solid var(--blue) ;
    padding: 1em;
    border-radius: 1rem;
@@ -16,7 +16,7 @@
 
  .select {
 	margin-bottom: 1rem;
-	width:43vw;
+	width:37vw;
 	border:1px solid var(--blue) ;
 	padding: 1em;
 	border-radius: 1rem;
@@ -25,8 +25,8 @@
  button {
 	 background-color:#33ccff;
 	 margin-top:0;
-	 min-width:6vw;
-	 padding: 1em;
+	 min-width:3vw;
+	 padding: 0.5rem;
  }
 
 .form_group:focus-within {
@@ -34,8 +34,10 @@
  }
 
  input[type="submit"] {
-   width: 50vw;
-   padding:1.5rem;
+	 width: 40vw;
+	 display:block;
+	 margin:auto;
+   padding:1rem 0;
    color:white;
    font-weight: bold;
    font-size: 20px;
@@ -48,7 +50,6 @@
 	margin-top:20px;
 	cursor: pointer;
 	width:10%;
-
 }
 
 .logo img {
@@ -81,15 +82,18 @@ footer {
 	.form_group{
 		width: 85vw;
 	}
-
 	input[type="submit"] {
 		width:85vw;
 	}
-
 	.logo img {
 		width:100%;
 		height: auto;
 	}
+}
 
-	
+@media only screen and (min-width:767px){
+	.select {
+		width: 35vw;
+	}
+
 }
