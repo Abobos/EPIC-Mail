@@ -1,6 +1,6 @@
 
 import jwt from 'jsonwebtoken';
-import { users } from '../dummy/database';
+import users from '../database/users';
 import { validateUserSignUpDetails, validateUserSignInDetails } from '../middlewares/validateUserDetails';
 
 

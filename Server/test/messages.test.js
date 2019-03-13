@@ -121,7 +121,7 @@ describe('GET /messages/unread', () => {
   });
 });
 
-
+// Sent Received Messages
 describe('GET /messages/sent', () => {
   it('should return a status of 200 and show all sent messages', (done) => {
     chai
@@ -133,6 +133,42 @@ describe('GET /messages/sent', () => {
         res.body.should.have.property('status').eql(200);
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        done();
+      });
+  });
+});
+
+// Specific Email Record
+describe('GET /messages/<message-id>', () => {
+  it('should return a status of 200 when message with the given id is found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/1')
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdOn');
+        res.body.data[0].should.have.property('subject');
+        res.body.data[0].should.have.property('message');
+        res.body.data[0].should.have.property('parentMessageId');
+        res.body.data[0].should.have.property('status');
+        done();
+      });
+  });
+
+  it('should return a status of 404 when message with the given Id is not found', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/9')
+      .end((req, res) => {
+        res.should.have.status(404);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(404);
+        res.body.should.have.property('error').eql('The message with the given id was not found');
         done();
       });
   });

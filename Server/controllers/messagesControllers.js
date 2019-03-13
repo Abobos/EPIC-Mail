@@ -1,4 +1,5 @@
-import { messages } from '../dummy/database';
+/* eslint-disable no-console */
+import messages from '../database/messages';
 import validateMessageDetails from '../middlewares/validateMessageDetails';
 
 class messagesControllers {
@@ -51,6 +52,23 @@ class messagesControllers {
       status: 200,
       data: [
         receivedSentMessage,
+      ],
+    });
+  }
+
+  static getUserMessage(req, res) {
+    const messageId = Number(req.params.Id);
+    const getMessage = messages.find(m => m.id === messageId);
+    if (!getMessage) {
+      return res.status(404).json({
+        status: 404,
+        error: 'The message with the given id was not found',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: [
+        getMessage,
       ],
     });
   }
