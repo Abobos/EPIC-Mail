@@ -7,7 +7,7 @@
     "test": "nyc mocha --require @babel/register ./Server/test/*.test.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start-dev": "nodemon --exec babel-node app.js",
-    "start": "node ./build/app.js",
+    "start": "node build/app.js",
     "build": "babel src --out-dir build"
   },
   "repository": {
