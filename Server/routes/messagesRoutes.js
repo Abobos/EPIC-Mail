@@ -8,5 +8,6 @@ router.get('/messages', messageControllers.receivedMessage);
 router.get('/messages/unread', messageControllers.receivedUnreadMessage);
 router.get('/messages/sent', messageControllers.receivedSentMessage);
 router.get('/messages/:Id', messageControllers.getUserMessage);
+router.delete('/messages/:Id', messageControllers.DeleteMessage);
 
 export default router;

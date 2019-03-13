@@ -173,3 +173,34 @@ describe('GET /messages/<message-id>', () => {
       });
   });
 });
+
+
+describe('DELETE /messages/<message-id>', () => {
+  it('should return a status of 200 when message with the given id is found', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/messages/1')
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('message');
+        done();
+      });
+  });
+
+  it('should return a status of 404 when message with the given Id is not found', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/messages/9')
+      .end((req, res) => {
+        res.should.have.status(404);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(404);
+        res.body.should.have.property('error').eql('The message with the given id was not found');
+        done();
+      });
+  });
+});
