@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 import usersRouter from './Server/routes/usersRoutes';
 import messagesRouter from './Server/routes/messagesRoutes';
 
+dotenv.config();
 const app = express();
-const PORT = process.env.port || 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
