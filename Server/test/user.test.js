@@ -212,4 +212,20 @@ describe('POST /login', () => {
         done();
       });
   });
+  it('should return a status of 404 when user details is not found', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'agbenelson@gmail.com',
+        password: '321534',
+      })
+      .end((req, res) => {
+        res.should.have.status(404);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(404);
+        res.body.should.have.property('error').eql('Details not found, Sign Up!');
+        done();
+      });
+  });
 });

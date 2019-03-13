@@ -56,13 +56,13 @@ class UsersControllers {
       });
     }
     const user = users.find(k => k.email === req.body.email);
-    const { authData, password } = user;
     if (!user) {
       return res.status(404).json({
         status: 404,
         error: 'Details not found, Sign Up!',
       });
     }
+    const { authData, password } = user;
     if (password !== req.body.password) {
       return res.status(401).json({
         status: 401,
