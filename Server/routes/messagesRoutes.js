@@ -7,5 +7,6 @@ router.post('/messages', messageControllers.sendMessage);
 router.get('/messages', messageControllers.receivedMessage);
 router.get('/messages/unread', messageControllers.receivedUnreadMessage);
 router.get('/messages/sent', messageControllers.receivedSentMessage);
+router.get('/messages/:Id', messageControllers.getUserMessage);
 
 export default router;
