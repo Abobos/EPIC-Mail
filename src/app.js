@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import usersRouter from './Server/routes/usersRoutes';
 import messagesRouter from './Server/routes/messagesRoutes';
 
-
 const app = express();
 const PORT = process.env.port || 8080;
 

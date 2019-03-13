@@ -6,9 +6,9 @@
   "scripts": {
     "test": "nyc mocha --require @babel/register ./Server/test/*.test.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start": "nodemon --exec babel-node app.js",
-    "build": "babel src --out-dir ./dist --source-maps",
-    "serve": "node ./dist/app.js"
+    "start-dev": "nodemon --exec babel-node app.js",
+    "start": "node ./build/app.js",
+    "build": "babel src --out-dir ./build --source-maps",
   },
   "repository": {
     "type": "git",
