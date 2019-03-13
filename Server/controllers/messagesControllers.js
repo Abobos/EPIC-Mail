@@ -72,6 +72,27 @@ class messagesControllers {
       ],
     });
   }
+
+  static DeleteMessage(req, res) {
+    const messageId = Number(req.params.Id);
+    const getMessage = messages.find(m => m.id === messageId);
+    if (!getMessage) {
+      return res.status(404).json({
+        status: 404,
+        error: 'The message with the given id was not found',
+      });
+    }
+    const messageIndex = messages.indexOf(getMessage);
+    messages.splice(messageIndex, 1);
+    return res.status(200).json({
+      status: 200,
+      data: [
+        {
+          message: getMessage.message,
+        },
+      ],
+    });
+  }
 }
 
 export default messagesControllers;
