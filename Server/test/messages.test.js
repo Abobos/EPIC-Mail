@@ -86,10 +86,7 @@ describe('POST /messages', () => {
   });
 });
 
-<<<<<<< HEAD
-=======
 // Received Messages
->>>>>>> d76575ec79f9f2134dc19706af96224b308ea928
 describe('GET /messages', () => {
   it('should return a status of 200 and show all received messages', (done) => {
     chai
@@ -107,13 +104,8 @@ describe('GET /messages', () => {
 });
 
 
-<<<<<<< HEAD
-
-describe('GET /unread/messages', () => {
-=======
 // Unread Received Messages
-describe('GET /messages/unread', () => {
->>>>>>> d76575ec79f9f2134dc19706af96224b308ea928
+describe('GET /unread/messages', () => {
   it('should return a status of 200 and show all received messages', (done) => {
     chai
       .request(app)
