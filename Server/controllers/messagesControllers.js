@@ -24,6 +24,7 @@ class messagesControllers {
       ],
     });
   }
+
   static receivedMessage(req, res) {
     const receivedMessage = messages.filter(message => message.status === 'read');
     return res.status(200).json({
@@ -33,12 +34,23 @@ class messagesControllers {
       ],
     });
   }
+
   static receivedUnreadMessage(req, res) {
     const receivedUnreadMessage = messages.filter(message => message.status === 'unread');
     return res.status(200).json({
       status: 200,
       data: [
         receivedUnreadMessage,
+      ],
+    });
+  }
+
+  static receivedSentMessage(req, res) {
+    const receivedSentMessage = messages.filter(message => message.status === 'sent');
+    return res.status(200).json({
+      status: 200,
+      data: [
+        receivedSentMessage,
       ],
     });
   }

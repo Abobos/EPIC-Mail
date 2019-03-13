@@ -105,11 +105,28 @@ describe('GET /messages', () => {
 
 
 // Unread Received Messages
-describe('GET /unread/messages', () => {
+describe('GET /messages/unread', () => {
   it('should return a status of 200 and show all received messages', (done) => {
     chai
       .request(app)
-      .get('/api/v1/unread/messages')
+      .get('/api/v1/messages/unread')
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        done();
+      });
+  });
+});
+
+
+describe('GET /messages/sent', () => {
+  it('should return a status of 200 and show all sent messages', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/sent')
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/messages', messageControllers.sendMessage);
 router.get('/messages', messageControllers.receivedMessage);
-router.get('/unread/messages', messageControllers.receivedUnreadMessage);
+router.get('/messages/unread', messageControllers.receivedUnreadMessage);
+router.get('/messages/sent', messageControllers.receivedSentMessage);
 
 export default router;
