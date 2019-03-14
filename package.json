@@ -4,7 +4,7 @@
   "description": "EPIC Mail is a web application that helps people exchange messages and informaion over the internet.",
   "main": "app.js",
   "scripts": {
-    "test": "nyc mocha --require @babel/register ./ addsrc/Server/test/*.test.js --exit",
+    "test": "nyc mocha --require @babel/register ./src/Server/test/*.test.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start-dev": "nodemon --exec babel-node app.js",
     "start": "node build/app.js",
