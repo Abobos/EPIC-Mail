@@ -1,0 +1,207 @@
+:root{
+    --blue: #3399ff;
+    --white:#ffffff;
+ }
+
+* {
+    font-size: 18px;
+    font-family: "Courier New", Monospace;
+    box-sizing:border-box;
+    padding:0;
+    margin: 0;
+    line-height:1.5rem;
+}
+
+/*sidenav for mobile devices*/
+.navbar {
+    background-color:var(--white);
+    border-bottom:3px solid var(--blue);
+}
+
+.navbar a {
+    text-decoration:none;
+    font-weight: bold;
+    color:var(--blue);
+}
+.navbar a, .navbar img {
+    margin-left:3rem;
+}
+.navbar img {
+    width: 10vw;
+}
+
+#openNav, #closeNav {
+   font-size:2rem;
+   cursor: pointer;
+}
+
+#closeNav {
+    color:white;
+}
+ul {
+    list-style-type: none;
+}
+
+.sidenav {
+    background-color:var(--blue);
+    height: 100vh;
+    width:0;
+    top:0;
+    left:0;
+    position: fixed;
+    z-index:1;
+    overflow-x: hidden;
+    padding-top:60px;
+    transition:0.5s
+}
+
+.nav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration:none;
+    font-size:25px;
+    color:var(--white);
+    display:block;
+    transition:0.4s;
+}
+
+#closeNav {
+    position:absolute;
+    top:0;
+    right:25px;
+    font-size:36px;
+    margin-left:50px;
+}
+
+.logo {
+    display:none;
+}
+
+.display {
+    text-align:center;
+}
+
+
+.form_group {
+     margin-bottom: 1rem;
+     width:55vw;
+     border:1px solid var(--blue) ;
+     padding: 1em;
+     border-radius: 1rem;
+ }
+
+.form_group:focus{
+    outline: none;
+    background-color:none;
+    border-bottom: 2px solid var(--blue);
+}
+
+textarea {
+    resize:none;
+}
+
+#send {
+    width:25vw;
+    margin-top:3px;
+    text-align:center;
+    padding: 7px;
+    border-radius: 30px;
+    color:var(--white);
+    font-weight: bold;
+    background-color: var(--blue);
+}
+
+#send:focus, #send:active {
+    outline: none;
+    border:none;
+    cursor:pointer;
+}
+
+#save {
+    width:25vw;
+    margin-top:5px;
+    text-align:center;
+    padding: 7px;
+    border-radius: 30px;
+    color:var(--white);
+    font-weight: bold;
+    background-color: #33ccff;
+}
+
+#send:focus, #send:active {
+    outline: none;
+    border:none;
+    cursor:pointer;
+}
+
+#delete {
+    width:30vw;
+    margin-top:5px;
+    text-align:center;
+    padding: 7px;
+    border-radius: 30px;
+    color:var(--white);
+    font-weight: bold;
+    background-color: red;
+}
+
+@media only screen and (max-height:450px) {
+    .sidenav {
+        padding-top:15px;
+    }    
+    .sidenav a {
+        font-size: 15px;
+    }
+}
+/*sidenav and logo for desktops*/
+
+
+@media only screen and (min-width:768px) {
+
+    .sidenav {
+        height: 100vh;
+        width:25vw;
+        position: fixed;
+        z-index:1;
+        overflow-x: hidden;
+        padding-top:20px;
+        transition:0.5s
+    }
+
+    .navbar {
+     display:none;
+        }
+
+    .display {
+        margin-left:10rem;
+    }
+  
+    #closeNav {
+        display:none;
+    }
+   
+    .logo{
+    
+        display:block;
+    }
+
+    .logo img {
+        margin-top: 1rem;
+        width:6vw;
+    }
+   
+}
+
+
+@media only screen and (min-width:900px) {
+     .display {
+        margin-left:13rem;
+    }
+
+}
+
+@media only screen and (min-width:1300px) {
+     .display {
+        margin-left:20rem;
+    }
+
+}

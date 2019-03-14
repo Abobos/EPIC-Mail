@@ -1,0 +1,86 @@
+@import "navbar.css";
+
+
+.sign_up_form {
+text-align: center;
+}
+
+
+.form_group {
+	border:none;
+	width: 30vw;
+	border-bottom: 2px solid var(--blue);
+	padding: 10px;
+	margin-bottom:6px;
+}
+
+.form_group:focus {
+	border: none;
+	outline: none;
+	border-bottom: 2px solid var(--blue);
+}
+
+.btn_display {
+	display: block;
+	width:30vw;
+	margin-top:20px;
+	margin-left: auto;
+	margin-right:auto;
+	text-align:center;
+	padding: 7px;
+	border-radius: 30px;
+	border:3px solid var(--blue);
+	color:var(--blue);
+	background-color: var(--white);
+}
+
+.btn_display:hover {
+  background-color: var(--blue);
+  color:white;
+}
+
+.sign_up_form a {
+	text-decoration: none;
+	color:var(--blue);
+	font-weight: bold;
+}
+
+footer {
+	text-align:center;
+	bottom:0;
+	padding:10px;
+	position:fixed;
+	width:100vw;
+	background-color:#f2f2f2;
+}
+
+.logo {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:20px;
+	cursor: pointer;
+	width:10%;
+
+}
+
+.logo img {
+	width:60%;
+	height: auto;
+}
+
+@media only screen and (max-width:767px){
+	.btn_display {
+		width: 75vw;
+	}
+	.form_group{
+		width: 75vw;
+	}
+	.logo img {
+		width:100%;
+		height: auto;
+	}
+	
+}
+
+
+
