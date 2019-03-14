@@ -6,7 +6,7 @@ import messagesRouter from './Server/routes/messagesRoutes';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 8080;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,9 +14,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1/auth', usersRouter);
 app.use('/api/v1', messagesRouter);
 
-app.listen(PORT, () => {
+app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log(`Listening to the port ${PORT}`);
+  console.log(`Listening to the port ${port}`);
 });
 
 export default app;
