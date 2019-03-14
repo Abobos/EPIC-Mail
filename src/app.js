@@ -11,6 +11,9 @@ const port = process.env.PORT;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get('/', (req, res) => {
+  res.send('Welcome to EPIC Mail');
+});
 app.use('/api/v1/auth', usersRouter);
 app.use('/api/v1', messagesRouter);
 
