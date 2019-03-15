@@ -14,7 +14,7 @@ class UsersControllers {
         error: error.details[0].message.replace(/[""]+/g, ''),
       });
     }
-    const getuser = users.find(k => k.email === req.body.email);
+    const getuser = users.find(userDetails => userDetails.email === req.body.email);
     if (getuser) {
       return res.status(409).json({
         status: 409,

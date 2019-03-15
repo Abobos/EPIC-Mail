@@ -42,8 +42,8 @@ function () {
         });
       }
 
-      var getuser = _users.default.find(function (k) {
-        return k.email === req.body.email;
+      var getuser = _users.default.find(function (userDetails) {
+        return userDetails.email === req.body.email;
       });
 
       if (getuser) {
