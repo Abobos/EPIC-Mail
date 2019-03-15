@@ -6,7 +6,6 @@ function validateUserSignUpDetails(userDetails) {
     lastname: Joi.string().trim().required(),
     email: Joi.string().trim().email().required(),
     password: Joi.string().trim().min(6).required(),
-    confirm_password: Joi.any().equal(Joi.ref('password')).required(),
   };
   return Joi.validate(userDetails, schema);
 }

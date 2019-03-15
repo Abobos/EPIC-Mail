@@ -20,4 +20,3 @@ function validateMessageDetails(MessageDetails) {
 
 var _default = validateMessageDetails;
 exports.default = _default;
-//# sourceMappingURL=validateMessageDetails.js.map

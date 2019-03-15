@@ -20,8 +20,7 @@ _chai.default.should();
       firstname: 'Elohor',
       lastname: 'Obiamata',
       email: 'elohorobiamata@gmail.com',
-      password: '321234',
-      confirm_password: '321234'
+      password: '321234'
     }).end(function (req, res) {
       res.should.have.status(201);
       res.should.be.an('object');
@@ -36,8 +35,7 @@ _chai.default.should();
     _chai.default.request(_app.default).post('/api/v1/auth/signup').send({
       lastname: 'Obiamata',
       email: 'elohorobiamata@gmail.com',
-      password: '321234',
-      confirm_password: '321234'
+      password: '321234'
     }).end(function (req, res) {
       res.should.have.status(400);
       res.should.be.an('object');
@@ -46,26 +44,11 @@ _chai.default.should();
       done();
     });
   });
-  (0, _mocha.it)('should return a status of 400 , when lastname is invalid', function (done) {
-    _chai.default.request(_app.default).post('/api/v1/auth/signup').send({
-      firstname: 'Elohor',
-      email: 'elohorobiamata@gmail.com',
-      password: '321234',
-      confirm_password: '321234'
-    }).end(function (req, res) {
-      res.should.have.status(400);
-      res.should.be.an('object');
-      res.body.should.have.property('status').eql(400);
-      res.body.should.have.property('error').eql('lastname is required');
-      done();
-    });
-  });
   (0, _mocha.it)('should return a status of 400 , when email is invalid', function (done) {
     _chai.default.request(_app.default).post('/api/v1/auth/signup').send({
       firstname: 'Elohor',
       lastname: 'Obiamata',
-      password: '321234',
-      confirm_password: '321234'
+      password: '321234'
     }).end(function (req, res) {
       res.should.have.status(400);
       res.should.be.an('object');
@@ -78,8 +61,7 @@ _chai.default.should();
     _chai.default.request(_app.default).post('/api/v1/auth/signup').send({
       firstname: 'Elohor',
       email: 'elohorobiamata@gmail.com',
-      password: '321234',
-      confirm_password: '321234'
+      password: '321234'
     }).end(function (req, res) {
       res.should.have.status(400);
       res.should.be.an('object');
@@ -92,8 +74,7 @@ _chai.default.should();
     _chai.default.request(_app.default).post('/api/v1/auth/signup').send({
       firstname: 'Elohor',
       lastname: 'Obiamata',
-      email: 'elohorobiamata@gmail.com',
-      confirm_password: '321234'
+      email: 'elohorobiamata@gmail.com'
     }).end(function (req, res) {
       res.should.have.status(400);
       res.should.be.an('object');
@@ -107,8 +88,7 @@ _chai.default.should();
       firstname: 'Elohor',
       lastname: 'Obiamata',
       email: 'elohorobiamata@gmail.com',
-      password: '321234',
-      confirm_password: '321234'
+      password: '321234'
     }).end(function (req, res) {
       res.should.have.status(409);
       res.should.be.an('object');
@@ -180,4 +160,3 @@ _chai.default.should();
     });
   });
 });
-//# sourceMappingURL=user.test.js.map

@@ -21,4 +21,3 @@ router.get('/messages/:Id', _messagesControllers.default.getUserMessage);
 router.delete('/messages/:Id', _messagesControllers.default.DeleteMessage);
 var _default = router;
 exports.default = _default;
-//# sourceMappingURL=messagesRoutes.js.map
