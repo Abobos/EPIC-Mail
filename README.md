@@ -21,7 +21,7 @@ EPIC Mail is a web application that helps people exchange messages and informaio
 #####User Features
 * Send mail to individuals or groups.
 * View inbox.
-* Read an emailmessage and any resulting thread.
+* Read an email essage and any resulting thread.
 * View sent messages and retract a sent message
 * Save a message as draft.
 
@@ -30,7 +30,32 @@ EPIC Mail is a web application that helps people exchange messages and informaio
 #####Dev Tools
 * HTML
 * CSS
-* Javascript (Client Side)
+* JAVASCRIPT(Node.js)
+
+#####Testing framework
+* Mocha
+* Chai
+* Chai-http
 
 #####Project Management
 * Pivotal Tracker
+
+#####Continuous Integration
+* Travis CI
+* Coveralls
+
+####API Docs
+* [Apiary](https://epicmail11.docs.apiary.io/#)
+
+####Getting Started
+To setup **EPIC Mail** , install the following
+
+* Node.js 8 and above
+* Postman
+* Git
+  
+###Running the app
+* Clone the repo
+* open terminal
+* Run `npm install`
+* Run `npm start`

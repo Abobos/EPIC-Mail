@@ -26,10 +26,21 @@ app.use(_bodyParser.default.urlencoded({
   extended: false
 }));
 app.get('/', function (req, res) {
-  res.send('Welcome to EPIC Mail');
+  return res.json({
+    message: 'Welcome to EPIC Mail'
+  });
 });
 app.use('/api/v1/auth', _usersRoutes.default);
 app.use('/api/v1', _messagesRoutes.default);
+app.get('/api/v1/docs', function (req, res) {
+  return res.redirect('https://epicmail11.docs.apiary.io/#');
+});
+app.all('*', function (req, res) {
+  return res.status(404).json({
+    status: '404',
+    error: 'This route is unavailable'
+  });
+});
 app.listen(port, function () {
   // eslint-disable-next-line no-console
   console.log("Listening to the port ".concat(port));

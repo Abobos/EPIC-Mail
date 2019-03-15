@@ -97,8 +97,8 @@ function () {
         });
       }
 
-      var user = _users.default.find(function (k) {
-        return k.email === req.body.email;
+      var user = _users.default.find(function (userDetails) {
+        return userDetails.email === req.body.email;
       });
 
       if (!user) {
