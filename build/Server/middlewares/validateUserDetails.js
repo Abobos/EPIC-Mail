@@ -15,8 +15,7 @@ function validateUserSignUpDetails(userDetails) {
     firstname: _joi.default.string().trim().required(),
     lastname: _joi.default.string().trim().required(),
     email: _joi.default.string().trim().email().required(),
-    password: _joi.default.string().trim().min(6).required(),
-    confirm_password: _joi.default.any().equal(_joi.default.ref('password')).required()
+    password: _joi.default.string().trim().min(6).required()
   };
   return _joi.default.validate(userDetails, schema);
 }
@@ -28,4 +27,3 @@ function validateUserSignInDetails(userDetails) {
   };
   return _joi.default.validate(userDetails, schema);
 }
-//# sourceMappingURL=validateUserDetails.js.map

@@ -17,4 +17,3 @@ router.post('/signup', _usersControllers.default.userSignUp);
 router.post('/login', _usersControllers.default.userSignIn);
 var _default = router;
 exports.default = _default;
-//# sourceMappingURL=usersRoutes.js.map

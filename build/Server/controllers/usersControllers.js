@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _bcrypt = _interopRequireDefault(require("bcrypt"));
+
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
 var _users = _interopRequireDefault(require("../database/users"));
@@ -51,11 +53,13 @@ function () {
         });
       }
 
+      var hashPassword = _bcrypt.default.hashSync(req.body.password, 10);
+
       var payload = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
-        password: req.body.password
+        password: hashPassword
       };
 
       var userToken = _jsonwebtoken.default.sign(payload, 'secret', {
@@ -67,7 +71,7 @@ function () {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
-        password: req.body.password,
+        password: hashPassword,
         authData: userToken
       };
 
@@ -107,7 +111,9 @@ function () {
       var authData = user.authData,
           password = user.password;
 
-      if (password !== req.body.password) {
+      var hashValue = _bcrypt.default.compareSync(req.body.password, password);
+
+      if (!hashValue) {
         return res.status(401).json({
           status: 401,
           error: 'Incorrect password!'
@@ -128,4 +134,3 @@ function () {
 
 var _default = UsersControllers;
 exports.default = _default;
-//# sourceMappingURL=usersControllers.js.map

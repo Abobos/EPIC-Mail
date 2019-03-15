@@ -1,4 +1,4 @@
-
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import users from '../database/users';
 import { validateUserSignUpDetails, validateUserSignInDetails } from '../middlewares/validateUserDetails';
@@ -21,11 +21,12 @@ class UsersControllers {
         error: 'User already exists, Sign In!',
       });
     }
+    const hashPassword = bcrypt.hashSync(req.body.password, 10);
     const payload = {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: req.body.password,
+      password: hashPassword,
     };
     const userToken = jwt.sign(payload, 'secret', { expiresIn: 1440 });
     const user = {
@@ -33,7 +34,7 @@ class UsersControllers {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       email: req.body.email,
-      password: req.body.password,
+      password: hashPassword,
       authData: userToken,
     };
     users.push(user);
@@ -55,7 +56,7 @@ class UsersControllers {
         error: error.details[0].message.replace(/[""]+/g, ''),
       });
     }
-    const user = users.find(k => k.email === req.body.email);
+    const user = users.find(userDetails => userDetails.email === req.body.email);
     if (!user) {
       return res.status(404).json({
         status: 404,
@@ -63,7 +64,8 @@ class UsersControllers {
       });
     }
     const { authData, password } = user;
-    if (password !== req.body.password) {
+    const hashValue = bcrypt.compareSync(req.body.password, password);
+    if (!hashValue) {
       return res.status(401).json({
         status: 401,
         error: 'Incorrect password!',

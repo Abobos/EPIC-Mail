@@ -17,7 +17,6 @@ describe('POST /signup', () => {
         lastname: 'Obiamata',
         email: 'elohorobiamata@gmail.com',
         password: '321234',
-        confirm_password: '321234',
       })
       .end((req, res) => {
         res.should.have.status(201);
@@ -38,32 +37,12 @@ describe('POST /signup', () => {
         lastname: 'Obiamata',
         email: 'elohorobiamata@gmail.com',
         password: '321234',
-        confirm_password: '321234',
       })
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
         res.body.should.have.property('status').eql(400);
         res.body.should.have.property('error').eql('firstname is required');
-        done();
-      });
-  });
-
-  it('should return a status of 400 , when lastname is invalid', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstname: 'Elohor',
-        email: 'elohorobiamata@gmail.com',
-        password: '321234',
-        confirm_password: '321234',
-      })
-      .end((req, res) => {
-        res.should.have.status(400);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('lastname is required');
         done();
       });
   });
@@ -76,7 +55,6 @@ describe('POST /signup', () => {
         firstname: 'Elohor',
         lastname: 'Obiamata',
         password: '321234',
-        confirm_password: '321234',
       })
       .end((req, res) => {
         res.should.have.status(400);
@@ -95,7 +73,6 @@ describe('POST /signup', () => {
         firstname: 'Elohor',
         email: 'elohorobiamata@gmail.com',
         password: '321234',
-        confirm_password: '321234',
       })
       .end((req, res) => {
         res.should.have.status(400);
@@ -114,7 +91,6 @@ describe('POST /signup', () => {
         firstname: 'Elohor',
         lastname: 'Obiamata',
         email: 'elohorobiamata@gmail.com',
-        confirm_password: '321234',
       })
       .end((req, res) => {
         res.should.have.status(400);
@@ -133,7 +109,6 @@ describe('POST /signup', () => {
         lastname: 'Obiamata',
         email: 'elohorobiamata@gmail.com',
         password: '321234',
-        confirm_password: '321234',
       })
       .end((req, res) => {
         res.should.have.status(409);
