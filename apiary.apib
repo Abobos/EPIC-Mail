@@ -1,80 +1,245 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://epicmail11.herokuapp.com/api/v1
 
-# Blessing Makaraba
+# EPIC Mail
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+EPIC Mail is a web application that helps people exchange messages and informaion over the internet.
 
-## Questions Collection [/questions]
+# Group User
 
-### List All Questions [GET]
+## Signup [/auth/signup]
 
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Sign up as a new User [POST]
+You can sign up using this link
 
 + Request (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
+            {
+                "firstname": "Elohor",
+                "lastname": "Obamata",
+                "email": "elohorobiamata@gmail.com",
+                "password": "321234",
+                "confirm_password": "321234"
+            }
+    
+
 
 + Response 201 (application/json)
 
-    + Headers
+            {
+              "status": 201,
+              "data": [
+                    {
+                      "token": "userToken"
+                    },
+               ],
+            }
 
-            Location: /questions/2
-
-    + Body
++ Response 409 (application/json)
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+              "status": 409,
+              "error": "User already exists, Sign In!"
+            }
+
+## Login [/auth/login]
+
+### Login as an existing User [POST]
+You can login with action
+
++ Request (application/json)
+
+            {
+                "email": "elohorobiamata@gmail.com",
+                "password": "321234"
+            }
+
+
+
++ Response 200 (application/json)
+
+            { 
+            
+              "status": 200,
+              "data": [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                      "token": "authData"
+                    },
+               ],
+            }
+
+
+
++ Response 404 (application/json)
+
+            {
+               "status": 404,
+               "error": "Details not found, Sign Up!"
+            }
+            
++ Response 401 (application/json)
+
+            {
+               "status": 401,
+               "error": "Incorrect Password!",
+            }
+            
+        
+
+# Group Messages
+
+## User Messages [/messages]
+
+### Get all received messages [GET /messages]
+You can get all  receive messages using this action
+
++ Response 200 (application/json)
+
+            {
+                 "status": 200,
+                 "data": [
+                            {
+                        "id": 7,
+                        "createdOn": "Mar 11 2019 04:34:50",
+                        "subject": "Andela",
+                        "message": "Brilliance is evenly disrtributed",
+                        "senderId": 7,
+                        "receiverId": 7,
+                        "parentMessageId": 7,
+                        "status": "read",
+                    },
+                    {
+                         "id": 8,
+                        "createdOn": "Mar 11 2019 04:34:50",
+                        "subject": "Andela",
+                        "message": "Brilliance is evenly disrtributed",
+                        "senderId": 8,
+                        "receiverId": 8,
+                        "parentMessageId": 8,
+                        "status": "read",
+                    },
+                 ]
+            }
+            
+            
+
+### Get all received unread messages [GET /messages/unread]
+You can get all received unread messages using this action
+
++ Response 200 (application/json)
+
+             {
+                 "status": 200,
+                 "data": [
+                            {
+                        "id": 5,
+                        "createdOn": "Mar 10 2019 04:34:50",
+                        "subject": "Andela",
+                        "message": "Brilliance is evenly disrtributed",
+                        "senderId": 5,
+                        "receiverId": 5,
+                        "parentMessageId": 5,
+                        "status": "unread",
+                    },
+                    {
+                        "id": 6,
+                        "createdOn": "Mar 10 2019 04:34:50",
+                        "subject": "Andela",
+                        "message": "Brilliance is evenly disrtributed",
+                        "senderId": 6,
+                        "receiverId": 6,
+                        "parentMessageId": 6,
+                        "status": "unread",
+                    },
+                 ]
+            }
+
+### Get all sent messages [GET /messages/sent]
+You can get all sent messages using this action
+
++ Response 200 (application/json)
+
+            {
+                 "status": 200,
+                 "data": [
+                            {
+                        "id": 3,
+                        "createdOn": "Mar 09 2019 04:34:50",
+                        "subject": "Andela",
+                        "message": "Brilliance is evenly disrtributed",
+                        "senderId": 3,
+                        "receiverId": 3,
+                        "parentMessageId": 3,
+                        "status": "sent",
+                    },
+                    {
+                        "id": 4,
+                        "createdOn": "Mar 09 2019 04:34:50",
+                        "subject": "Andela",
+                        "message": "Brilliance is evenly disrtributed",
+                        "senderId": 4,
+                        "receiverId": 4,
+                        "parentMessageId": 4,
+                        "status": "sent",
+                    },
+                 ]
+            }
+            
+
+### Get a specific user message [GET /messages/{Id}]
+You can get a specific user message
++ Parameters
+
+    + Id (required, Number, `5`) - ID of the message to get.
+    
++ Response 200 (application/json)
+
+            {
+                 "status": 200,
+                 "data": [
+                            {
+                        "id": 5,
+                        "createdOn": "Mar 10 2019 04:34:50",
+                        "subject": "Andela",
+                        "message": "Brilliance is evenly disrtributed",
+                        "senderId": 5,
+                        "receiverId": 5,
+                        "parentMessageId": 5,
+                        "status": "unread",
+                    },
+                 ]
+            }
+            
+            
++ Response 404 (application/json)
+
+
+            {
+                "status": 404,
+                "error": 'The message with the given id was not found',
+            }
+           
+### Get a specific user message [DELETE /messages/{Id}]
+You can delete a specific email record
++ Parameters
+
+    + Id (required, Number, `7`) - ID of the message to delete.
+    
++ Response 200 (application/json)
+
+             {
+                 "status": 200,
+                 "data": [
+                    {
+                     "message": "Brilliance is evenly disrtributed",
                     }
-                ]
+                 ]
+            }
+            
++ Response 404 (application/json)
+
+
+            {
+                "status": 404,
+                "error": 'The message with the given id was not found',
             }
