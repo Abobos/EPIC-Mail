@@ -1,13 +1,16 @@
+// eslint-disable-next-line no-undef
+const openNav = document.getElementById('openNav');
+// eslint-disable-next-line no-undef
+const closeNav = document.getElementById('closeNav');
 
-let openNav = document.getElementById('openNav');
-let closeNav = document.getElementById('closeNav');
-let sideNav = document.querySelector('.sidenav');
+// eslint-disable-next-line no-undef
+const sideNav = document.querySelector('.sidenav');
 
 
 openNav.addEventListener('click', () => {
-    sideNav.style.width = '80vw';
+  sideNav.style.width = '80vw';
 });
 
 closeNav.addEventListener('click', () => {
-    sideNav.style.width='0';
+  sideNav.style.width = '0';
 });

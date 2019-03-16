@@ -4,7 +4,7 @@
 ### EPIC-Mail
 EPIC Mail is a web application that helps people exchange messages and informaion over the internet.
 
-###Features
+### Features
 * Sign up to **EPIC-Mail**.
 * Log in to access features.
 * Reset password.
@@ -14,48 +14,48 @@ EPIC Mail is a web application that helps people exchange messages and informaio
 * Retract sent messages.
 * Save an email as draft.
 
-#####Admin Features
+##### Admin Features
 * Create group.
 * Add users to group.
   
-#####User Features
+##### User Features
 * Send mail to individuals or groups.
 * View inbox.
 * Read an email essage and any resulting thread.
 * View sent messages and retract a sent message
 * Save a message as draft.
 
-####Tools
+#### Tools
 
-#####Dev Tools
+##### Dev Tools
 * HTML
 * CSS
 * JAVASCRIPT(Node.js)
 
-#####Testing framework
+##### Testing framework
 * Mocha
 * Chai
 * Chai-http
 
-#####Project Management
+##### Project Management
 * Pivotal Tracker
 
 #####Continuous Integration
 * Travis CI
 * Coveralls
 
-####API Docs
+#### API Docs
 * [Apiary](https://epicmail11.docs.apiary.io/#)
 
-####Getting Started
+#### Getting Started
 To setup **EPIC Mail** , install the following
 
 * Node.js 8 and above
 * Postman
 * Git
   
-###Running the app
+### Running the app
 * Clone the repo
 * open terminal
 * Run `npm install`
-* Run `npm start`
+* Run `npm start` 

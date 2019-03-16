@@ -1,19 +1,10 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import users from '../database/users';
-import { validateUserSignUpDetails, validateUserSignInDetails } from '../middlewares/validateUserDetails';
 
 
 class UsersControllers {
-// eslint-disable-next-line class-methods-use-this
   static userSignUp(req, res) {
-    const { error } = validateUserSignUpDetails(req.body);
-    if (error) {
-      return res.status(400).json({
-        status: 400,
-        error: error.details[0].message.replace(/[""]+/g, ''),
-      });
-    }
     const getuser = users.find(userDetails => userDetails.email === req.body.email);
     if (getuser) {
       return res.status(409).json({
@@ -23,16 +14,16 @@ class UsersControllers {
     }
     const hashPassword = bcrypt.hashSync(req.body.password, 10);
     const payload = {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       password: hashPassword,
     };
     const userToken = jwt.sign(payload, 'secret', { expiresIn: 1440 });
     const user = {
       id: users.length + 1,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       email: req.body.email,
       password: hashPassword,
       authData: userToken,
@@ -49,13 +40,6 @@ class UsersControllers {
   }
 
   static userSignIn(req, res) {
-    const { error } = validateUserSignInDetails(req.body);
-    if (error) {
-      return res.status(400).json({
-        status: 400,
-        error: error.details[0].message.replace(/[""]+/g, ''),
-      });
-    }
     const user = users.find(userDetails => userDetails.email === req.body.email);
     if (!user) {
       return res.status(404).json({

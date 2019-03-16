@@ -8,13 +8,102 @@ chai.use(chaiHttp);
 chai.should();
 
 describe('POST /signup', () => {
+  it('should return a status of 400 , when firstName does not exist', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        lastName: 'Obiamata',
+        email: 'elohorobiamata@gmail.com',
+        password: '321234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('firstName is required');
+        done();
+      });
+  });
+
+  it('should return a status of 400 , when email does not exist', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Elohor',
+        lastName: 'Obiamata',
+        password: '321234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('email is required');
+        done();
+      });
+  });
+
+  it('should return a status of 400 , when lastName is does not exist', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Elohor',
+        email: 'elohorobiamata@gmail.com',
+        password: '321234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('lastName is required');
+        done();
+      });
+  });
+
+  it('should return a status of 400 , when password does not exist', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Elohor',
+        lastName: 'Obiamata',
+        email: 'elohorobiamata@gmail.com',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('password is required');
+        done();
+      });
+  });
+  it('should return a status of 201 when email is not valid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Elohor',
+        lastName: 'Obiamata',
+        email: 'elohorobiam@gmail',
+        password: '321234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('email is not valid');
+        done();
+      });
+  });
   it('should return a status of 201 when user details are valid', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'Elohor',
-        lastname: 'Obiamata',
+        firstName: 'Elohor',
+        lastName: 'Obiamata',
         email: 'elohorobiamata@gmail.com',
         password: '321234',
       })
@@ -28,85 +117,13 @@ describe('POST /signup', () => {
         done();
       });
   });
-
-  it('should return a status of 400 , when firstname is invalid', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        lastname: 'Obiamata',
-        email: 'elohorobiamata@gmail.com',
-        password: '321234',
-      })
-      .end((req, res) => {
-        res.should.have.status(400);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('firstname is required');
-        done();
-      });
-  });
-
-  it('should return a status of 400 , when email is invalid', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstname: 'Elohor',
-        lastname: 'Obiamata',
-        password: '321234',
-      })
-      .end((req, res) => {
-        res.should.have.status(400);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('email is required');
-        done();
-      });
-  });
-
-  it('should return a status of 400 , when lastname is invalid', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstname: 'Elohor',
-        email: 'elohorobiamata@gmail.com',
-        password: '321234',
-      })
-      .end((req, res) => {
-        res.should.have.status(400);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('lastname is required');
-        done();
-      });
-  });
-
-  it('should return a status of 400 , when password is invalid', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstname: 'Elohor',
-        lastname: 'Obiamata',
-        email: 'elohorobiamata@gmail.com',
-      })
-      .end((req, res) => {
-        res.should.have.status(400);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('password is required');
-        done();
-      });
-  });
   it('should return a status of 409 when user has already sign up', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'Elohor',
-        lastname: 'Obiamata',
+        firstName: 'Elohor',
+        lastName: 'Obiamata',
         email: 'elohorobiamata@gmail.com',
         password: '321234',
       })
@@ -157,7 +174,7 @@ describe('POST /login', () => {
       });
   });
 
-  it('should return a status of 400 when password is invalid', (done) => {
+  it('should return a status of 400 when password does not exist', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/login')
@@ -172,7 +189,8 @@ describe('POST /login', () => {
         done();
       });
   });
-  it('should return a status of 400 when user email is invalid', (done) => {
+
+  it('should return a status of 400 when email does not exist', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/login')
@@ -184,6 +202,22 @@ describe('POST /login', () => {
         res.should.be.an('object');
         res.body.should.have.property('status').eql(400);
         res.body.should.have.property('error').eql('email is required');
+        done();
+      });
+  });
+  it('should return a status of 400 when user email is not valid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'elohorobiam@gmail',
+        password: '321234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error').eql('email is not valid');
         done();
       });
   });
