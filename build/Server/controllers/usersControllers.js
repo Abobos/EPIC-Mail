@@ -11,8 +11,6 @@ var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
 var _users = _interopRequireDefault(require("../database/users"));
 
-var _validateUserDetails = require("../middlewares/validateUserDetails");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30,18 +28,7 @@ function () {
 
   _createClass(UsersControllers, null, [{
     key: "userSignUp",
-    // eslint-disable-next-line class-methods-use-this
     value: function userSignUp(req, res) {
-      var _validateUserSignUpDe = (0, _validateUserDetails.validateUserSignUpDetails)(req.body),
-          error = _validateUserSignUpDe.error;
-
-      if (error) {
-        return res.status(400).json({
-          status: 400,
-          error: error.details[0].message.replace(/[""]+/g, '')
-        });
-      }
-
       var getuser = _users.default.find(function (userDetails) {
         return userDetails.email === req.body.email;
       });
@@ -56,8 +43,8 @@ function () {
       var hashPassword = _bcrypt.default.hashSync(req.body.password, 10);
 
       var payload = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: hashPassword
       };
@@ -68,8 +55,8 @@ function () {
 
       var user = {
         id: _users.default.length + 1,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: hashPassword,
         authData: userToken
@@ -87,16 +74,6 @@ function () {
   }, {
     key: "userSignIn",
     value: function userSignIn(req, res) {
-      var _validateUserSignInDe = (0, _validateUserDetails.validateUserSignInDetails)(req.body),
-          error = _validateUserSignInDe.error;
-
-      if (error) {
-        return res.status(400).json({
-          status: 400,
-          error: error.details[0].message.replace(/[""]+/g, '')
-        });
-      }
-
       var user = _users.default.find(function (userDetails) {
         return userDetails.email === req.body.email;
       });
