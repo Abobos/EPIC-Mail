@@ -4,17 +4,14 @@ function validateUserSignUpDetails(userDetails) {
   const schema = {
     firstName: Joi.string()
       .regex(/^[a-zA-Z]+$/)
-      .required()
       .error(new Error('firstName is not valid')),
 
     lastName: Joi.string()
       .regex(/^[a-zA-Z]+$/)
-      .required()
       .error(new Error('lastName is not valid')),
 
-    email: Joi.string().trim().email()
+    email: Joi.string().email()
       .regex(/^[A-Za-z0-9_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
-      .required()
       .error(new Error('email is not valid')),
     password: Joi.string().trim().min(6).required(),
   };
@@ -25,7 +22,6 @@ function validateUserSignInDetails(userDetails) {
   const schema = {
     email: Joi.string().email()
       .regex(/^[A-Za-z0-9_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
-      .required()
       .error(new Error('email is not valid')),
 
     password: Joi.string().min(6).required(),
@@ -65,7 +61,7 @@ const signup = (req, res, done) => {
   if (error) {
     return res.status(400).json({
       status: 400,
-      error: error.message.replace(/[""]+/g, ''),
+      error: (error.details) ? error.details[0].message.replace(/[""]+/g, '') : error.message,
     });
   }
   return done();
@@ -89,7 +85,7 @@ const login = (req, res, done) => {
   if (error) {
     return res.status(400).json({
       status: 400,
-      error: error.message.replace(/[""]+/g, ''),
+      error: (error.details) ? error.details[0].message.replace(/[""]+/g, '') : error.message,
     });
   }
   return done();
