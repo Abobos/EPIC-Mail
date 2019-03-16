@@ -12,58 +12,55 @@
 
 <body>
     
-    <div class="navbar">
-        <span id="openNav">&#9776;</span>
-        <a class="navbar_brand" href="index.html"><img src="images/logo.png"/>EPIC Mail</a>
-    </div>
+<div class="navbar">
+  <span id="openNav">&#9776;</span>
+  <a class="navbar_brand" href="index.html"><img src="images/logo.png"/>EPIC Mail</a>
+</div>
                    
-    <div class="sidenav">
-        <span id="closeNav">&times;</span>
-        <ul class="nav">   
-            <li class="nav_items"><a href="index.html">Home</a></li>
-	        <li class="nav_items"><a href="#">Docs</a></li>
-            <li class="nav_items"><a href="#">Docs</a></li>
-            <li class="nav tabs"><a href="compose_message.html" id="compose">Compose Message</a></li>
-            <li class="nav tabs"><a href="inbox.html" id="inbox">Inbox</a></li>
-            <li class="nav tabs"><a href="sent_message.html" id="sent">Sent</a></li>
-            <li class="nav tabs"><a href="draft.html" id="drafts">Draft</a></li>
-            <li class="nav tabs"><a href="create_group.html" id="create_group">Create Group</a></li>
-        </ul>
-    </div>
+<div class="sidenav">
+   <span id="closeNav">&times;</span>
+  <ul class="nav">   
+    <li class="nav_items"><a href="index.html">Home</a></li>
+    <li class="nav_items"><a href="#">Docs</a></li>
+    <li class="nav tabs"><a href="compose_message.html" id="compose">Compose Message</a></li>
+    <li class="nav tabs"><a href="inbox.html" id="inbox">Inbox</a></li>
+    <li class="nav tabs"><a href="sent_message.html" id="sent">Sent</a></li>
+    <li class="nav tabs"><a href="draft.html" id="drafts">Draft</a></li>
+    <li class="nav tabs"><a href="create_group.html" id="create_group">Create Group</a></li>
+  </ul>
+</div>
 
-    <div class="display">
-            <div class="logo">
-                <a class="navbar_brand" href="index.html"><img src="images/logo.png"/></a>
-            </div> 
+<div class="display">
+  <div class="logo">
+    <a class="navbar_brand" href="index.html"><img src="images/logo.png"/></a>
+  </div> 
 
-        <div id="Compose" class="hide">
-            <h3>Compose Message</h3><br>
-            <form action = "#">
-                <input type="text"class="form_group" placeholder="Subject"/><br>
-                
-                          <select id="users" class="form_group select">
-                                <option value="#" disabled selected>Select User</option>
-                                <option value="user1">User 1</option>
-                                <option value="user2">User 2</option>
-                                <option value="user3">User 3</option>
-                                <option value="user4">User 4</option>
-                          </select><br>
+  <div id="Compose" class="hide">
+    <h3>Compose Message</h3><br>
+      <form action = "#">
+        <input type="text"class="form_group" placeholder="Subject"/><br>              
+          <select id="users" class="form_group select">
+              <option value="#" disabled selected>Select User</option>
+              <option value="user1">User 1</option>
+              <option value="user2">User 2</option>
+              <option value="user3">User 3</option>
+              <option value="user4">User 4</option>
+          </select><br>
+                              
+          <select id="groups" class="form_group select">
+              <option value="" disabled selected>Select Group</option>
+              <option value="group1">Group 1</option>
+              <option value="group2">Group 2</option>
+              <option value="group3">Group 3</option>
+              <option value="group4">Group 4</option>
+          </select><br>
 
-                        
-                        <select id="groups" class="form_group select">
-                                <option value="" disabled selected>Select Group</option>
-                                <option value="group1">Group 1</option>
-                                <option value="group2">Group 2</option>
-                                <option value="group3">Group 3</option>
-                                <option value="group4">Group 4</option>
-                       </select><br>
-
-                <textarea id="message" rows="10" class="form_group" placeholder="Type your message here"></textarea><br>
-                <input type="submit"  id="send" class ="btn_display" value="Send"/>
-                <button id="save" type="button">Save</button>
-            </form>
-        </div>
-    </div>
-    <script src="js/script.js"></script>
+        <textarea id="message" rows="6" class="form_group" placeholder="Type your message here"></textarea><br>
+        <input type="submit"  id="send" class ="btn_display" value="Send"/>
+        <button id="save" type="button">Save</button>
+       </form>
+   </div>
+</div>
+ <script src="js/script.js"></script>
 </body>
 </html>
