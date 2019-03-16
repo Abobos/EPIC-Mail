@@ -72,13 +72,9 @@ ul {
 	margin-left:50px;
 }
 
-.logo {
-	display:none;
-}
-
 .display {
-
-	text-align:center;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 
@@ -96,24 +92,28 @@ ul {
 	border-bottom: 2px solid var(--blue);
 }
 
-#delete {
-	width:30vw;
-	margin-top:5px;
+#Draft {
+margin-top: 1.5rem;
+}
+
+#Draft h3 {
+	text-align: center;
+	font-size: 1.5rem;
+}
+
+#send {
+	margin-top:1rem;
 	text-align:center;
 	padding: 7px;
 	border-radius: 30px;
 	color:var(--white);
 	font-weight: bold;
-	background-color: red;
-}
-
-#Inbox {
-margin-top: 1.5rem;
+	background-color:var(--blue);
+	cursor:pointer;
 }
 
 #delete {
-	width:7vw;
-	margin-top:5px;
+	margin-top:1rem;
 	text-align:center;
 	padding: 7px;
 	border-radius: 30px;
@@ -122,10 +122,8 @@ margin-top: 1.5rem;
 	background-color:#b30000;
 	cursor:pointer;
 }
-
 .view {
-	width:7vw;
-	margin-top:5px;
+	margin-top:1rem;
 	text-align:center;
 	padding: 7px;
 	border-radius: 30px;
@@ -135,48 +133,40 @@ margin-top: 1.5rem;
 	cursor:pointer;
 }
 
-#send {
-  width:7vw;
-  margin-top:3px;
-  text-align:center;
-  padding: 7px;
-  border-radius: 30px;
-  color:var(--white);
-  font-weight: bold;
-  background-color: var(--blue);
-}
-
 #delete:focus, #delete:active, .view:focus, .view:active {
 	border:none;
 }
 
 .message {
-	margin-left: 2rem;
-	margin-bottom:2rem;
-	padding: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom:0.8rem;
+  padding: 1rem;
+  color:white;
 	width:70vw;
-	background-color:#ccccb3;
+	background-color:gray;
 	border:3px solid #f2f2f2;
 	text-align: left;
 }
 
-.messageTitle {
-	font-weight: bold;
-	border-bottom: 3px solid #f2f2f2;
+.messageTitle p {
+  font-weight: bold;
+  line-height: 30px;
 }
 
 .messageBody {
 	padding: 1rem;
-	line-height:1.5rem;
+  line-height:1.5rem;
 	height:2vh;
-	overflow-y:hidden;
+  overflow-y:hidden;
+  color:black;
 	background-color: #ffffff;
 	transition:0.5s;
 }
 
 .hide {
-  height:50vh;
-  overflow-y: scroll;
+	height:50vh;
+	overflow-y: scroll;
 }
 
 
@@ -196,113 +186,96 @@ margin-top: 1.5rem;
 		height: 100vh;
 		width:25vw;
 		position: fixed;
-		padding-top:20px;
+    padding-top:20px;
+    transition:none;
 	}
 
+	.logo {
+		margin-left: auto;
+		margin-right: auto;
+		width: 6vw;
+	}
+	.logo img {
+		margin: 0 auto;
+		width: 6vw;
+	}
 	.navbar {
 	 display:none;
 		}
 
 	.display {
-    margin-left:10rem;
+    margin-left: 25vw;
+		width:75vw;
 	}
 	#closeNav {
 		display:none;
 	}
    
-	.logo{
-	
-		display:block;
-	}
-
-	.logo img {
-		margin-top: 1rem;
-		width:6vw;
-	}
 	#delete {
-		width: 10vw;
+	min-width: 6vw;
 	}
 	.view {
-		width:10vw;
-  }
-  
-  #send {
-    width:10vw;
-  }
-   
-}
+	  min-width:6vw;
+	}
 
+  #send {
+	min-width: 6vw;
+	}
+	
+}
 
 @media only screen and (min-width:900px) {
 	 .display {
-		margin-left:13rem;
+    margin-left: 25vw;
 	}
 	.message {
 	   margin-left:2rem;
 	}
-
 }
 
 @media only screen and (min-width:1300px) {
 	 .display {
-		margin-left:20rem;
+    margin-left: 25vw;
 	}
-
 	.message {
 	   margin-left:1.5rem;
 	}
-
 }
 
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width:767px) {
 	.message {
 		margin-left: 6rem;
 	}
+
+	.logo {
+		display: none;
+	}
 	
 	#delete {
-		width: 15vw;
+		min-width: 6vw;
 	}
 	.view {
-		width:15vw;
-  }
-  #send {
-    width:15vw
-  }
+		min-width:6vw;
+	}
+	#send {
+		min-width: 6vw;
+	}
 }
 
 @media only screen and (max-width:550px) {
 	.message {
 		margin-left: 3rem;
 	}
-	
-	#save {
-		width: 60vw;
-	}	
-	#delete {
-		width: 20vw;
-	}
-	.view {
-		width:20vw;
-  }
-  #send {
-    width:20vw;
-  }
-}
 
-@media only screen and (max-width:640px) {
-	.message {
-		margin-left: 3rem;
-  }
-  
 	#delete {
-		width: 20vw;
+		min-width: 6vw;
 	}
 	.view {
-		width:20vw;
-  }
-  #send {
-    width:20vw;
-  }
+		min-width:6vw;
+	}
+	#send {
+		min-width: 6vw;
+	}
 }
 
