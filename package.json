@@ -31,8 +31,6 @@
     "eslint": "^5.15.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "istanbul": "^0.4.5",
-    "kill-all-node-on-windows": "0.0.4",
     "nyc": "^13.3.0",
     "nodemon": "^1.18.10"
   },

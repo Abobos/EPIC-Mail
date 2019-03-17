@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import messages from '../database/messages';
+import messages from '../database/messages.v1';
 import validateMessageDetails from '../middlewares/validateMessageDetails';
 
 class messagesControllers {
