@@ -93,7 +93,61 @@ describe('POST /signup', () => {
         res.should.have.status(400);
         res.should.be.an('object');
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('email is not valid');
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+  it('should return a status of 201 when email is not valid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Elohor',
+        lastName: 'Obiamata',
+        email: 'elohorobiam@gmail.com',
+        password: '324',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+  it('should return a status of 201 when email is not valid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Elohor',
+        lastName: '1234',
+        email: 'elohorobiam@gmail.com',
+        password: '321234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+  it('should return a status of 201 when email is not valid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: '1234',
+        lastName: 'Obiamata',
+        email: 'elohorobiam@gmail.com',
+        password: '321234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -217,7 +271,23 @@ describe('POST /login', () => {
         res.should.have.status(400);
         res.should.be.an('object');
         res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('email is not valid');
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+  it('should return a status of 400 when user email is not valid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'elohorobiam@gmail.com',
+        password: '3234',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('error');
         done();
       });
   });
