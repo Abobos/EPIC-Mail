@@ -31,20 +31,20 @@
     "eslint": "^5.15.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "istanbul": "^0.4.5",
-    "kill-all-node-on-windows": "0.0.4",
     "nyc": "^13.3.0",
     "nodemon": "^1.18.10"
   },
   "dependencies": {
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
-    "mocha": "^6.0.2",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "cross-env": "^5.2.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.0"
+    "jsonwebtoken": "^8.5.0",
+    "mocha": "^6.0.2",
+    "pg": "^7.9.0"
   }
 }

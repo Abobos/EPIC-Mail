@@ -40,7 +40,7 @@ EPIC Mail is a web application that helps people exchange messages and informaio
 ##### Project Management
 * Pivotal Tracker
 
-#####Continuous Integration
+##### Continuous Integration
 * Travis CI
 * Coveralls
 

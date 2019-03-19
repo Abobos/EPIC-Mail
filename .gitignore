@@ -1,5 +1,6 @@
 node_modules
-build
 .nyc_output
+coverage
+build
 .env
 .coveralls.yml

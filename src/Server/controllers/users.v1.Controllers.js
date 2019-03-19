@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import users from '../database/users';
+import users from '../database/users.v1';
 
 
 class UsersControllers {
