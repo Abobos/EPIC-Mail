@@ -5,6 +5,7 @@ import usersv1Router from './Server/routes/users.v1.Routes';
 import messagesv1Router from './Server/routes/messages.v1.Routes';
 
 dotenv.config();
+
 const app = express();
 const port = process.env.PORT;
 
@@ -21,11 +22,9 @@ app.all('*', (req, res) => res.status(404).json({
   error: 'This route is unavailable',
 }));
 
-
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Listening to the port ${port}`);
 });
-
 
 export default app;

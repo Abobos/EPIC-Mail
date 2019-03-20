@@ -7,7 +7,7 @@ const development = {
   user: process.env.PGUSER,
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
-  password: process.env.PGPASSWORD,
+  // password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
 };
 
@@ -15,23 +15,21 @@ const test = {
   user: process.env.PGUSER,
   host: process.env.PGHOST,
   database: process.env.PGDATABASE_TEST,
-  password: process.env.PGPASSWORD,
+  // password: process.env.PGPASSWORD,
   port: process.env.PGPORT,
 };
 
-const production = {
-  user: process.env.PGUSER,
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE_PRODUCTION,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
-};
+// const production = {
+//   user: process.env.PGUSER,
+//   host: process.env.PGHOST,
+//   database: process.env.PGDATABASE_PRODUCTION,
+//   password: process.env.PGPASSWORD,
+//   port: process.env.PGPORT,
+// };
 
-let config;
-if (process.env.NODE_ENV === 'development') config = development;
+let config = development;
 if (process.env.NODE_ENV === 'test') config = test;
-if (process.env.NODE_ENV === 'production') config = production;
-
+// if (process.env.NODE_ENV === 'production') config = production;
 const pool = new pg.Pool(config);
 
 export default pool;
