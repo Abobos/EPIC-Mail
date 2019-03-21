@@ -46,7 +46,7 @@ class UsersControllers {
 
   static userSignIn(req, res) {
     const { email } = req.body;
-    pool.query('SELECT * FROM users WHERE email = $1', [email ], (err, result) => {
+    pool.query('SELECT * FROM users WHERE email = $1', [email], (err, result) => {
       if (err) throw err;
       if (result.rows.length === 0) {
         return res.status(404).json({
