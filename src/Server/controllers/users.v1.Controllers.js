@@ -38,9 +38,7 @@ class UsersControllers {
               ],
             });
           }
-          return done();
         });
-      return next();
     });
   }
 

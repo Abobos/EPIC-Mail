@@ -4,3 +4,4 @@ coverage
 build
 .env
 .coveralls.yml
+node_modules
