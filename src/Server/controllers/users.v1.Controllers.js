@@ -10,7 +10,7 @@ class UsersControllers {
     const {
       firstName, lastName, email, password,
     } = req.body;
-    pool.query('SELECT * FROM users WHERE email = $1', [email], (err, result) => {
+    pool.query('SELECT * FROM users WHERE email = $1', [email], (err, result, next) => {
       if (err) throw err;
       if (result.rows.length > 0) {
         return res.status(409).json({
@@ -26,7 +26,7 @@ class UsersControllers {
       };
       const userToken = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' });
       pool.query('INSERT INTO users (firstname, lastname, email , password) VALUES ($1, $2, $3, $4)',
-        [firstName, lastName, email, hashPassword], (error, user) => {
+        [firstName, lastName, email, hashPassword], (error, user, done) => {
           if (error) throw error;
           if (user.rows) {
             return res.status(201).json({
@@ -38,7 +38,9 @@ class UsersControllers {
               ],
             });
           }
+          return done();
         });
+      return next();
     });
   }
 
