@@ -1,1 +1,0 @@
-npm run migrate-db && npm start
