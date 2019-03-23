@@ -11,7 +11,7 @@ class UsersControllers {
       firstName, lastName, email, password,
     } = req.body;
     pool.query('SELECT * FROM users WHERE email = $1', [email], (err, result, next) => {
-      if (err) throw err;
+      if (err) console.log(err);
       if (result.rows.length > 0) {
         return res.status(409).json({
           status: 409,
@@ -27,7 +27,7 @@ class UsersControllers {
       const userToken = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' });
       pool.query('INSERT INTO users (firstname, lastname, email , password) VALUES ($1, $2, $3, $4)',
         [firstName, lastName, email, hashPassword], (error, user, done) => {
-          if (error) throw error;
+          if (error) console.log(error);
           if (user.rows) {
             return res.status(201).json({
               status: 201,
@@ -45,7 +45,7 @@ class UsersControllers {
   static userSignIn(req, res) {
     const { email } = req.body;
     pool.query('SELECT * FROM users WHERE email = $1', [email], (err, result) => {
-      if (err) throw err;
+      if (err) console.log(err);
       if (result.rows.length === 0) {
         return res.status(404).json({
           status: 404,
