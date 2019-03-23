@@ -21,8 +21,7 @@ const test = {
 
 
 let config = development;
-if (process.env.NODE_ENV === 'test') config = test;
-if (process.env.NODE_ENV === 'production') config = production;
+if (process.env.NODE_ENV === 'test') config = test
 const pool = new pg.Pool(config);
 
 export default pool;
