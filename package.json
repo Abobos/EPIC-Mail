@@ -7,8 +7,9 @@
     "test": "cross-env NODE_ENV=test npm run migrate-db && nyc mocha --require @babel/register ./src/Server/test/*.test.js --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start-dev": "nodemon --exec babel-node ./src/app.js",
-    "start": "cross-env NODE_ENV=production npm run migrate-db && node build/app.js",
+    "start": "cross-env NODE_ENV=production npm run migrate && node build/app.js",
     "build": "babel src --out-dir build",
+    "migrate": "node ./build/Server/database/table.js",
     "migrate-db": "babel-node ./src/Server/database/table.js"
   },
   "repository": {
