@@ -79,7 +79,7 @@ describe('POST /signup', () => {
         done();
       });
   });
-  it('should return a status of 201 when email is not valid', (done) => {
+  it('should return a status of 400 when email is not valid', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
@@ -97,7 +97,7 @@ describe('POST /signup', () => {
         done();
       });
   });
-  it('should return a status of 201 when email is not valid', (done) => {
+  it('should return a status of 400 when password is not valid', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
@@ -115,7 +115,7 @@ describe('POST /signup', () => {
         done();
       });
   });
-  it('should return a status of 201 when email is not valid', (done) => {
+  it('should return a status of 400 when lastName is not valid', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
@@ -133,7 +133,7 @@ describe('POST /signup', () => {
         done();
       });
   });
-  it('should return a status of 201 when email is not valid', (done) => {
+  it('should return a status of 400 when firstName is not valid', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
