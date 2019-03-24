@@ -19,9 +19,10 @@ const test = {
   port: process.env.PGPORT,
 };
 
-
 let config = development;
-if (process.env.NODE_ENV === 'test') config = test
+if (process.env.NODE_ENV === 'test') config = test;
+if (process.env.NODE_ENV === 'production') config = process.env.DATABASE_URL;
+
 const pool = new pg.Pool(config);
 
 export default pool;
