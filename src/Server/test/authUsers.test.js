@@ -7,6 +7,7 @@ import app from '../../app';
 chai.use(chaiHttp);
 chai.should();
 
+
 describe('POST /signup', () => {
   it('should return a status of 400 , when firstName does not exist', (done) => {
     chai
@@ -190,6 +191,7 @@ describe('POST /signup', () => {
       });
   });
 });
+
 
 describe('POST /login', () => {
   it('should return a status of 200 when user details are valid', (done) => {
