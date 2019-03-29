@@ -7,34 +7,78 @@ import app from '../../app';
 chai.use(chaiHttp);
 chai.should();
 
-let userToken = '';
-let wrongToken = '';
 
-describe('token', () => {
+describe('Signup two users', () => {
+   it('should return a status of 201 when user has signup', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Gift',
+        lastName: 'Abobo',
+        email: 'giftabobo@gmail.com',
+        password: 'precious',
+      })
+      .end((req, res) => {
+        res.should.have.status(201);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('token');
+        done();
+      });
+    });
+
+     it('should return a status of 201 when user has sign up', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Blessing',
+        lastName: 'Makaraba',
+        email: 'blessingmakaraba@gmail.com',
+        password: 'blue333',
+      })
+      .end((req, res) => {
+        res.should.have.status(201);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('token');
+        done();
+      });
+  });
+});
+
+describe('Generate Token', () => {
   it('generate a token', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'elohorobiamata@gmail.com',
-        password: '321234',
+        email: 'giftabobo@gmail.com',
+        password: 'precious',
       })
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         res.body.data[0].should.have.property('token');
         userToken = res.body.data[0].token;
         [wrongToken] = userToken.split('.');
-        console.log(wrongToken);
         done();
       });
   });
 });
 
 // Send Messages
+let userToken = '';
+let wrongToken = '';
+
 describe('POST /messages', () => {
   it('should return a status of 200 when message is sent', (done) => {
     chai
@@ -44,25 +88,39 @@ describe('POST /messages', () => {
       .send({
         subject: 'Andela',
         message: 'We provide opportunity',
-        user: 'blue',
+        email: 'blessingmakaraba@gmail.com',
       })
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
-        res.body.data[0].should.have.property('id');
-        res.body.data[0].should.have.property('createdOn');
-        res.body.data[0].should.have.property('subject');
-        res.body.data[0].should.have.property('message');
-        res.body.data[0].should.have.property('parentMessageId');
-        res.body.data[0].should.have.property('status');
+        res.body.data[0].should.have.an('object');
         done();
       });
   });
 
-   it('should return a status of 401 when token is wrong', (done) => {
+   it('should return a status of 400 when receiver\'s mail does not exist', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/messages')
+      .set('Authorization', userToken)
+      .send({
+        subject: 'Andela',
+        message: 'We provide opportunity',
+        email: 'victoryabobo@gmail.com',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+
+  it('should return a status of 401 when token is wrong', (done) => {
     chai
       .request(app)
       .post('/api/v1/messages')
@@ -70,7 +128,7 @@ describe('POST /messages', () => {
       .send({
         subject: 'Andela',
         message: 'We provide opportunity',
-        user: 'blue',
+        email: 'blessingmakaraba@gmail.com',
       })
       .end((req, res) => {
         res.should.have.status(401);
@@ -87,12 +145,12 @@ describe('POST /messages', () => {
       .set('Authorization', `Bearer ${userToken}`)
       .send({
         message: 'we provide opportunity',
-        user: 'blue',
+        email: 'blessingmakaraba@gmail.com',
       })
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('subject is required');
         done();
       });
@@ -105,18 +163,36 @@ describe('POST /messages', () => {
       .set('Authorization', `Bearer ${userToken}`)
       .send({
         subject: 'Creative Discourse',
-        user: 'blue',
+        email: 'blessingmakaraba@gmail.com',
       })
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('message is required');
         done();
       });
   });
 
-  it('should return a status of 400 when sender found', (done) => {
+   it('should return a status of 400 when email is invalid', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/messages')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        subject: 'Creative Discourse',
+        email: 'blessingmakaraba@gmail',
+      })
+      .end((req, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('email is not valid');
+        done();
+      });
+  });
+
+  it('should return a status of 400 when receive found', (done) => {
     chai
       .request(app)
       .post('/api/v1/messages')
@@ -128,8 +204,8 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
-        res.body.should.have.property('error').eql('user is required');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -145,7 +221,7 @@ describe('GET /messages', () => {
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         done();
@@ -164,7 +240,7 @@ describe('GET /messages/unread', () => {
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         done();
@@ -182,7 +258,7 @@ describe('GET /messages/sent', () => {
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         done();
@@ -200,7 +276,7 @@ describe('GET /messages/<message-id>', () => {
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         res.body.data[0].should.have.property('id');
@@ -221,8 +297,8 @@ describe('GET /messages/<message-id>', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(404);
-        res.body.should.have.property('error').eql('The message with the given id was not found');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -238,7 +314,7 @@ describe('DELETE /messages/<message-id>', () => {
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         res.body.data[0].should.have.property('message');
@@ -254,8 +330,8 @@ describe('DELETE /messages/<message-id>', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(404);
-        res.body.should.have.property('error').eql('The message with the given id was not found');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error');
         done();
       });
   });
