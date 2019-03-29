@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import pool from './config/pool';
 
 const createUsersTable = `
