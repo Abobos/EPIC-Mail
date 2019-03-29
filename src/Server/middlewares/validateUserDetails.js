@@ -35,32 +35,32 @@ const signup = (req, res, done) => {
   } = req.body;
   if (!firstName) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: 'firstName is required',
     });
   }
   if (!lastName) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: 'lastName is required',
     });
   }
   if (!email) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: 'email is required',
     });
   }
   if (!password) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: 'password is required',
     });
   }
   const { error } = validateUserSignUpDetails(req.body);
   if (error) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: (error.details) ? error.details[0].message.replace(/[""]+/g, '') : error.message,
     });
   }
@@ -71,20 +71,20 @@ const login = (req, res, done) => {
   const { email, password } = req.body;
   if (!email) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: 'email is required',
     });
   }
   if (!password) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: 'password is required',
     });
   }
   const { error } = validateUserSignInDetails(req.body);
   if (error) {
     return res.status(400).json({
-      status: 400,
+      status: 'failed',
       error: (error.details) ? error.details[0].message.replace(/[""]+/g, '') : error.message,
     });
   }
