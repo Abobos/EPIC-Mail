@@ -21,7 +21,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('firstName is required');
         done();
       });
@@ -39,13 +39,13 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('email is required');
         done();
       });
   });
 
-  it('should return a status of 400 , when lastName is does not exist', (done) => {
+  it('should return a status of 400 , when lastName does not exist', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
@@ -57,7 +57,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('lastName is required');
         done();
       });
@@ -75,7 +75,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('password is required');
         done();
       });
@@ -93,7 +93,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error');
         done();
       });
@@ -111,7 +111,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error');
         done();
       });
@@ -129,7 +129,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error');
         done();
       });
@@ -147,7 +147,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error');
         done();
       });
@@ -165,7 +165,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(201);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(201);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         res.body.data[0].should.have.property('token');
@@ -185,8 +185,8 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(409);
-        res.body.should.have.property('error').eql('User already exists, Sign In!');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -205,7 +205,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         res.body.data[0].should.have.property('token');
@@ -224,7 +224,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(401);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(401);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('Incorrect password!');
         done();
       });
@@ -240,7 +240,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('password is required');
         done();
       });
@@ -256,7 +256,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('email is required');
         done();
       });
@@ -272,7 +272,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error');
         done();
       });
@@ -288,7 +288,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(400);
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error');
         done();
       });
@@ -304,8 +304,8 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql(404);
-        res.body.should.have.property('error').eql('Details not found, Sign Up!');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error');
         done();
       });
   });

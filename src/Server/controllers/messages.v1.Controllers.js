@@ -1,35 +1,33 @@
-/* eslint-disable no-console */
 import messages from '../database/messages.v1';
-import validateMessageDetails from '../middlewares/validateMessageDetails';
+import pool from '../database/config/pool';
 
 class messagesControllers {
   static sendMessage(req, res) {
-    const { error } = validateMessageDetails(req.body);
-    if (error) {
-      return res.status(400).json({
-        status: 400,
-        error: error.details[0].message.replace(/[""]+/g, ''),
+    const senderId = req.decoded.userId;
+    const { message, subject } = req.body;
+    const { receiverId } = req.body;
+    const queryText = 'INSERT INTO messages (subject, message, parentMessageId, status) VALUES ($1, $2, $3, $4) RETURNING *';
+    pool.query(queryText, [subject, message, receiverId, 'sent'], (error, result) => {
+      pool.query('INSERT INTO sent (senderId, message) VALUES ($1, $2) RETURNING *', [senderId, message], (err, sentMessages) => {
+        const sqlStatement = 'INSERT INTO inbox (receiverId, message) VALUES ($1, $2) RETURNING *';
+        pool.query(sqlStatement, [receiverId, message], (errors, userInbox) => {
+          if (userInbox.rows) {
+            return res.status(200).json({
+              status: 'success',
+              data: [
+                result.rows[0],
+              ],
+            });
+          }
+        });
       });
-    }
-    return res.status(200).json({
-      status: 200,
-      data: [
-        {
-          id: messages.length + 1,
-          createdOn: (new Date().toLocaleString()),
-          subject: req.body.subject,
-          message: req.body.message,
-          parentMessageId: messages.length + 1,
-          status: 'sent',
-        },
-      ],
     });
   }
 
   static receivedMessage(req, res) {
     const receivedMessage = messages.filter(message => message.status === 'read');
     return res.status(200).json({
-      status: 200,
+      status: 'success',
       data: [
         receivedMessage,
       ],
@@ -39,7 +37,7 @@ class messagesControllers {
   static receivedUnreadMessage(req, res) {
     const receivedUnreadMessage = messages.filter(message => message.status === 'unread');
     return res.status(200).json({
-      status: 200,
+      status: 'success',
       data: [
         receivedUnreadMessage,
       ],
@@ -49,7 +47,7 @@ class messagesControllers {
   static receivedSentMessage(req, res) {
     const receivedSentMessage = messages.filter(message => message.status === 'sent');
     return res.status(200).json({
-      status: 200,
+      status: 'success',
       data: [
         receivedSentMessage,
       ],
@@ -61,12 +59,12 @@ class messagesControllers {
     const getMessage = messages.find(m => m.id === messageId);
     if (!getMessage) {
       return res.status(404).json({
-        status: 404,
+        status: 'failed',
         error: 'The message with the given id was not found',
       });
     }
     return res.status(200).json({
-      status: 200,
+      status: 'success',
       data: [
         getMessage,
       ],
@@ -78,14 +76,14 @@ class messagesControllers {
     const getMessage = messages.find(m => m.id === messageId);
     if (!getMessage) {
       return res.status(404).json({
-        status: 404,
+        status: 'failed',
         error: 'The message with the given id was not found',
       });
     }
     const messageIndex = messages.indexOf(getMessage);
     messages.splice(messageIndex, 1);
     return res.status(200).json({
-      status: 200,
+      status: 'success',
       data: [
         {
           message: getMessage.message,
