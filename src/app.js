@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -7,7 +8,7 @@ import messagesv1Router from './Server/routes/messages.v1.Routes';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
