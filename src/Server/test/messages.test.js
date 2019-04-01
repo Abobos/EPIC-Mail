@@ -9,7 +9,7 @@ chai.should();
 
 
 describe('Signup two users', () => {
-   it('should return a status of 201 when user has signup', (done) => {
+  it('should return a status of 201 when user has signup', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
@@ -28,9 +28,9 @@ describe('Signup two users', () => {
         res.body.data[0].should.have.property('token');
         done();
       });
-    });
+  });
 
-     it('should return a status of 201 when user has sign up', (done) => {
+  it('should return a status of 201 when user has sign up', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/signup')
@@ -52,6 +52,9 @@ describe('Signup two users', () => {
   });
 });
 
+let senderToken = '';
+let receiverToken = '';
+let wrongToken = '';
 describe('Generate Token', () => {
   it('generate a token', (done) => {
     chai
@@ -68,23 +71,40 @@ describe('Generate Token', () => {
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         res.body.data[0].should.have.property('token');
-        userToken = res.body.data[0].token;
-        [wrongToken] = userToken.split('.');
+        senderToken = res.body.data[0].token;
+        [wrongToken] = senderToken.split('.');
+        done();
+      });
+  });
+
+  it('generate a token', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'blessingmakaraba@gmail.com',
+        password: 'blue333',
+      })
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('token');
+        receiverToken = res.body.data[0].token;
         done();
       });
   });
 });
 
 // Send Messages
-let userToken = '';
-let wrongToken = '';
-
 describe('POST /messages', () => {
   it('should return a status of 200 when message is sent', (done) => {
     chai
       .request(app)
       .post('/api/v1/messages')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .send({
         subject: 'Andela',
         message: 'We provide opportunity',
@@ -101,11 +121,11 @@ describe('POST /messages', () => {
       });
   });
 
-   it('should return a status of 400 when receiver\'s mail does not exist', (done) => {
+  it('should return a status of 400 when receiver\'s mail does not exist', (done) => {
     chai
       .request(app)
       .post('/api/v1/messages')
-      .set('Authorization', userToken)
+      .set('Authorization', senderToken)
       .send({
         subject: 'Andela',
         message: 'We provide opportunity',
@@ -142,7 +162,7 @@ describe('POST /messages', () => {
     chai
       .request(app)
       .post('/api/v1/messages')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .send({
         message: 'we provide opportunity',
         email: 'blessingmakaraba@gmail.com',
@@ -160,7 +180,7 @@ describe('POST /messages', () => {
     chai
       .request(app)
       .post('/api/v1/messages')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .send({
         subject: 'Creative Discourse',
         email: 'blessingmakaraba@gmail.com',
@@ -174,11 +194,11 @@ describe('POST /messages', () => {
       });
   });
 
-   it('should return a status of 400 when email is invalid', (done) => {
+  it('should return a status of 400 when email is invalid', (done) => {
     chai
       .request(app)
       .post('/api/v1/messages')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .send({
         subject: 'Creative Discourse',
         email: 'blessingmakaraba@gmail',
@@ -196,7 +216,7 @@ describe('POST /messages', () => {
     chai
       .request(app)
       .post('/api/v1/messages')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .send({
         message: 'Blessing is Creative',
         subject: 'Creative Discourse',
@@ -217,7 +237,7 @@ describe('GET /messages', () => {
     chai
       .request(app)
       .get('/api/v1/messages')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${receiverToken}`)
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
@@ -227,22 +247,100 @@ describe('GET /messages', () => {
         done();
       });
   });
+
+  it('should return a status of 200 and display a message of inbox is empty', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages')
+      .set('Authorization', `Bearer ${senderToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data').eql('inbox is empty');
+        done();
+      });
+  });
 });
 
 
 // Unread Received Messages
 describe('GET /messages/unread', () => {
-  it('should return a status of 200 and show all received messages', (done) => {
+  it('should return a status of 200 when message is sent', (done) => {
     chai
       .request(app)
-      .get('/api/v1/messages/unread')
-      .set('Authorization', `Bearer ${userToken}`)
+      .post('/api/v1/messages')
+      .set('Authorization', `Bearer ${senderToken}`)
+      .send({
+        subject: 'Andela',
+        message: 'Brilliance is evenly distributed',
+        email: 'blessingmakaraba@gmail.com',
+      })
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        done();
+      });
+  });
+
+  it('should return a status of 200 and show all unread received messages', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/unread')
+      .set('Authorization', `Bearer ${receiverToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        done();
+      });
+  });
+
+  it('should return a status of 200, show all received messages and change status of messages to read', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages')
+      .set('Authorization', `Bearer ${receiverToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        done();
+      });
+  });
+
+  it('should return a status of 200 and display no unread messages', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/unread')
+      .set('Authorization', `Bearer ${receiverToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data').eql('No unread messages');
+        done();
+      });
+  });
+
+  it('should return a status of 200 and display no unread messages', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/unread')
+      .set('Authorization', `Bearer ${senderToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data').eql('No unread messages');
         done();
       });
   });
@@ -254,7 +352,7 @@ describe('GET /messages/sent', () => {
     chai
       .request(app)
       .get('/api/v1/messages/sent')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
@@ -272,7 +370,7 @@ describe('GET /messages/<message-id>', () => {
     chai
       .request(app)
       .get('/api/v1/messages/1')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
@@ -293,7 +391,7 @@ describe('GET /messages/<message-id>', () => {
     chai
       .request(app)
       .get('/api/v1/messages/9')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
@@ -310,7 +408,7 @@ describe('DELETE /messages/<message-id>', () => {
     chai
       .request(app)
       .delete('/api/v1/messages/1')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
@@ -326,7 +424,7 @@ describe('DELETE /messages/<message-id>', () => {
     chai
       .request(app)
       .delete('/api/v1/messages/9')
-      .set('Authorization', `Bearer ${userToken}`)
+      .set('Authorization', `Bearer ${senderToken}`)
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
