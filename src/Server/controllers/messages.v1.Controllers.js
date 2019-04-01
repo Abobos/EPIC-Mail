@@ -1,46 +1,63 @@
 import messages from '../database/messages.v1';
 import pool from '../database/config/pool';
 
+
 class messagesControllers {
   static sendMessage(req, res) {
     const senderId = req.decoded.userId;
     const { message, subject } = req.body;
     const { receiverId } = req.body;
-    const queryText = 'INSERT INTO messages (subject, message, parentMessageId, status) VALUES ($1, $2, $3, $4) RETURNING *';
-    pool.query(queryText, [subject, message, receiverId, 'sent'], (error, result) => {
-      pool.query('INSERT INTO sent (senderId, message) VALUES ($1, $2) RETURNING *', [senderId, message], (err, sentMessages) => {
-        const sqlStatement = 'INSERT INTO inbox (receiverId, message) VALUES ($1, $2) RETURNING *';
-        pool.query(sqlStatement, [receiverId, message], (errors, userInbox) => {
-          if (userInbox.rows) {
-            return res.status(200).json({
-              status: 'success',
-              data: [
-                result.rows[0],
-              ],
-            });
-          }
+    const queryText = 'INSERT INTO messages (subject, message, senderId, receiverId) VALUES ($1, $2, $3, $4) RETURNING *';
+    pool.query(queryText, [subject, message, senderId, receiverId], (err, result) => {
+      if (result.rows) {
+        const sentMessage = result.rows.map((messageBody) => {
+          const messageDetails = {
+            id: messageBody.id,
+            createdOn: messageBody.createdon,
+            subject: messageBody.subject,
+            message: messageBody.message,
+            parentMessageId: messageBody.parentmessageid,
+            status: 'sent',
+          };
+          return messageDetails;
         });
-      });
+
+        return res.status(200).json({
+          status: 'success',
+          data: sentMessage,
+        });
+      }
     });
   }
 
   static receivedMessage(req, res) {
-    const receivedMessage = messages.filter(message => message.status === 'read');
-    return res.status(200).json({
-      status: 'success',
-      data: [
-        receivedMessage,
-      ],
+    pool.query('SELECT * FROM messages WHERE receiverId = $1', [req.decoded.userId], (err, result) => {
+      if (result.rows[0]) {
+        pool.query('UPDATE messages SET status = $1 WHERE receiverId = $2', ['read', req.decoded.userId]);
+        return res.status(200).json({
+          status: 'success',
+          data: result.rows,
+        });
+      }
+      return res.status(200).json({
+        status: 'success',
+        data: 'inbox is empty',
+      });
     });
   }
 
   static receivedUnreadMessage(req, res) {
-    const receivedUnreadMessage = messages.filter(message => message.status === 'unread');
-    return res.status(200).json({
-      status: 'success',
-      data: [
-        receivedUnreadMessage,
-      ],
+    pool.query('SELECT * FROM messages WHERE receiverId = $1 AND status = $2', [req.decoded.userId, 'unread'], (err, result) => {
+      if (result.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+          data: result.rows,
+        });
+      }
+      return res.status(200).json({
+        status: 'success',
+        data: 'No unread messages',
+      });
     });
   }
 
