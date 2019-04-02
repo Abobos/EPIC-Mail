@@ -6,9 +6,9 @@ import { verifyToken } from '../middlewares/tokenHandler';
 const router = express.Router();
 
 router.post('/messages', verifyToken, validateMessageDetails, messageControllers.sendMessage);
-router.get('/messages', verifyToken, messageControllers.receivedMessage);
-router.get('/messages/unread', verifyToken, messageControllers.receivedUnreadMessage);
-router.get('/messages/sent', verifyToken, messageControllers.receivedSentMessage);
+router.get('/messages', verifyToken, messageControllers.getReceivedMessage);
+router.get('/messages/unread', verifyToken, messageControllers.getReceivedUnreadMessage);
+router.get('/messages/sent', verifyToken, messageControllers.getSentMessage);
 router.get('/messages/:Id', verifyToken, messageControllers.getUserMessage);
 router.delete('/messages/:Id', verifyToken, messageControllers.DeleteMessage);
 

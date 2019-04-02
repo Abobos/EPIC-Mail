@@ -23,7 +23,6 @@ app.all('*', (req, res) => res.status(404).json({
 }));
 
 app.listen(port, () => {
-  // eslint-disable-next-line no-console
   console.log(`Listening to the port ${port}`);
 });
 
