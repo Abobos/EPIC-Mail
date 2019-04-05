@@ -10,6 +10,6 @@ router.get('/messages', verifyToken, messageControllers.getReceivedEmails);
 router.get('/messages/unread', verifyToken, messageControllers.getUnreadEmails);
 router.get('/messages/sent', verifyToken, messageControllers.getSentEmails);
 router.get('/messages/:messageId', verifyToken, validateMessageId, messageControllers.getAnEmail);
-// router.delete('/messages/:messageId', verifyToken, validateMessageId, messageControllers.deleteAnEmail);
+router.delete('/messages/:messageId', verifyToken, validateMessageId, messageControllers.deleteAnEmail);
 
 export default router;
