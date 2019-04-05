@@ -79,25 +79,25 @@ class messagesControllers {
     });
   }
 
-//   static async deleteAnEmail(req, res) {
-//     const messageId = Number(req.params.messageId);
-//     const deletedDetails = await db.query('DELETE FROM inbox WHERE id = $1 AND receiverId = $2 RETURNING *', [messageId, req.decoded.userId]);
-//     if (deletedDetails.rows[0]) {
-//       const deletedMessage = await db.query('SELECT message FROM messages WHERE id = $1', [messageId]);
-//       return res.status(200).json({
-//         status: 'success',
-//         data: [
-//           {
-//             message: deletedMessage.rows[0].message,
-//           },
-//         ],
-//       });
-//     }
-//     return res.status(200).json({
-//       status: 'success',
-//       message: 'The email record with the given ID was not found',
-//     });
-//   }
+  static async deleteAnEmail(req, res) {
+    const messageId = Number(req.params.messageId);
+    const deletedDetails = await db.query('DELETE FROM inbox WHERE id = $1 AND receiverId = $2 RETURNING *', [messageId, req.decoded.userId]);
+    if (deletedDetails.rows[0]) {
+      const deletedMessage = await db.query('SELECT message FROM messages WHERE id = $1', [messageId]);
+      return res.status(200).json({
+        status: 'success',
+        data: [
+          {
+            message: deletedMessage.rows[0].message,
+          },
+        ],
+      });
+    }
+    return res.status(200).json({
+      status: 'success',
+      message: 'The email record with the given ID was not found',
+    });
+  }
  }
 
 export default messagesControllers;

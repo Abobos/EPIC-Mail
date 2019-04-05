@@ -411,34 +411,34 @@ describe('GET /messages/<message-id>', () => {
 });
 
 
-// describe('DELETE /messages/<message-id>', () => {
-//   it('should return a status of 200 and display deleted message', (done) => {
-//     chai
-//       .request(app)
-//       .delete('/api/v1/messages/1')
-//       .set('Authorization', `Bearer ${receiverToken}`)
-//       .end((req, res) => {
-//         res.should.have.status(200);
-//         res.should.be.an('object');
-//         res.body.should.have.property('status').eql('success');
-//         res.body.should.have.property('data');
-//         res.body.data.should.have.an('array');
-//         res.body.data[0].should.have.property('message');
-//         done();
-//       });
-//   });
+describe('DELETE /messages/<message-id>', () => {
+  it('should return a status of 200 and display deleted message', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/messages/1')
+      .set('Authorization', `Bearer ${receiverToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('message');
+        done();
+      });
+  });
 
-//   it('should return a status of 200 when message with the given Id is not found', (done) => {
-//     chai
-//       .request(app)
-//       .delete('/api/v1/messages/9')
-//       .set('Authorization', `Bearer ${senderToken}`)
-//       .end((req, res) => {
-//         res.should.have.status(200);
-//         res.should.be.an('object');
-//         res.body.should.have.property('status').eql('success');
-//         res.body.should.have.property('message').eql('The email record with the given ID was not found');
-//         done();
-//       });
-//   });
-// });
+  it('should return a status of 200 when message with the given Id is not found', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/messages/9')
+      .set('Authorization', `Bearer ${senderToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('message').eql('The email record with the given ID was not found');
+        done();
+      });
+  });
+});
