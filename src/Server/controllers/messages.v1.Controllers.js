@@ -1,73 +1,66 @@
 import messages from '../database/messages.v1';
-import pool from '../database/config/pool';
+import db from '../database/config/pool';
+import '@babel/polyfill';
 
 
 class messagesControllers {
-  static sendMessage(req, res) {
+  static async sendMessage(req, res) {
     const senderId = req.decoded.userId;
-    const { message, subject } = req.body;
+    const { subject, message } = req.body;
     const { receiverId } = req.body;
-    const queryText = 'INSERT INTO messages (subject, message, senderId, receiverId) VALUES ($1, $2, $3, $4) RETURNING *';
-    pool.query(queryText, [subject, message, senderId, receiverId], (err, result) => {
-      if (result.rows) {
-        const sentMessage = result.rows.map((messageBody) => {
-          const messageDetails = {
-            id: messageBody.id,
-            createdOn: messageBody.createdon,
-            subject: messageBody.subject,
-            message: messageBody.message,
-            parentMessageId: messageBody.parentmessageid,
-            status: 'sent',
-          };
-          return messageDetails;
-        });
-
-        return res.status(200).json({
-          status: 'success',
-          data: sentMessage,
-        });
-      }
-    });
-  }
-
-  static receivedMessage(req, res) {
-    pool.query('SELECT * FROM messages WHERE receiverId = $1', [req.decoded.userId], (err, result) => {
-      if (result.rows[0]) {
-        pool.query('UPDATE messages SET status = $1 WHERE receiverId = $2', ['read', req.decoded.userId]);
-        return res.status(200).json({
-          status: 'success',
-          data: result.rows,
-        });
-      }
-      return res.status(200).json({
-        status: 'success',
-        data: 'inbox is empty',
-      });
-    });
-  }
-
-  static receivedUnreadMessage(req, res) {
-    pool.query('SELECT * FROM messages WHERE receiverId = $1 AND status = $2', [req.decoded.userId, 'unread'], (err, result) => {
-      if (result.rows[0]) {
-        return res.status(200).json({
-          status: 'success',
-          data: result.rows,
-        });
-      }
-      return res.status(200).json({
-        status: 'success',
-        data: 'No unread messages',
-      });
-    });
-  }
-
-  static receivedSentMessage(req, res) {
-    const receivedSentMessage = messages.filter(message => message.status === 'sent');
+    const createdMessage = await db.query('INSERT INTO messages (subject, message) VALUES ($1, $2) RETURNING *', [subject, message]);
+    const messageId = createdMessage.rows[0].id;
+    await db.query('INSERT INTO inbox (senderId, receiverId, messageId) VALUES ($1, $2, $3)', [senderId, receiverId, messageId]);
+    await db.query('INSERT INTO sent (senderId, receiverId, messageId) VALUES ($1, $2, $3)', [senderId, receiverId, messageId]);
     return res.status(200).json({
       status: 'success',
-      data: [
-        receivedSentMessage,
-      ],
+      data: createdMessage.rows,
+    });
+  }
+
+  static async getReceivedMessage(req, res) {
+    const queryText = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, messages.parentMessageId, inbox.senderId, inbox.receiverId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 ORDER BY messages.id';
+    const receivedMessages = await db.query(queryText, [req.decoded.userId]);
+    await db.query('UPDATE inbox SET status = $1 WHERE receiverId = $2', ['read', req.decoded.userId]);
+    if (receivedMessages.rows[0]) {
+      return res.status(200).json({
+        status: 'success',
+        data: receivedMessages.rows,
+      });
+    }
+    return res.status(200).json({
+      status: 'success',
+      message: 'Inbox is empty',
+    });
+  }
+
+  static async getReceivedUnreadMessage(req, res) {
+    const queryStatement = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, messages.parentMessageId, inbox.senderId, inbox.receiverId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 AND inbox.status = $2 ORDER BY messages.id';
+    const unreadMessages = await db.query(queryStatement, [req.decoded.userId, 'unread']);
+    if (unreadMessages.rows[0]) {
+      return res.status(200).json({
+        status: 'success',
+        data: unreadMessages.rows,
+      });
+    }
+    return res.status(200).json({
+      status: 'success',
+      message: 'No unread messages',
+    });
+  }
+
+  static async getSentMessage(req, res) {
+    const queryStatement = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, messages.parentMessageId, sent.senderId, sent.receiverId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.senderId = $1 ORDER BY messages.id';
+    const sentMessages = await db.query(queryStatement, [req.decoded.userId]);
+    if (sentMessages.rows[0]) {
+      return res.status(200).json({
+        status: 'success',
+        data: sentMessages.rows,
+      });
+    }
+    return res.status(200).json({
+      status: 'success',
+      message: 'No sent messages',
     });
   }
 

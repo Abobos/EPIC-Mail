@@ -257,7 +257,7 @@ describe('GET /messages', () => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('data').eql('inbox is empty');
+        res.body.should.have.property('message').eql('Inbox is empty');
         done();
       });
   });
@@ -321,32 +321,18 @@ describe('GET /messages/unread', () => {
     chai
       .request(app)
       .get('/api/v1/messages/unread')
-      .set('Authorization', `Bearer ${receiverToken}`)
-      .end((req, res) => {
-        res.should.have.status(200);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('data').eql('No unread messages');
-        done();
-      });
-  });
-
-  it('should return a status of 200 and display no unread messages', (done) => {
-    chai
-      .request(app)
-      .get('/api/v1/messages/unread')
       .set('Authorization', `Bearer ${senderToken}`)
       .end((req, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('data').eql('No unread messages');
+        res.body.should.have.property('message').eql('No unread messages');
         done();
       });
   });
 });
 
-// Sent Received Messages
+// Sent Messages
 describe('GET /messages/sent', () => {
   it('should return a status of 200 and show all sent messages', (done) => {
     chai
@@ -359,6 +345,20 @@ describe('GET /messages/sent', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        done();
+      });
+  });
+
+  it('should return a status of 200 and display No sent messages', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/sent')
+      .set('Authorization', `Bearer ${receiverToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('message').eql('No sent messages');
         done();
       });
   });
