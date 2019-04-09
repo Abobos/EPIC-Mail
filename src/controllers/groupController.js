@@ -15,6 +15,20 @@ class groupController {
       });
     }
   }
+
+  static async getGroups(req, res) {
+    try {
+      const allGroups = await db.query('SELECT * FROM groups');
+      return res.status(200).json({
+        status: 'success',
+        data: allGroups.rows,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+  }
 }
 
 export default groupController;
