@@ -57,7 +57,7 @@ class groupValidator {
       });
     } catch (err) {
       return res.status(500).json({
-        error: err.message,
+        error: 'Something went wrong',
       });
     }
   }

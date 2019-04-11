@@ -140,55 +140,59 @@ describe('GET /groups', () => {
 });
 
 describe('PATCH /groups/:groupId/name', () => {
-  it('should return a status of 400 when groupId is invalid', () => {
+  it('should return a status of 400 when groupId is invalid', (done) => {
     chai.request(app)
-      .patch('api/v1/groups/1f/name')
+      .patch('/api/v1/groups/1f/name')
       .set('Authorization', `Bearer ${userToken}`)
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('groupId is invalid');
+        done();
       });
   });
 
-  it('should return a status of 404 when groupId is not found', () => {
+  it('should return a status of 404 when groupId is not found', (done) => {
     chai.request(app)
-      .patch('api/v1/groups/1f/name')
+      .patch('/api/v1/groups/4/name')
       .set('Authorization', `Bearer ${userToken}`)
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('error').eql('The group with the given ID was not found');
+        done();
       });
   });
 
-  it('should return a status of 404 when the user is not the owner of the group', () => {
+  it('should return a status of 409 when the user is not the owner of the group', (done) => {
     chai.request(app)
-      .patch('api/v1/groups/1/name')
+      .patch('/api/v1/groups/1/name')
       .set('Authorization', `Bearer ${anonymousToken}`)
       .end((req, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('failed');
-        res.body.should.have.property('error').eql('You dont\'t own any group');
+        res.body.should.have.property('error').eql('You are not the owner of this group');
+        done();
       });
   });
 
-  it('should return a status of 200 when the group name has been modified', () => {
+  it('should return a status of 200 when the group name has been modified', (done) => {
     chai.request(app)
-      .patch('api/v1/groups/1/name')
+      .patch('/api/v1/groups/1/name')
       .set('Authorization', `Bearer ${userToken}`)
       .send({
         name: 'Bootcamper',
       })
-      .end((req, res) => {
+      .end((err, res) => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        done();
       });
   });
 });

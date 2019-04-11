@@ -38,7 +38,7 @@ class groupController {
       }
       return res.status(200).json({
         status: 'success',
-        message: 'You don\'t own any group',
+        data: allGroups.rows[0],
       });
     } catch (e) {
       return res.status(500).json({

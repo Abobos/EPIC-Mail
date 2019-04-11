@@ -6,7 +6,7 @@ import { trim, transformEmail } from '../helpers/specialAuth';
 
 const router = express.Router();
 
-router.post('/messages', verifyToken, transformEmail, validateMessageDetails, messageController.sendEmail);
+router.post('/messages', verifyToken, trim, transformEmail, validateMessageDetails, messageController.sendEmail);
 router.get('/messages', verifyToken, messageController.getReceivedEmails);
 router.get('/messages/unread', verifyToken, messageController.getUnreadEmails);
 router.get('/messages/sent', verifyToken, messageController.getSentEmails);
