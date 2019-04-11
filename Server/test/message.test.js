@@ -400,9 +400,9 @@ describe('GET /messages/<message-id>', () => {
       .get('/api/v1/messages/9')
       .set('Authorization', `Bearer ${receiverToken}`)
       .end((req, res) => {
-        res.should.have.status(200);
+        res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('message').eql('The email record with the given ID was not found');
         done();
       });
@@ -433,9 +433,9 @@ describe('DELETE /messages/<message-id>', () => {
       .delete('/api/v1/messages/9')
       .set('Authorization', `Bearer ${senderToken}`)
       .end((req, res) => {
-        res.should.have.status(200);
+        res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('status').eql('failed');
         res.body.should.have.property('message').eql('The email record with the given ID was not found');
         done();
       });

@@ -42,8 +42,8 @@ const createSentTable = `
     id SERIAL PRIMARY KEY,
     createdOn TIMESTAMP NOT NULL DEFAULT NOW(),
     senderId int NOT NULL,
-    receiverId int NOT NULL,
-    messageId int NOT NULL,
+    receiverId INT NOT NULL,
+    messageId INT NOT NULL,
     status VARCHAR(20) NOT NULL DEFAULT 'sent',
     FOREIGN KEY (senderId) REFERENCES "users" (id) ON DELETE CASCADE,
     FOREIGN KEY (receiverId) REFERENCES "users" (id) ON DELETE CASCADE,
@@ -55,14 +55,18 @@ const createGroupTable = `
   CREATE TABLE groups(
     id SERIAL PRIMARY KEY,
     name VARCHAR(128) NOT NULL UNIQUE,
-    role VARCHAR(128) NOT NULL DEFAULT 'Admin'
+    role VARCHAR(128) NOT NULL DEFAULT 'Admin',
+    ownerId INT NOT NULL,
+    createdOn TIMESTAMP NOT NULL DEFAULT NOW(),
+    updatedOn TIMESTAMP NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (ownerId) REFERENCES "users" (id) ON DELETE CASCADE
   );`;
 
 const createGroupMembersTable = `
   DROP TABLE IF EXISTS groupmembers CASCADE;
   CREATE TABLE groupmembers(
-    groupId int NOT NULL,
-    userId int NOT NULL,
+    groupId INT NOT NULL,
+    userId INT NOT NULL,
     userRole VARCHAR(128) NOT NULL,
     FOREIGN KEY (groupId) REFERENCES "groups" (id) ON DELETE CASCADE,
     FOREIGN KEY (userId) REFERENCES "users" (id) ON DELETE CASCADE
@@ -75,7 +79,7 @@ const createGroupMessagesTable = `
     createdOn TIMESTAMP NOT NULL DEFAULT NOW(),
     subject TEXT NOT NULL,
     message TEXT NOT NULL,
-    parentMessageId int NOT NULL,
+    parentMessageId INT NOT NULL,
     status VARCHAR(20) NOT NULL DEFAULT 'sent',
     FOREIGN KEY (parentMessageId) REFERENCES "groups" (id) ON UPDATE CASCADE ON DELETE CASCADE
   );`;

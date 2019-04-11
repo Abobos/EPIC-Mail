@@ -101,8 +101,8 @@ class messageController {
         error: 'Something went wrong',
       });
     }
-    return res.status(200).json({
-      status: 'success',
+    return res.status(404).json({
+      status: 'failed',
       message: 'The email record with the given ID was not found',
     });
   }
@@ -127,8 +127,8 @@ class messageController {
         error: 'Something went wrong',
       });
     }
-    return res.status(200).json({
-      status: 'success',
+    return res.status(404).json({
+      status: 'failed',
       message: 'The email record with the given ID was not found',
     });
   }
