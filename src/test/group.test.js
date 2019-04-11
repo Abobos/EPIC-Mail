@@ -64,7 +64,7 @@ describe('POST /groups', () => {
       });
   });
 
-it('should display a status of 400 and return the newly created group details', (done) => {
+  it('should display a status of 400 and return the newly created group details', (done) => {
     chai
       .request(app)
       .post('/api/v1/groups')
@@ -81,7 +81,7 @@ it('should display a status of 400 and return the newly created group details', 
       });
   });
 
-it('should display a status of 400 and return the newly created group details', (done) => {
+  it('should display a status of 400 and return the newly created group details', (done) => {
     chai
       .request(app)
       .post('/api/v1/groups')
@@ -99,3 +99,19 @@ it('should display a status of 400 and return the newly created group details', 
   });
 });
 
+describe('GET /groups', () => {
+  it('should retun a status code of 200 and display all group records', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/groups')
+      .set('Authorization', `Bearer ${userToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.be.an('array');
+        done();
+      });
+  });
+});

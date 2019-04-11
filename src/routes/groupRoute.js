@@ -6,5 +6,6 @@ import groupAuth from '../middlewares/groupAuth';
 const router = express.Router();
 
 router.post('/groups', verifyToken, groupAuth, groupController.createGroup);
+router.get('/groups', verifyToken, groupController.getGroups);
 
 export default router;
