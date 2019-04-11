@@ -1,8 +1,10 @@
+import '@babel/polyfill';
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import usersv1Router from './Server/routes/users.v1.Routes';
-import messagesv1Router from './Server/routes/messages.v1.Routes';
+import userRouter from './routes/userRoute';
+import messageRouter from './routes/messageRoute';
+import groupRouter from './routes/groupRoute';
 
 dotenv.config();
 
@@ -14,8 +16,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.json({ message: 'Welcome to EPIC Mail' }));
 
-app.use('/api/v1/auth', usersv1Router);
-app.use('/api/v1', messagesv1Router);
+app.use('/api/v1/auth', userRouter);
+app.use('/api/v1', messageRouter);
+app.use('/api/v1', groupRouter);
 app.get('/api/v1/docs', (req, res) => res.redirect('https://epicmail11.docs.apiary.io/#'));
 app.all('*', (req, res) => res.status(404).json({
   status: '404',

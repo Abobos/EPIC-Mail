@@ -1,14 +1,15 @@
 import bcrypt from 'bcrypt';
-import pool from '../database/config/pool';
+import db from '../database/config/pool';
 import { generateToken } from '../middlewares/tokenHandler';
 
 
-class UsersControllers {
-  static userSignUp(req, res) {
+class UserController {
+  static async userSignUp(req, res) {
     const {
       firstName, lastName, email, password,
     } = req.body;
-    pool.query('SELECT * FROM users WHERE email = $1', [email], (err, existingUser) => {
+    try {
+      const existingUser = await db.query('SELECT * FROM users WHERE email = $1', [email]);
       if (existingUser.rows[0]) {
         return res.status(409).json({
           status: 'failed',
@@ -16,25 +17,29 @@ class UsersControllers {
         });
       }
       const hashPassword = bcrypt.hashSync(password, 10);
-      pool.query('INSERT INTO users (firstname, lastname, email , password) VALUES ($1, $2, $3, $4) RETURNING *',
-        [firstName, lastName, email, hashPassword], (error, newUser) => {
-          if (newUser.rows[0]) {
-            return res.status(201).json({
-              status: 'success',
-              data: [
-                {
-                  token: generateToken(newUser.rows[0]),
-                },
-              ],
-            });
-          }
+      const newUser = await db.query('INSERT INTO users (firstname, lastname, email , password) VALUES ($1, $2, $3, $4) RETURNING *',
+        [firstName, lastName, email, hashPassword]);
+      if (newUser.rows[0]) {
+        return res.status(201).json({
+          status: 'success',
+          data: [
+            {
+              token: generateToken(newUser.rows[0]),
+            },
+          ],
         });
-    });
+      }
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
   }
 
-  static userSignIn(req, res) {
+  static async userSignIn(req, res) {
     const { email } = req.body;
-    pool.query('SELECT * FROM users WHERE email = $1', [email], (err, existingUser) => {
+    try {
+      const existingUser = await db.query('SELECT * FROM users WHERE email = $1', [email]);
       if (!existingUser.rows[0]) {
         return res.status(404).json({
           status: 'failed',
@@ -57,8 +62,12 @@ class UsersControllers {
           },
         ],
       });
-    });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
   }
 }
 
-export default UsersControllers;
+export default UserController;

@@ -1,4 +1,3 @@
-import '@babel/polyfill';
 import pool from './config/pool';
 
 const createUsersTable = `
@@ -16,7 +15,7 @@ const createMessagesTable = `
   CREATE TABLE messages(
     id SERIAL PRIMARY KEY,
     createdOn TIMESTAMP NOT NULL DEFAULT NOW(),
-    subject VARCHAR(128) NOT NULL,
+    subject TEXT NOT NULL,
     message TEXT NOT NULL,
     parentMessageId SERIAL UNIQUE,
     status VARCHAR(20) NOT NULL DEFAULT 'sent',
@@ -51,12 +50,45 @@ const createSentTable = `
     FOREIGN KEY (messageId) REFERENCES "messages" (id) ON DELETE CASCADE
 );`;
 
+const createGroupTable = `
+  DROP TABLE IF EXISTS groups CASCADE;
+  CREATE TABLE groups(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(128) NOT NULL UNIQUE,
+    role VARCHAR(128) NOT NULL DEFAULT 'Admin'
+  );`;
+
+const createGroupMembersTable = `
+  DROP TABLE IF EXISTS groupmembers CASCADE;
+  CREATE TABLE groupmembers(
+    groupId int NOT NULL,
+    userId int NOT NULL,
+    userRole VARCHAR(128) NOT NULL,
+    FOREIGN KEY (groupId) REFERENCES "groups" (id) ON DELETE CASCADE,
+    FOREIGN KEY (userId) REFERENCES "users" (id) ON DELETE CASCADE
+  );`;
+
+const createGroupMessagesTable = `
+  DROP TABLE IF EXISTS groupmessage CASCADE;
+  CREATE TABLE groupmessage(
+    id SERIAL PRIMARY KEY,
+    createdOn TIMESTAMP NOT NULL DEFAULT NOW(),
+    subject TEXT NOT NULL,
+    message TEXT NOT NULL,
+    parentMessageId int NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'sent',
+    FOREIGN KEY (parentMessageId) REFERENCES "groups" (id) ON UPDATE CASCADE ON DELETE CASCADE
+  );`;
+
 const migrate = async () => {
   try {
     await pool.query(createUsersTable);
     await pool.query(createMessagesTable);
     await pool.query(createInboxTable);
     await pool.query(createSentTable);
+    await pool.query(createGroupTable);
+    await pool.query(createGroupMembersTable);
+    await pool.query(createGroupMessagesTable);
     console.log('Table Created');
     pool.end();
   } catch (error) {
@@ -65,12 +97,3 @@ const migrate = async () => {
 };
 
 migrate();
-// pool.query(createUserTable)
-//   .then((res) => {
-//     console.log(res);
-//     pool.end();
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//     pool.end();
-//   });
