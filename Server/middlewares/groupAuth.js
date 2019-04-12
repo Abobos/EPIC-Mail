@@ -12,7 +12,7 @@ class groupValidator {
     }
     const schema = {
       name: Joi.string()
-        .regex(/^[a-zA-Z]+$/)
+        .regex(/^[a-zA-Z\s]+$/)
         .error(new Error('group name is not valid')),
     };
     const { error } = Joi.validate({ name: `${name}` }, schema);

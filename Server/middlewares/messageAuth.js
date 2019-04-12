@@ -37,9 +37,10 @@ const validateMessageDetails = (req, res, next) => {
 };
 
 const validateMessageId = (req, res, next) => {
-  let { messageId } = req.params;
-  messageId = messageId.replace(/\s/g, '');
-  if ((!messageId) || (/[^0-9]/g.test(messageId))) {
+  const { messageId } = req.params;
+  const id = messageId.replace(/\s/g, '');
+  req.params.messageId = id;
+  if ((!id) || (/[^0-9]/g.test(id))) {
     return res.status(400).json({
       status: 'failed',
       error: 'messageId is invalid',
