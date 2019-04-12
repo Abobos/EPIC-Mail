@@ -196,3 +196,18 @@ describe('PATCH /groups/:groupId/name', () => {
       });
   });
 });
+  
+  describe('DELETE a group', () => {
+  it('should return a status of 200 when the group name has been deleted', (done) => {
+    chai.request(app)
+      .delete('/api/v1/groups/1')
+      .set('Authorization', `Bearer ${userToken}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('message').eql('Group deleted successfully')
+        done();
+      });
+  });
+});
