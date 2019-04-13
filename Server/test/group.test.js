@@ -196,8 +196,108 @@ describe('PATCH /groups/:groupId/name', () => {
       });
   });
 });
-  
-  describe('DELETE a group', () => {
+
+
+describe('Add user to a group', () => {
+  it('should return a status of 404 when a prospective member is not registered', (done) => {
+    chai.request(app)
+      .post('/api/v1/groups/1/users')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        users: 'mosesmajor@gmail.com, gift@gmail.com',
+      })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('gift@gmail.com is not a registered user');
+        done();
+      });
+  });
+
+  it('should return a status of 409 when user wants to add his/her self', (done) => {
+    chai.request(app)
+      .post('/api/v1/groups/1/users')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        users: 'elohorobiamata@gmail.com',
+      })
+      .end((err, res) => {
+        res.should.have.status(409);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('You can\'t add yourself as a member of a group you own');
+        done();
+      });
+  });
+
+  it('should return a status of 200 when a prospective member is added a group', (done) => {
+    chai.request(app)
+      .post('/api/v1/groups/1/users')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        users: 'mosesmajor@gmail.com',
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.be.an('array');
+        done();
+      });
+  });
+
+  it('should return a status of 409 when a member of a group wants to be added to same group', (done) => {
+    chai.request(app)
+      .post('/api/v1/groups/1/users')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        users: 'mosesmajor@gmail.com',
+      })
+      .end((err, res) => {
+        res.should.have.status(409);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('mosesmajor@gmail.com already belongs to this group');
+        done();
+      });
+  });
+
+  it('should return a status of 400 when no prospctive member is added to group', (done) => {
+    chai.request(app)
+      .post('/api/v1/groups/1/users')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        users: '',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('\'users\' is required: you haven\'t add any user');
+        done();
+      });
+  });
+
+  it('should return a status of 400 when a prospective member\'s email is not valid', (done) => {
+    chai.request(app)
+      .post('/api/v1/groups/1/users')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        users: 'blessingmakaraba@gmail',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('blessingmakaraba@gmail is not a valid email');
+        done();
+      });
+  });
+});
+
+describe('DELETE a group', () => {
   it('should return a status of 200 when the group name has been deleted', (done) => {
     chai.request(app)
       .delete('/api/v1/groups/1')
