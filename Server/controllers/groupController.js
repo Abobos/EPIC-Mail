@@ -80,6 +80,37 @@ class groupController {
       });
     }
   }
+
+  static async addUsers(req, res) {
+    const memberIds = req.body;
+    const groupId = Number(req.params.groupId);
+    const queryStatement = 'INSERT INTO groupmembers (groupId, userId, userRole) VALUES ($1, $2, $3) RETURNING *';
+    try {
+      const groups = [];
+      for (const memberId of memberIds) {
+        const { rows } = await db.query(queryStatement, [groupId, memberId, 'member']);
+        if (rows[0]) {
+          groups.push(rows[0]);
+        }
+      }
+      const groupInfo = groups.map((group) => {
+        const info = {
+          id: group.groupid,
+          userId: group.userid,
+          userRole: group.userrole,
+        };
+        return info;
+      });
+      return res.status(200).json({
+        status: 'success',
+        data: groupInfo,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+  }
 }
 
 export default groupController;
