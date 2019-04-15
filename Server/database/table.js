@@ -4,9 +4,9 @@ const createUsersTable = `
   DROP TABLE IF EXISTS users CASCADE;
   CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    firstname VARCHAR(40) NOT NULL,
-    lastname VARCHAR(40) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    firstname VARCHAR(128) NOT NULL,
+    lastname VARCHAR(128) NOT NULL,
+    email VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL
 );`;
 
@@ -55,7 +55,7 @@ const createGroupTable = `
   CREATE TABLE groups(
     id SERIAL PRIMARY KEY,
     name VARCHAR(128) NOT NULL UNIQUE,
-    role VARCHAR(128) NOT NULL DEFAULT 'Admin',
+    role VARCHAR(128) NOT NULL DEFAULT 'admin',
     ownerId INT NOT NULL,
     createdOn TIMESTAMP NOT NULL DEFAULT NOW(),
     updatedOn TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -65,9 +65,10 @@ const createGroupTable = `
 const createGroupMembersTable = `
   DROP TABLE IF EXISTS groupmembers CASCADE;
   CREATE TABLE groupmembers(
+    id SERIAL PRIMARY KEY,
     groupId INT NOT NULL,
     userId INT NOT NULL,
-    userRole VARCHAR(128) NOT NULL,
+    userRole VARCHAR(50) NOT NULL,
     FOREIGN KEY (groupId) REFERENCES "groups" (id) ON DELETE CASCADE,
     FOREIGN KEY (userId) REFERENCES "users" (id) ON DELETE CASCADE
   );`;

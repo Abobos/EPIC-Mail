@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-const generateToken = userDetails => jwt.sign({ userId: userDetails.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+const generateToken = userDetails => jwt.sign({ userId: userDetails.id, userEmail: userDetails.email}, 
+  process.env.SECRET_KEY, 
+  { expiresIn: '1d' });
 
 const verifyToken = (req, res, next) => {
   try {
