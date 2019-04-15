@@ -120,26 +120,6 @@ describe('POST /messages', () => {
       });
   });
 
-  it('should return a status of 409 when receiver\'s mail is yours', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/messages')
-      .set('Authorization', `Bearer ${senderToken}`)
-      .send({
-        subject: 'Andela',
-        message: 'We provide opportunity',
-        email: 'giftabobo@gmail.com',
-      })
-      .end((req, res) => {
-        res.should.have.status(409);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
-        res.body.should.have.property('error').eql('you cannot send a message to yourself');
-        done();
-      });
-  });
-
-
   it('should return a status of 400 when receiver\'s mail does not exist', (done) => {
     chai
       .request(app)
