@@ -120,6 +120,26 @@ describe('POST /messages', () => {
       });
   });
 
+  it('should return a status of 409 when receiver\'s mail is yours', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/messages')
+      .set('Authorization', `Bearer ${senderToken}`)
+      .send({
+        subject: 'Andela',
+        message: 'We provide opportunity',
+        email: 'giftabobo@gmail.com',
+      })
+      .end((req, res) => {
+        res.should.have.status(409);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('you cannot send a message to yourself');
+        done();
+      });
+  });
+
+
   it('should return a status of 400 when receiver\'s mail does not exist', (done) => {
     chai
       .request(app)
@@ -243,6 +263,9 @@ describe('GET /messages', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdon');
         done();
       });
   });
@@ -256,7 +279,8 @@ describe('GET /messages', () => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('message').eql('Inbox is empty');
+        res.body.should.have.property('data');
+        res.body.data.should.be.an('array').that.is.empty;
         done();
       });
   });
@@ -282,6 +306,8 @@ describe('GET /messages/unread', () => {
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
         res.body.data[0].should.have.an('object');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdon');
         done();
       });
   });
@@ -297,6 +323,9 @@ describe('GET /messages/unread', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdon');
         done();
       });
   });
@@ -312,6 +341,9 @@ describe('GET /messages/unread', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdon');
         done();
       });
   });
@@ -325,7 +357,8 @@ describe('GET /messages/unread', () => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('message').eql('No unread messages');
+        res.body.should.have.property('data');
+        res.body.data.should.be.an('array').that.is.empty;
         done();
       });
   });
@@ -344,6 +377,9 @@ describe('GET /messages/sent', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdon');
         done();
       });
   });
@@ -357,7 +393,8 @@ describe('GET /messages/sent', () => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('message').eql('No sent messages');
+        res.body.should.have.property('data');
+        res.body.data.should.be.an('array').that.is.empty;
         done();
       });
   });
@@ -376,6 +413,9 @@ describe('GET /messages/<message-id>', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdon');
         done();
       });
   });

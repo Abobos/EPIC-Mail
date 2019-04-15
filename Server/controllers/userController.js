@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import db from '../database/config/pool';
 import { generateToken } from '../middlewares/tokenHandler';
 
-
 class UserController {
   static async userSignUp(req, res) {
     const {

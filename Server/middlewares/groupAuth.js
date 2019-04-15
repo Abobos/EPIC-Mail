@@ -76,6 +76,80 @@ class groupValidator {
       });
     }
   }
+
+  static async scruntinize(req, res, next) {
+    const { users } = req.body;
+    const groupmembers = [];
+    let memberId;
+    try {
+      for (const memberEmail of users) {
+        if ((req.decoded.userEmail) === memberEmail) {
+          return res.status(409).json({
+            status: 'failed',
+            error: 'You can\'t add yourself as a member of a group you own',
+          });
+        }
+        const getUserId = await db.query('SELECT * FROM users WHERE email = $1', [memberEmail]);
+        if (getUserId.rows[0]) {
+          memberId = getUserId.rows[0].id;
+          groupmembers.push(memberId);
+        }
+        if (!getUserId.rows[0]) {
+          return res.status(404).json({
+            status: 'failed',
+            error: `${memberEmail} is not a registered user`,
+          });
+        }
+        const userIdDuplicate = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND userId = $2', [req.params.groupId, memberId]);
+        if (userIdDuplicate.rows[0]) {
+          return res.status(409).json({
+            status: 'failed',
+            error: `${memberEmail} already belongs to this group`,
+          });
+        }
+      }
+    } catch (error) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+    // remove duplicate id
+    const memberIds = Array.from(new Set(groupmembers));
+    req.body = memberIds;
+    return next();
+  }
+
+
+  static async validateUserId (req, res, next) {
+   const { userId } = req.params;
+   const id = userId.replace(/\s/g, '');
+    req.params.userId = id;
+    if ((!id) || (/[^0-9]/g.test(id))) {
+      return res.status(400).json({
+        status: 'failed',
+        error: 'userId is invalid',
+      });
+    }
+    return next();
+  }
+
+  static async isMember(req, res, next) {
+    const { groupId, userId } = req.params;
+    try {
+      const memberDetails = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND userId = $2', [groupId, userId]);
+      if (!memberDetails.rows[0]) {
+         return res.status(404).json({
+            status: 'failed',
+            error: 'User does not belong to this group',
+         });
+      }
+      return next();
+    } catch (e) {
+        return res.status(500).json({
+          error: 'Something went wrong',
+        });
+      }
+  }
 }
 
 export default groupValidator;

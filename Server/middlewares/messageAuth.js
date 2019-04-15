@@ -1,7 +1,6 @@
 import Joi from 'joi';
 import pool from '../database/config/pool';
 
-
 const validateMessageDetails = (req, res, next) => {
   if (!req.body.email) {
     return res.status(400).json({
@@ -22,6 +21,12 @@ const validateMessageDetails = (req, res, next) => {
       status: 'failed',
       error: (error.details) ? error.details[0].message.replace(/[""]+/g, '') : error.message,
     });
+  }
+  if ((req.body.email) === (req.decoded.userEmail)) {
+    return res.status(409).json({
+      status: 'failed',
+      error: 'you cannot send a message to yourself',
+    })
   }
   const { email } = req.body;
   pool.query('SELECT id FROM users WHERE email = $1', [email], (err, userDetails) => {
