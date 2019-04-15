@@ -105,7 +105,7 @@ class messageController {
           status: 'success',
           data: [
             {
-              message: deletedMessage.rows[0].message,
+              message: 'message deleted successfully',
             },
           ],
         });

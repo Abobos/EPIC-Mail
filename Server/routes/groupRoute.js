@@ -28,11 +28,18 @@ router.post('/groups/:groupId/users',
   Auth.scruntinize,
   groupController.addUsers);
 router.delete('/groups/:groupId/users/:userId', 
-  verifyToken, 
-  Auth.validateGroupId, 
-  Auth.checkOwner, 
-  Auth.validateUserId, 
-  Auth.isMember, 
+  verifyToken,
+  Auth.validateGroupId,
+  Auth.checkOwner,
+  Auth.validateUserId,
+  Auth.isMember,
   groupController.deleteUser);
+router.post('/groups/:groupId/messages',
+  verifyToken,
+  Auth.validateGroupId,
+  Auth.checkOwner,
+  trim,
+  Auth.checkMessageDetails,
+  groupController.sendMessage);
 
 export default router;
