@@ -15,7 +15,11 @@ router.patch('/groups/:groupId/name',
   trim,
   Auth.createGroupAuth,
   groupController.editGroupName);
-router.delete('/groups/:groupId', verifyToken, Auth.validateGroupId, Auth.checkOwner, groupController.deleteGroup);
+router.delete('/groups/:groupId', 
+  verifyToken, 
+  Auth.validateGroupId, 
+  Auth.checkOwner, 
+  groupController.deleteGroup);
 router.post('/groups/:groupId/users',
   verifyToken,
   Auth.validateGroupId,
@@ -23,5 +27,12 @@ router.post('/groups/:groupId/users',
   splitUsers,
   Auth.scruntinize,
   groupController.addUsers);
+router.delete('/groups/:groupId/users/:userId', 
+  verifyToken, 
+  Auth.validateGroupId, 
+  Auth.checkOwner, 
+  Auth.validateUserId, 
+  Auth.isMember, 
+  groupController.deleteUser);
 
 export default router;
