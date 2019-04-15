@@ -1,7 +1,7 @@
 import express from 'express';
 import messageController from '../controllers/messageController';
-import { validateMessageDetails, validateMessageId } from '../middlewares/messageAuth';
 import { verifyToken } from '../middlewares/tokenHandler';
+import { validateMessageDetails, validateMessageId } from '../middlewares/messageAuth';
 import { trim, transformEmail } from '../helpers/specialAuth';
 
 const router = express.Router();
