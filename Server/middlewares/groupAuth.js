@@ -118,6 +118,38 @@ class groupValidator {
     req.body = memberIds;
     return next();
   }
+
+
+  static async validateUserId (req, res, next) {
+   const { userId } = req.params;
+   const id = userId.replace(/\s/g, '');
+    req.params.userId = id;
+    if ((!id) || (/[^0-9]/g.test(id))) {
+      return res.status(400).json({
+        status: 'failed',
+        error: 'userId is invalid',
+      });
+    }
+    return next();
+  }
+
+  static async isMember(req, res, next) {
+    const { groupId, userId } = req.params;
+    try {
+      const memberDetails = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND userId = $2', [groupId, userId]);
+      if (!memberDetails.rows[0]) {
+         return res.status(404).json({
+            status: 'failed',
+            error: 'User does not belong to this group',
+         });
+      }
+      return next();
+    } catch (e) {
+        return res.status(500).json({
+          error: 'Something went wrong',
+        });
+      }
+  }
 }
 
 export default groupValidator;
