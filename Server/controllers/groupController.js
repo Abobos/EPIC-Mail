@@ -69,11 +69,17 @@ class groupController {
     const groupId = Number(req.params.groupId);
     const queryStatement = 'DELETE FROM groups WHERE id = $1 RETURNING *';
     try {
-      await db.query(queryStatement, [groupId]);
-      return res.status(200).json({
-        status: 'success',
-        message: 'Group deleted successfully',
-      });
+      const deletedGroup = await db.query(queryStatement, [groupId]);
+      if (deletedGroup.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+           data: [
+            {
+              message: 'Group deleted successfully',
+            },
+          ],
+        });
+      }
     } catch (e) {
       return res.status(500).json({
         error: 'Something went wrong',
@@ -110,6 +116,28 @@ class groupController {
         error: 'Something went wrong',
       });
     }
+  }
+
+  static async deleteUser(req, res) {
+    const groupId = Number(req.params.groupId);
+    const userId = Number(req.params.userId);
+    try {
+      const deletedMember = await db.query('DELETE FROM groupmembers WHERE groupId = $1 AND userId = $2 RETURNING *', [groupId, userId]);
+      if (deletedMember.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+           data: [
+              {
+                 message: 'User deleted from group',
+              },
+            ],
+        });
+      }
+    } catch (e) {
+        return res.status(500).json({
+          error: 'Something went wrong',
+        });
+      }
   }
 }
 

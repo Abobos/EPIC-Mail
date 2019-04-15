@@ -297,6 +297,52 @@ describe('Add user to a group', () => {
   });
 });
 
+
+describe('DELETE a user from a group', () => {
+  it('should return a status of 400 when the userId is invalid', (done) => {
+    chai.request(app)
+      .delete('/api/v1/groups/1/users/h2')
+      .set('Authorization', `Bearer ${userToken}`)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('userId is invalid');
+        done();
+      });
+   });
+
+  it('should return a status of 404 when the user does not belongs to group', (done) => {
+    chai.request(app)
+      .delete('/api/v1/groups/1/users/3')
+      .set('Authorization', `Bearer ${userToken}`)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('error').eql('User does not belong to this group');
+        done();
+      });
+   });
+
+  it('should return a status of 200 when the user has been deleted from a group', (done) => {
+    chai.request(app)
+      .delete('/api/v1/groups/1/users/2')
+      .set('Authorization', `Bearer ${userToken}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('message').eql('User deleted from group');
+        done();
+      });
+  });
+});
+
+
+
 describe('DELETE a group', () => {
   it('should return a status of 200 when the group name has been deleted', (done) => {
     chai.request(app)
@@ -306,7 +352,9 @@ describe('DELETE a group', () => {
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('message').eql('Group deleted successfully')
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('message').eql('Group deleted successfully');
         done();
       });
   });
