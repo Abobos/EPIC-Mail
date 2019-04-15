@@ -363,6 +363,7 @@ describe('SEND message to group', () => {
   });
 });
 
+
 describe('DELETE a group', () => {
   it('should return a status of 200 when the group name has been deleted', (done) => {
     chai.request(app)

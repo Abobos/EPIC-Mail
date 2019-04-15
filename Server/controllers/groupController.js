@@ -73,7 +73,8 @@ class groupController {
       if (deletedGroup.rows[0]) {
         return res.status(200).json({
           status: 'success',
-          data: [
+           data: [
+
             {
               message: 'Group deleted successfully',
             },
@@ -150,10 +151,10 @@ class groupController {
         data: createdMessage.rows,
       });
     } catch (e) {
-      return res.status(500).json({
-        error: 'Something went wrong',
-      });
-    }
+        return res.status(500).json({
+          error: 'Something went wrong',
+        });
+      }
   }
 }
 

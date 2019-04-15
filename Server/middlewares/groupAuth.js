@@ -119,10 +119,9 @@ class groupValidator {
     return next();
   }
 
-
-  static async validateUserId(req, res, next) {
-    const { userId } = req.params;
-    const id = userId.replace(/\s/g, '');
+  static async validateUserId (req, res, next) {
+   const { userId } = req.params;
+   const id = userId.replace(/\s/g, '');
     req.params.userId = id;
     if ((!id) || (/[^0-9]/g.test(id))) {
       return res.status(400).json({
