@@ -74,6 +74,7 @@ class groupController {
         return res.status(200).json({
           status: 'success',
            data: [
+
             {
               message: 'Group deleted successfully',
             },
@@ -126,13 +127,29 @@ class groupController {
       if (deletedMember.rows[0]) {
         return res.status(200).json({
           status: 'success',
-           data: [
-              {
-                 message: 'User deleted from group',
-              },
-            ],
+          data: [
+            {
+              message: 'User deleted from group',
+            },
+          ],
         });
       }
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+  }
+
+  static async sendMessage(req, res) {
+    const groupId = Number(req.params.groupId);
+    const { subject, message } = req.body;
+    try {
+      const createdMessage = await db.query('INSERT INTO groupmessage (subject, message, parentMessageId) VALUES ($1, $2, $3) RETURNING *', [subject, message, groupId]);
+      return res.status(200).json({
+        status: 'success',
+        data: createdMessage.rows,
+      });
     } catch (e) {
         return res.status(500).json({
           error: 'Something went wrong',

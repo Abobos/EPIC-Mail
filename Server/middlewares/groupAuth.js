@@ -119,7 +119,6 @@ class groupValidator {
     return next();
   }
 
-
   static async validateUserId (req, res, next) {
    const { userId } = req.params;
    const id = userId.replace(/\s/g, '');
@@ -138,17 +137,32 @@ class groupValidator {
     try {
       const memberDetails = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND userId = $2', [groupId, userId]);
       if (!memberDetails.rows[0]) {
-         return res.status(404).json({
-            status: 'failed',
-            error: 'User does not belong to this group',
-         });
+        return res.status(404).json({
+          status: 'failed',
+          error: 'User does not belong to this group',
+        });
       }
       return next();
     } catch (e) {
-        return res.status(500).json({
-          error: 'Something went wrong',
-        });
-      }
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+  }
+
+  static async checkMessageDetails(req, res, next) {
+    const schema = {
+      subject: Joi.string().trim().required(),
+      message: Joi.string().trim().required(),
+    };
+    const { error } = Joi.validate(req.body, schema);
+    if (error) {
+      return res.status(400).json({
+        status: 'failed',
+        error: error.details[0].message.replace(/[""]+/g, ''),
+      });
+    }
+    return next();
   }
 }
 

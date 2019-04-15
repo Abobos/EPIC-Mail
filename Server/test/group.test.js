@@ -341,6 +341,27 @@ describe('DELETE a user from a group', () => {
   });
 });
 
+describe('SEND message to group', () => {
+  it('should return a status of 200 when message is sent', (done) => {
+    chai
+      .request(app)
+      .post('/api/v1/groups/1/messages')
+      .set('Authorization', `Bearer ${userToken}`)
+      .send({
+        subject: 'Andela',
+        message: 'We provide opportunity',
+      })
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        done();
+      });
+  });
+});
 
 
 describe('DELETE a group', () => {

@@ -462,12 +462,12 @@ describe('DELETE /messages/<message-id>', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
-        res.body.data[0].should.have.property('message');
+        res.body.data[0].should.have.property('message').eql('message deleted successfully');
         done();
       });
   });
 
-  it('should return a status of 200 when message with the given Id is not found', (done) => {
+  it('should return a status of 404 when message with the given Id is not found', (done) => {
     chai
       .request(app)
       .delete('/api/v1/messages/9')
