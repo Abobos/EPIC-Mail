@@ -26,7 +26,7 @@ class messageController {
     try {
       const receivedMessages = await db.query(queryText, [req.decoded.userId]);
       await db.query('UPDATE inbox SET status = $1 WHERE receiverId = $2', ['read', req.decoded.userId]);
-      if (receivedMessages.rows[0]) {
+      if (receivedMessages.rows) {
         return res.status(200).json({
           status: 'success',
           data: receivedMessages.rows,
@@ -37,17 +37,13 @@ class messageController {
         error: 'Something went wrong',
       });
     }
-    return res.status(200).json({
-      status: 'success',
-      message: 'Inbox is empty',
-    });
   }
 
   static async getUnreadEmails(req, res) {
     const queryStatement = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 AND inbox.status = $2 ORDER BY messages.id';
     try {
       const unreadMessages = await db.query(queryStatement, [req.decoded.userId, 'unread']);
-      if (unreadMessages.rows[0]) {
+      if (unreadMessages.rows) {
         return res.status(200).json({
           status: 'success',
           data: unreadMessages.rows,
@@ -58,17 +54,13 @@ class messageController {
         error: 'Something went wrong',
       });
     }
-    return res.status(200).json({
-      status: 'success',
-      message: 'No unread messages',
-    });
   }
 
   static async getSentEmails(req, res) {
     const queryStatement = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, sent.senderId, sent.receiverId, messages.parentMessageId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.senderId = $1 ORDER BY messages.id';
     try {
       const sentMessages = await db.query(queryStatement, [req.decoded.userId]);
-      if (sentMessages.rows[0]) {
+      if (sentMessages.rows) {
         return res.status(200).json({
           status: 'success',
           data: sentMessages.rows,
@@ -79,10 +71,6 @@ class messageController {
         error: 'Something went wrong',
       });
     }
-    return res.status(200).json({
-      status: 'success',
-      message: 'No sent messages',
-    });
   }
 
   static async getAnEmail(req, res) {
@@ -96,15 +84,15 @@ class messageController {
           data: EmailRecord.rows,
         });
       }
+    return res.status(404).json({
+      status: 'failed',
+      message: 'The email record with the given ID was not found',
+    });
     } catch (e) {
       return res.status(500).json({
         error: 'Something went wrong',
       });
     }
-    return res.status(404).json({
-      status: 'failed',
-      message: 'The email record with the given ID was not found',
-    });
   }
 
   static async deleteAnEmail(req, res) {
@@ -122,15 +110,15 @@ class messageController {
           ],
         });
       }
+        return res.status(404).json({
+          status: 'failed',
+          message: 'The email record with the given ID was not found',
+        });
     } catch (e) {
       return res.status(500).json({
         error: 'Something went wrong',
       });
     }
-    return res.status(404).json({
-      status: 'failed',
-      message: 'The email record with the given ID was not found',
-    });
   }
 }
 
