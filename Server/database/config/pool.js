@@ -1,7 +1,7 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
-dotenv.config();z
+dotenv.config();
 
 let config = process.env.DATABASE_URL_DEV;
 
