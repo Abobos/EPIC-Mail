@@ -15,7 +15,7 @@ const sendEmail = async (email, firstname, token) => {
   const mailOptions = {
     from: 'noreply@epicmail.com',
     to: email,
-    subject: '<h1>Here is the link to reset your password</h1>',
+    subject: 'Here is the link to reset your password',
     html: `<p>Dear ${firstname},</p>
     <p>Click the link below to reset your password</p>
     <p><a href='https://abobos.github.io/EPIC-Mail/UI/forgot_password.html?authorization=${token}'>Click here</a></p>
