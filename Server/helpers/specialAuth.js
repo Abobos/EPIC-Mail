@@ -1,10 +1,9 @@
-
-function isEmail(email) {
+const isEmail = (email) => {
   if (/^[A-Za-z0-9_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(email)) {
     return true;
   }
   return false;
-}
+};
 
 const trim = (req, res, next) => {
   const userData = {};
@@ -33,7 +32,7 @@ const splitUsers = (req, res, next) => {
   }
   const { users } = req.body;
   const validMemberEmails = [];
-  const groupEmails = users.replace(/\s/g,'').split(',');
+  const groupEmails = users.replace(/\s/g, '').split(',');
   const filteredGroupEmails = groupEmails.filter(email => email !== '');
   for (const memberEmail of filteredGroupEmails) {
     if (isEmail(memberEmail)) {
@@ -49,4 +48,6 @@ const splitUsers = (req, res, next) => {
   return next();
 };
 
-export { trim, transformEmail, splitUsers };
+export {
+  trim, transformEmail, splitUsers, isEmail,
+};

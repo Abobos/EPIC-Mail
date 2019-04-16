@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const generateToken = userDetails => jwt.sign({ userId: userDetails.id, userEmail: userDetails.email}, 
-  process.env.SECRET_KEY, 
-  { expiresIn: '1d' });
+const generateToken = userDetails => jwt.sign(userDetails, process.env.SECRET_KEY, { expiresIn: '1d' });
 
 const verifyToken = (req, res, next) => {
   try {
@@ -12,7 +10,7 @@ const verifyToken = (req, res, next) => {
     return next();
   } catch (e) {
     return res.status(401).json({
-      message: 'auth failed',
+      message: 'Authentification failed',
     });
   }
 };

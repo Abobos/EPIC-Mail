@@ -3,7 +3,7 @@ import db from '../database/config/pool';
 class groupController {
   static async createGroup(req, res) {
     const { name } = req.body;
-    const ownerId = req.decoded.userId;
+    const ownerId = req.decoded.id;
     try {
       const createdGroupDetails = await db.query('INSERT INTO groups (name, ownerId) VALUES ($1, $2) RETURNING *', [name, ownerId]);
       const createdGroup = createdGroupDetails.rows.map((groupDetails) => {
@@ -29,7 +29,7 @@ class groupController {
 
   static async getGroups(req, res) {
     try {
-      const allGroups = await db.query('SELECT id, name, role FROM groups WHERE ownerId= $1 ORDER BY id', [req.decoded.userId]);
+      const allGroups = await db.query('SELECT id, name, role FROM groups WHERE ownerId= $1 ORDER BY id', [req.decoded.id]);
       return res.status(200).json({
         status: 'success',
         data: allGroups.rows,
@@ -73,7 +73,7 @@ class groupController {
       if (deletedGroup.rows[0]) {
         return res.status(200).json({
           status: 'success',
-           data: [
+          data: [
 
             {
               message: 'Group deleted successfully',
@@ -96,9 +96,7 @@ class groupController {
       const groups = [];
       for (const memberId of memberIds) {
         const { rows } = await db.query(queryStatement, [groupId, memberId, 'member']);
-        if (rows[0]) {
           groups.push(rows[0]);
-        }
       }
       const groupInfo = groups.map((group) => {
         const info = {
@@ -151,10 +149,10 @@ class groupController {
         data: createdMessage.rows,
       });
     } catch (e) {
-        return res.status(500).json({
-          error: 'Something went wrong',
-        });
-      }
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
   }
 }
 

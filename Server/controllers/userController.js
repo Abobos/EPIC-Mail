@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import db from '../database/config/pool';
 import { generateToken } from '../middlewares/tokenHandler';
+import sendEmail from '../utils/sendEmail';
 
 class UserController {
   static async userSignUp(req, res) {
@@ -66,6 +67,27 @@ class UserController {
         error: 'Something went wrong',
       });
     }
+  }
+
+  static async sendResetLink(req, res) {
+    const { firstname, email } = req.body;
+    const token = await generateToken(req.body);
+    const response = await sendEmail(email, firstname, token);
+    if (response === 'failed') {
+      return res.status(500).json({
+        status: 'failed',
+        error: 'Network Issue: something went wrong'
+      })
+    } 
+       return res.status(200).json({
+        status: 'success',
+        data: [
+          {
+            message: 'Check your email for password reset link',
+            email: email,
+          }
+        ]
+      });
   }
 }
 
