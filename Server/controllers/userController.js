@@ -76,18 +76,38 @@ class UserController {
     if (response === 'failed') {
       return res.status(500).json({
         status: 'failed',
-        error: 'Network Issue: something went wrong'
-      })
-    } 
-       return res.status(200).json({
+        error: 'Network Issue: something went wrong',
+      });
+    }
+    return res.status(200).json({
+      status: 'success',
+      data: [
+        {
+          message: 'Check your email for password reset link',
+          email: `${email}`,
+        },
+      ],
+    });
+  }
+
+  static async resetPassword(req, res) {
+    const { password } = req.body;
+    const hashPassword = bcrypt.hashSync(password, 10);
+    try {
+      await db.query('UPDATE users SET password = $1 WHERE id = $2', [hashPassword, req.decoded.id]);
+      return res.status(200).json({
         status: 'success',
         data: [
           {
-            message: 'Check your email for password reset link',
-            email: email,
-          }
-        ]
+            message: 'Your password reset was successful',
+          },
+        ],
       });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
   }
 }
 

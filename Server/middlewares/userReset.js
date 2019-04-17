@@ -1,5 +1,6 @@
 import db from '../database/config/pool';
 import { isEmail } from '../helpers/specialAuth';
+import { validatePassword } from './userAuth';
 
 const authUser = async (req, res, next) => {
   const { email } = req.body;
@@ -23,4 +24,15 @@ const authUser = async (req, res, next) => {
   }
 };
 
-export default authUser;
+const isPassword = (req, res, next) => {
+  const { error } = validatePassword(req.body);
+  if (error) {
+    return res.status(400).json({
+      status: 'failed',
+      error: error.details[0].message.replace(/[""]+/g, ''),
+    });
+  }
+  return next();
+};
+
+export { authUser, isPassword };
