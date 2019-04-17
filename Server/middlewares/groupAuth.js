@@ -64,7 +64,7 @@ class groupValidator {
 
   static async checkOwner(req, res, next) {
     try {
-      const result = await db.query('SELECT * FROM groups WHERE id =$1 AND ownerId = $2', [req.params.groupId, req.decoded.userId]);
+      const result = await db.query('SELECT * FROM groups WHERE id =$1 AND ownerId = $2', [req.params.groupId, req.decoded.id]);
       if (result.rows[0]) return next();
       return res.status(409).json({
         status: 'failed',
@@ -83,7 +83,7 @@ class groupValidator {
     let memberId;
     try {
       for (const memberEmail of users) {
-        if ((req.decoded.userEmail) === memberEmail) {
+        if ((req.decoded.email) === memberEmail) {
           return res.status(409).json({
             status: 'failed',
             error: 'You can\'t add yourself as a member of a group you own',
@@ -119,9 +119,9 @@ class groupValidator {
     return next();
   }
 
-  static async validateUserId (req, res, next) {
-   const { userId } = req.params;
-   const id = userId.replace(/\s/g, '');
+  static async validateUserId(req, res, next) {
+    const { userId } = req.params;
+    const id = userId.replace(/\s/g, '');
     req.params.userId = id;
     if ((!id) || (/[^0-9]/g.test(id))) {
       return res.status(400).json({
@@ -135,7 +135,7 @@ class groupValidator {
   static async isMember(req, res, next) {
     const { groupId, userId } = req.params;
     try {
-      const memberDetails = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND userId = $2', [groupId, userId]);
+      const memberDetails = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND (userId = $2 OR userId = $3)', [groupId, userId, req.decoded.id]);
       if (!memberDetails.rows[0]) {
         return res.status(404).json({
           status: 'failed',

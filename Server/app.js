@@ -1,7 +1,7 @@
 import '@babel/polyfill';
+import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import userRouter from './routes/userRoute';
 import messageRouter from './routes/messageRoute';
 import groupRouter from './routes/groupRoute';

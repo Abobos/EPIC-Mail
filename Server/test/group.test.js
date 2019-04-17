@@ -310,20 +310,7 @@ describe('DELETE a user from a group', () => {
         res.body.should.have.property('error').eql('userId is invalid');
         done();
       });
-   });
-
-  it('should return a status of 404 when the user does not belongs to group', (done) => {
-    chai.request(app)
-      .delete('/api/v1/groups/1/users/3')
-      .set('Authorization', `Bearer ${userToken}`)
-      .end((err, res) => {
-        res.should.have.status(404);
-        res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
-        res.body.should.have.property('error').eql('User does not belong to this group');
-        done();
-      });
-   });
+  });
 
   it('should return a status of 200 when the user has been deleted from a group', (done) => {
     chai.request(app)

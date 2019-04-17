@@ -13,7 +13,8 @@ function validateUserSignUpDetails(userDetails) {
     email: Joi.string().email()
       .regex(/^[A-Za-z0-9_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
       .error(new Error('email is not valid')),
-    password: Joi.string().trim().min(6).required(),
+    password: Joi.string().alphanum().trim().min(6)
+      .required(),
   };
   return Joi.validate(userDetails, schema);
 }
@@ -24,7 +25,16 @@ function validateUserSignInDetails(userDetails) {
       .regex(/^[A-Za-z0-9_]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/)
       .error(new Error('email is not valid')),
 
-    password: Joi.string().min(6).required(),
+    password: Joi.string().alphanum().min(6)
+      .required(),
+  };
+  return Joi.validate(userDetails, schema);
+}
+
+function validatePassword(userDetails) {
+  const schema = {
+    password: Joi.string().alphanum().trim().min(6)
+      .required(),
   };
   return Joi.validate(userDetails, schema);
 }
@@ -91,5 +101,4 @@ const login = (req, res, done) => {
   return done();
 };
 
-
-export { signup, login };
+export { signup, login, validatePassword };

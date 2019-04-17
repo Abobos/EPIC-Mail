@@ -172,7 +172,7 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(401);
         res.should.be.an('object');
-        res.body.should.have.property('message').eql('auth failed');
+        res.body.should.have.property('message').eql('Authentification failed');
         done();
       });
   });

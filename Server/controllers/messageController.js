@@ -2,7 +2,7 @@ import db from '../database/config/pool';
 
 class messageController {
   static async sendEmail(req, res) {
-    const senderId = req.decoded.userId;
+    const senderId = req.decoded.id;
     const { subject, message } = req.body;
     const { receiverId } = req.body;
     try {
@@ -24,8 +24,8 @@ class messageController {
   static async getReceivedEmails(req, res) {
     const queryText = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 ORDER BY messages.id';
     try {
-      const receivedMessages = await db.query(queryText, [req.decoded.userId]);
-      await db.query('UPDATE inbox SET status = $1 WHERE receiverId = $2', ['read', req.decoded.userId]);
+      const receivedMessages = await db.query(queryText, [req.decoded.id]);
+      await db.query('UPDATE inbox SET status = $1 WHERE receiverId = $2', ['read', req.decoded.id]);
       if (receivedMessages.rows) {
         return res.status(200).json({
           status: 'success',
@@ -42,7 +42,7 @@ class messageController {
   static async getUnreadEmails(req, res) {
     const queryStatement = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 AND inbox.status = $2 ORDER BY messages.id';
     try {
-      const unreadMessages = await db.query(queryStatement, [req.decoded.userId, 'unread']);
+      const unreadMessages = await db.query(queryStatement, [req.decoded.id, 'unread']);
       if (unreadMessages.rows) {
         return res.status(200).json({
           status: 'success',
@@ -59,7 +59,7 @@ class messageController {
   static async getSentEmails(req, res) {
     const queryStatement = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, sent.senderId, sent.receiverId, messages.parentMessageId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.senderId = $1 ORDER BY messages.id';
     try {
-      const sentMessages = await db.query(queryStatement, [req.decoded.userId]);
+      const sentMessages = await db.query(queryStatement, [req.decoded.id]);
       if (sentMessages.rows) {
         return res.status(200).json({
           status: 'success',
@@ -77,17 +77,17 @@ class messageController {
     const messageId = Number(req.params.messageId);
     const queryText = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.messageId = $1 AND inbox.receiverId = $2';
     try {
-      const EmailRecord = await db.query(queryText, [messageId, req.decoded.userId]);
+      const EmailRecord = await db.query(queryText, [messageId, req.decoded.id]);
       if (EmailRecord.rows[0]) {
         return res.status(200).json({
           status: 'success',
           data: EmailRecord.rows,
         });
       }
-    return res.status(404).json({
-      status: 'failed',
-      message: 'The email record with the given ID was not found',
-    });
+      return res.status(404).json({
+        status: 'failed',
+        message: 'The email record with the given ID was not found',
+      });
     } catch (e) {
       return res.status(500).json({
         error: 'Something went wrong',
@@ -98,9 +98,8 @@ class messageController {
   static async deleteAnEmail(req, res) {
     const messageId = Number(req.params.messageId);
     try {
-      const deletedDetails = await db.query('DELETE FROM inbox WHERE id = $1 AND receiverId = $2 RETURNING *', [messageId, req.decoded.userId]);
+      const deletedDetails = await db.query('DELETE FROM inbox WHERE id = $1 AND receiverId = $2 RETURNING *', [messageId, req.decoded.id]);
       if (deletedDetails.rows[0]) {
-        const deletedMessage = await db.query('SELECT message FROM messages WHERE id = $1', [messageId]);
         return res.status(200).json({
           status: 'success',
           data: [
@@ -110,10 +109,10 @@ class messageController {
           ],
         });
       }
-        return res.status(404).json({
-          status: 'failed',
-          message: 'The email record with the given ID was not found',
-        });
+      return res.status(404).json({
+        status: 'failed',
+        message: 'The email record with the given ID was not found',
+      });
     } catch (e) {
       return res.status(500).json({
         error: 'Something went wrong',
