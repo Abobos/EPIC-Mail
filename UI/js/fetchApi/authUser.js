@@ -1,8 +1,8 @@
 
 const signUpForm = document.querySelector('#signUpForm');
 const signInForm = document.querySelector('#signInForm');
-const forgotPassword = document.querySelector('#forgotPassword');
 const resetPassword = document.querySelector('#resetPassword');
+const forgotPassword = document.querySelector('#forgotPassword');
 
 
 if (signUpForm) {
@@ -70,8 +70,8 @@ if (signInForm) {
   });
 }
 
-if (forgotPassword) {
-  forgotPassword.addEventListener('submit', (event) => {
+if (resetPassword) {
+  resetPassword.addEventListener('submit', (event) => {
     event.preventDefault();
     localStorage.value = submit.value;
     notify('enable');
@@ -95,8 +95,8 @@ if (forgotPassword) {
   });
 }
 
-if (resetPassword) {
-  resetPassword.addEventListener('submit', (event) => {
+if (forgotPassword) {
+  forgotPassword.addEventListener('submit', (event) => {
     event.preventDefault();
     localStorage.value = submit.value;
     notify('enable');

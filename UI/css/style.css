@@ -2,7 +2,7 @@
 
 .card {
   text-align:center;
-  margin: 1rem auto 0;
+  margin: 0.3rem auto 0;
   width: 100vw;
   padding:30px;
   box-shadow: 5px 5px 3px #888888, -5px -5px 3px #888888;
@@ -19,7 +19,7 @@
 }
 
 .margin {
-  margin-top:5rem;
+  margin-top:2rem;
 }
 
 .form_group {
@@ -54,8 +54,8 @@
   cursor: pointer;
   text-align:center;
   border-radius: 0.5rem;
-  padding: 1rem;
-  font-size: 1.2rem;
+  padding: 0.8rem;
+  font-size: 1rem;
   border:3px solid var(--white);
   color:var(--white);
   text-decoration: none;
@@ -122,23 +122,26 @@ footer {
 }
 
 #welcome {
-height: 75vh;
+height: 70vh;
 display: flex;
 justify-content: center;
-font-size: 30px;
 align-items: center;
 line-height: 2.5rem;
 }
 
 #welcomeText {
+width:80vw;
 text-align: center;
 -webkit-animation: SlideUp 1.5s;
 animation: SlideUp 1.5s;
 }
 
+#welcomeText h1 {
+  font-size: 1.5rem;
+}
+
 #welcomeText h1, #welcomeText p {
   color: white;
-  font-size: 1.5rem;
 }
 
 @keyframes fadeInOut {
@@ -196,7 +199,7 @@ animation: SlideUp 1.5s;
     width: 40vw
   }
   #welcomeText {
-    width: 50vw;
+    width: 30vw;
   }
   .margin {
     margin-top:4rem;
