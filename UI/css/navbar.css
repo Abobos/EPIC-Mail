@@ -21,14 +21,14 @@ nav {
 }
 
 img {
-  width: 10vw;
+  width: 9vw;
   height: auto;
 }
 
 .navbar_brand {
   text-decoration: none;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.3rem;
   color: black;
   text-shadow: 3px 1px 8px #8888, 2px 1px 8px #8888;
 }
@@ -36,6 +36,9 @@ img {
 @media screen and (min-width:500px) {
   img {
     width: 10vw;
+  }
+  .navbar_brand {
+  font-size: 1.7rem;
   }
 } 
 
