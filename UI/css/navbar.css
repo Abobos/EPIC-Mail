@@ -1,116 +1,57 @@
 :root{
-	--blue: #3399ff;
-	--white:#ffffff;
+  --white:#ffffff;
+  --blue: #3399ff;
+  --fail: rgba(251, 59, 59, 0.822);
+  --success: #449af0;
  }
-
 
 * {
 	font-size: 18px;
-	font-family: "Courier New", Monospace;
-	box-sizing:border-box;
-	padding:0;
-	margin: 0;
-	line-height:1.3rem;
+	box-sizing: border-box;
+	padding:0;  
+  margin: 0;
 }
 
-/*Navbar for mobile devices*/
-nav{
-	background-color:var(--blue);
-	padding-bottom: 10px;
-	width:100vw;
+nav {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #888888;
+  background: var(--white);
 }
 
-.navbar_links{
-	list-style-type: none;
-	display: none;
+img {
+  width: 13vw;
+  height: auto;
 }
 
-.navbar_links li {
-	text-align: center;
-	margin: 15px auto;
-}
-.navbar_links li a {
-	color:var(--white);
-}
-
- nav a {
- 	display: inline-block;
- 	margin-top: 10px;
- 	margin-left: 20px;
- 	text-decoration: none;
- 	color:var(--white);
- }
-.navbar_toggle  {
-	top:10px;
-	right: 20px;
-	width: 20px;
-	height: 20px;
-	position:absolute;
-	cursor: pointer;
-
-}
-.line {
-	position: absolute;
-	width: 100%;
-	height:4px;
-	background-color: white;
-	border-radius:8px;
-	transition:transform 1s;
-}
-.top {
-	top:18%;
-}
-.middle {
-	top:48%;
-}
-.bottom {
-	top:78%;
-}
-.navbar_toggle.close .top {
-	transform:rotate(45deg);
-	top: 48%;
-}
-.navbar_toggle.close .middle, .navbar_toggle.close .bottom {
-	transform:rotate(-45deg);
-	top:48%;
-}
-.navbar_links.active {
-	display: block;
-	width: 100%;
-	height: 100vh;
-	position: absolute;	
-	top:40px;
-	background-color: var(--white);
-}
-.navbar_links.active li a {
-	color:var(--blue);
-	font-size: 30px;
-}
 .navbar_brand {
-	font-weight: bold;
-
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 2rem;
+  color: black;
+  text-shadow: 3px 1px 8px #8888, 2px 1px 8px #8888;
 }
-/*Navbar for desktops*/
-@media only screen and (min-width: 768px) {
-		nav {
-			display:flex;
-			justify-content: space-between;
-			align-items: center;
-			height: 50px;
-		 } 
-		.navbar_links {
-			justify-content: flex-end;
-		    display: flex;
-		    margin-right: 30px;
-		}
-		.navbar_links {
-			margin-left:auto;
-		}
-		.navbar_links li {
-			margin-left: 40px;
-		}
-		.navbar_toggle {
-			display: none;
-		}
 
-}
+@media screen and (min-width:500px) {
+  img {
+    width: 10vw;
+  }
+} 
+
+@media screen and (min-width:600px) {
+  img {
+    width: 9vw;
+  }
+} 
+@media screen and (min-width:768px) {
+  img {
+    width: 8vw;
+  }
+} 
+
+@media screen and (min-width:1000px) {
+  img {
+    width: 5vw;
+  }
+} 

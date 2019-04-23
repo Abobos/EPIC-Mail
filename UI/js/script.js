@@ -1,13 +1,22 @@
 
-let openNav = document.getElementById('openNav');
-let closeNav = document.getElementById('closeNav');
-let sideNav = document.querySelector('.sidenav');
+const notify = (state) => {
+  const submit = document.getElementById('submit');
+  const submitData = submit.dataset.notice;
+  const value = localStorage.value;
+  if (state === 'enable') {
+    submit.value = submitData;
+  } else {
+    submit.value = value;
+    // localStorage.removeItem('value');
+  }
+};
 
-
-openNav.addEventListener('click', () => {
-    sideNav.style.width = '80vw';
-});
-
-closeNav.addEventListener('click', () => {
-    sideNav.style.width='0';
-});
+const display = (message, className) => {
+  const feedback = document.querySelector('#feedback');
+  feedback.classList.add(className);
+  feedback.innerHTML = message;
+  notify('disable');
+  setTimeout(() => {
+    feedback.classList.remove(className);
+  }, 3000);
+};

@@ -6,50 +6,33 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no"> 
 	<link rel="icon" type="image/png" href="images/logo.png">
-	<link rel="stylesheet" type="text/css" href="css/sign_in.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>EPIC-Mail | Sign in</title>
 </head>
 
 <body>
-	<nav class="navbar">
-		
-				<div class="navbar_toggle">
-						<span class="line top"></span>
-						<span class="line middle"></span>
-						<span class="line bottom"></span>
-				</div >	
-	
-			<a class="navbar_brand" href="index.html"></span>EPIC Mail</a>
-			<ul class="navbar_links">
-				<li class="nav_items"><a href="index.html">Home</a></li>
-				<li class="nav_items"><a href="#">Docs</a></li>
+    <nav>
+      <div id = "navImage"><img src="images/logo.png"/></div>
+      <div id ='navText'><a class="navbar_brand" href="index.html">EPIC Mail</a></div>
+    </nav>
+   
+     <div id="feedback">
+     </div>
 
-			</ul>
-
-		    </ul>
-
-	</nav>
-
-	 <div class="logo">
-	 	<a class="navbar_brand" href="index.html"><img src="images/logo.png"/></a>
-	 </div> 
-
-	<div class="login_form">
-			<form action="compose_message.html" method="get">
-				<input type="email" name="first_name" placeholder="Email" class="form_group"/><br>
-				<input type="password" name="password" placeholder="Password" class="form_group"/><br>
-				<input type="submit" class="btn_display" value="Sign in"/><br>
-				
-				<div class="forgot_password">
-						<a href="forgot_password.html">forgot password?</a><br>
-						<a href="sign_up.html">Sign Up</a>
-				</div>
-				
+	<div class="card margin">
+      <h1>Sign In to your EPIC Mail Account</h1><br>
+			<form id="signInForm">
+				<input type="email" id="email" placeholder="Email" class="form_group"/><br>
+				<input type="password" id="password" placeholder="Password" class="form_group"/><br>
+        		<input type="submit" id="submit" class="btn_display" value="Sign In" data-notice="Processing..."/><br>
+					<a href="forgot_password.html">Forgot password?</a><br><br>
+          <p>Don't have an account? <a href="sign_up.html">Sign Up</a></p><br>
 			</form>
 	</div>
 
-	<footer>&copy; 2019 EPIC Mail Inc.</footer>
+	<footer>&copy; 2019 EPIC Mail by Blessing Makaraba</footer>
 	
-	<script src="js/scripts.js"></script>
+  <script src="js/script.js"></script>
+	<script src="js/fetchApi/authUser.js"></script>
 </body>
 </html>

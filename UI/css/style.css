@@ -1,0 +1,220 @@
+@import "navbar.css";
+
+.card {
+  text-align:center;
+  margin: 1rem auto 0;
+  width: 100vw;
+  padding:30px;
+  box-shadow: 5px 5px 3px #888888, -5px -5px 3px #888888;
+}
+
+.card h1 {
+  font-size:1.2rem;
+  text-decoration: none;
+}
+
+.card a {
+	text-decoration: none;
+	color:var(--blue);
+}
+
+.margin {
+  margin-top:5rem;
+}
+
+.form_group {
+  width: 80vw;
+  padding: 10px;
+  margin-bottom:10px;
+}
+
+.form_group:focus {
+	outline: none;
+	border-bottom: 2px solid var(--blue);
+}
+
+.btn_display {
+  cursor: pointer;
+  display: block;
+  width: 80vw;
+  margin: 20px auto 0;
+  text-align:center;
+  padding: 7px;
+  border:3px solid var(--blue);
+  color:var(--white);
+  background-color: var(--blue);
+  text-decoration: none;
+}
+
+.btn_display:hover {
+  background-color: #1787f6;
+}
+
+.btn {
+  cursor: pointer;
+  text-align:center;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border:3px solid var(--white);
+  color:var(--white);
+  text-decoration: none;
+  box-shadow: 5px 5px 3px #888888, -5px -5px 3px #888888;
+}
+
+.btn:nth-of-type(2) {
+  margin-left: 2rem;
+}
+
+.btn:hover {
+  background-color: #1787f6;
+}
+
+footer {
+	text-align:center;
+	bottom:0;
+	padding:10px;
+  position:fixed;
+  color:black;
+  font-weight:bold;
+  background-color:#f2f2f2;
+}
+
+#feedback.success {
+background: var(--success);
+display: block;
+}
+
+#feedback.fail {
+background: var(--fail);
+display: block;
+}
+
+#feedback {
+  color: white;
+  padding: 0.6rem;
+  position: fixed;
+  width:100vw;
+  text-align: center;
+  display: none;
+  top:4rem;
+  padding: 0.6rem;
+  -webkit-animation: fadeInOut 3.5s;
+  animation: fadeInOut 3.5s;
+}
+
+footer {
+	text-align:center;
+	bottom:0;
+	padding:10px;
+	position:fixed;
+	width:100vw;
+	background-color:#f2f2f2;
+	}
+
+#Index {
+  background-image: url("../images/eddy-billard-1380740-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+#welcome {
+height: 75vh;
+display: flex;
+justify-content: center;
+font-size: 30px;
+align-items: center;
+line-height: 2.5rem;
+}
+
+#welcomeText {
+text-align: center;
+-webkit-animation: SlideUp 1.5s;
+animation: SlideUp 1.5s;
+}
+
+#welcomeText h1, #welcomeText p {
+  color: white;
+  font-size: 1.5rem;
+}
+
+@keyframes fadeInOut {
+  0%, 50% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+@keyframes SlideUp {
+	from {
+		transform: translateY(400px);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+@media screen and (min-width:500px) {
+  .card {
+    width: 80vw;
+  }
+
+  .form_group {
+    width: 70vw;
+  }
+
+  .btn_display {
+    width: 70vw
+  }
+
+  #welcomeText {
+    width: 70vw;
+  }
+} 
+
+@media screen and (min-width:600px) {
+  .card {
+    width: 65vw;
+  }
+  .form_group {
+    width: 50vw;
+  }
+  .btn_display {
+    width: 50vw
+  }
+} 
+
+@media screen and (min-width:768px) {
+  .card {
+    width: 50vw;
+  }
+  .form_group {
+    width: 40vw;
+  }
+  .btn_display {
+    width: 40vw
+  }
+  #welcomeText {
+    width: 50vw;
+  }
+  .margin {
+    margin-top:4rem;
+  }
+} 
+
+@media screen and (min-width:1000px) {
+  .card {
+    width: 30vw;
+  }
+  .form_group {
+    width: 25vw;
+  }
+  .btn_display {
+    width: 25vw
+  }
+} 
+
+
+
+
