@@ -9,7 +9,7 @@
 }
 
 .card h1 {
-  font-size:1.2rem;
+  font-size:0.8rem;
   text-decoration: none;
 }
 
@@ -113,7 +113,7 @@ footer {
 	}
 
 #Index {
-  background-image: url("../images/eddy-billard-1380740-unsplash.jpg");
+  background-image: url(https://source.unsplash.com/M5UD_FyuDl8);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
