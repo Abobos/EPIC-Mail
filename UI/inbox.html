@@ -6,158 +6,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="stylesheet" type="text/css"  href="css/inbox.css">
+    <link rel="stylesheet" type="text/css"  href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
     <title>EPIC-Mail | Inbox</title>
 </head>
 
-<body>
+<body id ="userPage">
 
-<div class="navbar">
+<div id="userHeading">
    <span id="openNav">&#9776;</span>
-    <a class="navbar_brand" href="index.html"><img src="images/logo.png"/>EPIC Mail</a>
+   <div id ="heading">Inbox</div>
 </div>
 
+  <div id="feedback">
+  </div>
 
-<div class="sidenav">
-   <span id="closeNav">&times;</span>
-     <ul class="nav">
-        <li class="nav_items"><a href="index.html">Home</a></li>
-        <li class="nav_items"><a href="#">Docs</a></li>
-        <li class="nav tabs"><a href="compose_message.html" id="compose">Compose Message</a></li>
-        <li class="nav tabs"><a href="inbox.html" id="inbox">Inbox</a></li>
-        <li class="nav tabs"><a href="sent_message.html" id="sent">Sent</a></li>
-        <li class="nav tabs"><a href="draft.html" id="drafts">Draft</a></li>
-        <li class="nav tabs"><a href="create_group.html" id="create_group">Create Group</a></li>
-        <li class="nav tabs"><a href="index.html" id="create_group">Logout</a></li>
-     </ul>
- </div>
-
-<div class="display">
-    <div class="logo">
-      <a class="navbar_brand" href="index.html"><img src="images/logo.png"/></a>
+  <div id="sideNav">
+    <div id="userInfo">
+      <!-- <p>blessingmakaraba@gmail.com</p> -->
+      Status : Online;
     </div>
-    
- <div id="Inbox">
-      <h3>Inbox</h3>
-    <div class="message">
-       <div class="messageTitle">
-          <p>Life is Race</p>
-             <p>From : Blessing Makaraba</p>
-       </div>
-
-     <div class="messageBody" id="firstMessage" class="hide" >
-         <p>Life is but a walking shadow, a player that
-          strut and fret his life upon a stage is like
-          a fool signifying nothing.
-          This is my story, This is my song, And I    
-          will praise him my saviour on the day long
-       </p>
-
-       <p>Life is but a walking shadow, a player that
-          strut and fret his life upon a stage is like
-          a fool signifying nothing.
-          This is my story, This is my song, And I
-          will praise him my saviour on the day long
-      </p>
-      
-      <p>Life is but a walking shadow, a player that
-         strut and fret his life upon a stage is like
-         a fool signifying nothing.
-         This is my story, This is my song, And I
-         will praise him my saviour on the day long
-      </p>
-      
-      <p>Life is but a walking shadow, a player that
-        strut and fret his life upon a stage is like
-        a fool signifying nothing.
-        This is my story, This is my song, And I
-        will praise him my saviour on the day long
-      </p>
- </div>
-    <button type="button" id="viewFirstMessage" class="view" data-type="firstMessage">view</button>
-    <button type="button" id="delete">delete</button>
+  
+      <ul id="nav">
+          <span id="closeNav">&times;</span>
+          <!-- <li class="navTabs"><a href="#" data-value="composeMessage" class="userView">Compose Message</a></li> -->
+          <li class="navTabs"><a href="#" data-value="inbox" class="userView"><i class="fa fa-inbox"></i>Inbox</a></li>
+          <li class="navTabs"><a href="#" data-value="sent" class="userView"><i class="fa fa-send"></i>Sent</a></li>
+          <li class="navTabs"><a href="#" data-value="draft" class="userView"><i class="fa fa-archive"></i>Draft</a></li>
+          <li class="navTabs"><a href="#" data-value="group"
+            class="userView"><i class="fa fa-group"></i>Group</a></li>
+          <li class="navTabs"><a href="#" id="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+      </ul>
  </div>
 
- <div class="message">
-       <div class="messageTitle">
-          <p>Life is Race</p>
-          <p>From : Victory Abobo</p>
+    <div id="inbox" class="viewPage">
+      <div class="message">
+
+        <div class="messageSubject">
+          <b>Blessing Makaraba is a good Body</b>
         </div>
 
-   <div class="messageBody" id="SecondMessage" class="hide">
-      <p>Life is but a walking shadow, a player that
-         strut and fret his life upon a stage is like
-         a fool signifying nothing.
-         This is my story, This is my song, And I
-         will praise him my saviour on the day long
-      </p>
+        <div class="messageBody">
+          <p> knangakjnfka asdlklannsklnasf asdfakksndfakf asdffkjajnkasf
+          afkjakjnlkaa aksngjknfgakddlfalkmdgklg
+          afgangkangg
+          akjjanfkjngakjg gakgnakgna aangkjjnga gagakjjgnaskga
+          gakajngaknga ajnsngkjjnaga askjajgnasgaabsag  asgasddkn</p>
+        </div>
 
-      <p>Life is but a walking shadow, a player that
-        strut and fret his life upon a stage is like
-        a fool signifying nothing.
-        This is my story, This is my song, And I
-        will praise him my saviour on the day long
-      </p>
-                        
-      <p>Life is but a walking shadow, a player that
-        strut and fret his life upon a stage is like
-        a fool signifying nothing.
-        This is my story, This is my song, And I
-        will praise him my saviour on the day long
-      </p>
-                        
-      <p>Life is but a walking shadow, a player that
-          strut and fret his life upon a stage is like
-          a fool signifying nothing.
-          This is my story, This is my song, And I
-          will praise him my saviour on the day long
-      </p>
+      </div>
+    </div>
 
-   </div>
-      <button type="button" id="viewSecondMessage" class="view" data-type="SecondMessage">view</button>
-      <button type="button" id="delete">delete</button>
- </div>
+    <div id="sent" class="viewPage hide">
+    </div>
 
- <div class="message">
-     <div class="messageTitle">
-        <p>Life is Race</p>
-        <p>From : Gift Abobo</p>
-     </div>
+    <div id="draft" class="viewPage hide">
+    </div>
 
-   <div class="messageBody" id="ThirdMessage" class="hide">
-        <p>Life is but a walking shadow, a player that
-          strut and fret his life upon a stage is like
-          a fool signifying nothing.
-          This is my story, This is my song, And I
-          will praise him my saviour on the day long
-        </p>
-   
-        <p>Life is but a walking shadow, a player that
-          strut and fret his life upon a stage is like
-          a fool signifying nothing.
-          This is my story, This is my song, And I
-          will praise him my saviour on the day long
-        </p>
-   
-        <p>Life is but a walking shadow, a player that
-          strut and fret his life upon a stage is like
-          a fool signifying nothing.
-          This is my story, This is my song, And I
-          will praise him my saviour on the day long
-        </p>
-   
-        <p>Life is but a walking shadow, a player that
-          strut and fret his life upon a stage is like
-          a fool signifying nothing.
-          This is my story, This is my song, And I
-          will praise him my saviour on the day long
-        </p>
-     </div>
-     <button type="button" id="viewThirdMessage" class="view" data-type="ThirdMessage">view</button>
-     <button type="button" id="delete" >delete</button>
-   </div>
- </div>
-</div> 
- <script src="js/profile.js"></script>
+    <div id="group" class="viewPage hide">
+    </div>  
+
+    <div id="composeMessage" class="viewPage hide">
+      <form id ="composeMessage">
+        <input type="text" name="subject" id="subject" placeholder="Subject" />
+        <input type="email" name="email" id="email" placeholder="Receipient"> 
+        <textarea id="message"></textarea>
+        <input type="submit" value="Send"/>
+      </form>
+    </div> 
+
+    <div id="composeMessageBtn">
+      <i class="fa fa-pencil"></i>
+    </div>
+
+ <script src="js/script.js"></script>
+
 </body>
 </html>

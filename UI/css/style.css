@@ -5,6 +5,7 @@
   margin: 0 auto;
   width: 100vw;
   padding:30px;
+  -webkit-box-shadow:5px 5px 3px #888888, -5px -5px 3px #888888;
   box-shadow: 5px 5px 3px #888888, -5px -5px 3px #888888;
 }
 
@@ -105,9 +106,9 @@ display: block;
 
 footer {
 	text-align:center;
-	bottom:0;
-	padding:10px;
-	position:fixed;
+  padding:10px;
+  font-size:0.8rem;
+  letter-spacing: .2rem;
 	width:100vw;
 	background-color:#f2f2f2;
 	}
@@ -122,9 +123,12 @@ footer {
 }
 
 #welcome {
-height: 70vh;
+height: 75vh;
+display: -webkit-flex;
 display: flex;
+-webkit-justify-content:  center;
 justify-content: center;
+-webkit-align-items:center;
 align-items: center;
 line-height: 2.5rem;
 }
@@ -132,12 +136,12 @@ line-height: 2.5rem;
 #welcomeText {
 width:80vw;
 text-align: center;
--webkit-animation: SlideUp 1.5s;
-animation: SlideUp 1.5s;
+-webkit-animation: SlideUp 2s;
+animation: SlideUp 2s;
 }
 
 #welcomeText h1 {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 #welcomeText h1, #welcomeText p {
@@ -158,6 +162,135 @@ animation: SlideUp 1.5s;
 	}
 }
 
+@-webkit-keyframes fadeInOut {
+  0%, 50% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+@-webkit-keyframes SlideUp {
+	from {
+		transform: translateY(400px);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+#userHeading {
+  padding: 0.5rem;
+  display:flex;
+  font-size: 1.3rem;
+  color:var(--white);
+  background: var(--blue);
+  align-items: center;
+  height: auto;
+}
+
+#openNav {
+  -webkit-flex:1;
+  flex:1;
+  cursor: pointer;
+}
+
+#heading {
+  -webkit-flex:1.5;
+  flex:1.5;
+}
+
+#sideNav {
+ background: #f2f2f2;
+  height: 100vh;
+  position: fixed;
+  overflow-x: hidden;
+  z-index:1;
+  width:0;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+#closeNav {
+  font-weight: bolder;
+  font-size:1.5rem;
+  position: absolute;
+  top:0;
+  right: 1rem;
+  cursor: pointer;
+}
+
+#nav {
+  list-style-type: none;
+}
+
+#nav a {
+  text-decoration: none;
+  text-align: center;
+  color:black;
+  display: inline-block;
+  -webkit-transition: .3s;
+  transition: .3s;
+  margin-left: 1rem;
+}
+
+#nav a:hover {
+  background-color: #b3d9ff;
+  padding: 8px 6rem 8px 8px;
+}
+
+#nav {
+  padding: 1rem;
+  margin-top:1rem;
+}
+.navTabs i {
+  margin-right: 1rem;
+}
+.navTabs {
+  margin-bottom: 2rem;
+}
+  
+#userInfo {
+  padding: 2rem;
+  background:#b3d9ff;
+}
+
+#inbox {
+  height:1px;
+}
+
+.message {
+  border: 1px solid #888888;
+  padding: 1rem;
+  -webkit-transition: .3s;
+  transition: .3s;
+}
+
+.messageBody {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.message:hover {
+  background: #f0f5f5;
+}
+
+.hide {
+  display: none;
+}
+
+#composeMessageBtn {
+  background-color: var(--blue);
+  color:white;
+  border-radius: 3rem;
+  padding:.8rem;
+  font-size:1.5rem;
+  position:fixed;
+  bottom:1rem;
+  right:1rem;
+  cursor:pointer;
+} 
+
+#composeMessageBtn:hover {
+  background-color: #1787f6;
+}
+
 @media screen and (min-width:500px) {
   .card {
     width: 80vw;
@@ -173,6 +306,14 @@ animation: SlideUp 1.5s;
 
   #welcomeText {
     width: 70vw;
+  }
+
+  footer {
+  font-size:1rem;
+  }
+
+  #welcomeText h1 {
+    font-size: 1.2rem;
   }
 } 
 
@@ -218,6 +359,8 @@ animation: SlideUp 1.5s;
   }
 } 
 
-
-
-
+@media screen and (max-height: 450px) {
+  #sideNav {
+    font-size:0.7rem;
+  }
+}

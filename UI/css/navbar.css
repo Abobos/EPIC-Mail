@@ -13,8 +13,11 @@
 }
 
 nav {
+  display: -webkit-flex;
   display:flex;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-align-items: center;
   align-items: center;
   border-bottom: 2px solid #888888;
   background: var(--white);
@@ -30,6 +33,7 @@ img {
   font-weight: bold;
   font-size: 1.3rem;
   color: black;
+  -webkit-text-shadow:3px 1px 8px #8888, 2px 1px 8px #8888;
   text-shadow: 3px 1px 8px #8888, 2px 1px 8px #8888;
 }
 

@@ -70,8 +70,8 @@ if (signInForm) {
   });
 }
 
-if (resetPassword) {
-  resetPassword.addEventListener('submit', (event) => {
+if (forgotPassword) {
+  forgotPassword.addEventListener('submit', (event) => {
     event.preventDefault();
     localStorage.value = submit.value;
     notify('enable');
@@ -95,19 +95,25 @@ if (resetPassword) {
   });
 }
 
-if (forgotPassword) {
-  forgotPassword.addEventListener('submit', (event) => {
+if (resetPassword) {
+  resetPassword.addEventListener('submit', (event) => {
     event.preventDefault();
     localStorage.value = submit.value;
     notify('enable');
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('authorization');
+
+    localStorage.token = token;
+    // const userToken = `Bearer ${token}`;
+
     if (password !== confirmPassword) display('Password do not match', 'fail');
     else {
       fetch('https://epicmail11.herokuapp.com/api/v1/auth/change_password', {
         method: 'POST',
-        headers: { 'Content-type': 'application/json' },
+        headers: { 'Content-type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           password,
         }),
