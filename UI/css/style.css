@@ -15,7 +15,8 @@
 }
 
 .card a {
-	text-decoration: none;
+  text-decoration: none;
+  font-size:1.5rem;
 	color:var(--blue);
 }
 
@@ -243,8 +244,8 @@ footer {
 }
   
 .userInfo {
-  padding: 2rem;
-  width:50vw;
+  padding: 1rem;
+  /* width:auto; */
   background:#b3d9ff;
 }
 
@@ -409,6 +410,7 @@ footer {
     border-bottom: 1px solid #cac5c5;
   }
  #desktop .userInfo {
+   padding:2rem;
    width: 40vw;
  }
   #desktop .nav {
