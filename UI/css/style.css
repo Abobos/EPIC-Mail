@@ -71,24 +71,14 @@
   background-color: #1787f6;
 }
 
-footer {
-	text-align:center;
-	bottom:0;
-	padding:10px;
-  position:fixed;
-  color:black;
-  font-weight:bold;
-  background-color:#f2f2f2;
-}
-
 #feedback.success {
-background: var(--success);
-display: block;
+  background: var(--success);
+  display: block;
 }
 
 #feedback.fail {
-background: var(--fail);
-display: block;
+  background: var(--fail);
+  display: block;
 }
 
 #feedback {
@@ -108,7 +98,9 @@ footer {
 	text-align:center;
   padding:10px;
   font-size:0.8rem;
-  letter-spacing: .2rem;
+  position:fixed;
+  bottom: 0;
+  letter-spacing: .08rem;
 	width:100vw;
 	background-color:#f2f2f2;
 	}
@@ -123,25 +115,25 @@ footer {
 }
 
 #welcome {
-height: 75vh;
-display: -webkit-flex;
-display: flex;
--webkit-justify-content:  center;
-justify-content: center;
--webkit-align-items:center;
-align-items: center;
-line-height: 2.5rem;
+  height: 75vh;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content:  center;
+  justify-content: center;
+  -webkit-align-items:center;
+  align-items: center;
+  line-height: 2.5rem;
 }
 
 #welcomeText {
-width:80vw;
-text-align: center;
--webkit-animation: SlideUp 2s;
-animation: SlideUp 2s;
+  width:80vw;
+  text-align: center;
+  -webkit-animation: SlideUp 2s;
+  animation: SlideUp 2s;
 }
 
 #welcomeText h1 {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 #welcomeText h1, #welcomeText p {
@@ -169,19 +161,21 @@ animation: SlideUp 2s;
 
 @-webkit-keyframes SlideUp {
 	from {
-		transform: translateY(400px);
+		-webkit-transform: translateY(400px);
 	}
 	to {
-		transform: translateY(0);
+		-webkit-transform: translateY(0);
 	}
 }
 
 #userHeading {
   padding: 0.5rem;
-  display:flex;
+  display: -webkit-flex;
+  display: flex;
   font-size: 1.3rem;
-  color:var(--white);
+  color: var(--white);
   background: var(--blue);
+  -webkit-align-items: center;
   align-items: center;
   height: auto;
 }
@@ -198,14 +192,14 @@ animation: SlideUp 2s;
 }
 
 #sideNav {
- background: #f2f2f2;
+  background: #f2f2f2;
   height: 100vh;
   position: fixed;
   overflow-x: hidden;
   z-index:1;
   width:0;
-  -webkit-transition: .5s;
-  transition: .5s;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
 #closeNav {
@@ -217,26 +211,27 @@ animation: SlideUp 2s;
   cursor: pointer;
 }
 
-#nav {
+.nav {
   list-style-type: none;
+  width:100vw;
 }
 
-#nav a {
+.nav a {
   text-decoration: none;
   text-align: center;
   color:black;
   display: inline-block;
-  -webkit-transition: .3s;
-  transition: .3s;
+  -webkit-transition: .4s;
+  transition: .4s;
   margin-left: 1rem;
 }
 
-#nav a:hover {
+.nav a:hover {
   background-color: #b3d9ff;
-  padding: 8px 6rem 8px 8px;
+  padding: 8px 5rem 8px 8px;
 }
 
-#nav {
+.nav {
   padding: 1rem;
   margin-top:1rem;
 }
@@ -247,8 +242,9 @@ animation: SlideUp 2s;
   margin-bottom: 2rem;
 }
   
-#userInfo {
+.userInfo {
   padding: 2rem;
+  /* width:20vw; */
   background:#b3d9ff;
 }
 
@@ -257,10 +253,11 @@ animation: SlideUp 2s;
 }
 
 .message {
-  border: 1px solid #888888;
-  padding: 1rem;
+  border: 1px solid #cac5c5;
+  padding: 16px;
   -webkit-transition: .3s;
   transition: .3s;
+  cursor: pointer;
 }
 
 .messageBody {
@@ -278,12 +275,12 @@ animation: SlideUp 2s;
 #composeMessageBtn {
   background-color: var(--blue);
   color:white;
-  border-radius: 3rem;
-  padding:.8rem;
-  font-size:1.5rem;
-  position:fixed;
-  bottom:1rem;
-  right:1rem;
+  border-radius: 4rem;
+  padding: .9rem;
+  font-size: 1rem;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
   cursor:pointer;
 } 
 
@@ -291,6 +288,54 @@ animation: SlideUp 2s;
   background-color: #1787f6;
 }
 
+#modal {
+  background: white;
+  position: fixed;
+  padding: 1rem;
+  text-align: justify;
+  line-height:1.8rem;
+  height: 100vh;
+  width: 100vw;
+}
+
+#modalSubject {
+  border-bottom: 1px solid #cac5c5; 
+}
+
+#modalBody {
+  margin-top: 0.8rem;
+}
+
+#modalClose, #modalTrash {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+#modalClose {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 30px;
+}
+
+.compose_group {
+  display: block;
+  border: none;
+  border-bottom: 2px solid #cac5c5;
+  padding: 1rem;
+  width: 100vw;
+  resize: none;
+}
+
+.compose_group:focus {
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #cac5c5;
+}
+
+#message {
+  height: 50vh;
+}
 @media screen and (min-width:500px) {
   .card {
     width: 80vw;
@@ -310,10 +355,6 @@ animation: SlideUp 2s;
 
   footer {
   font-size:1rem;
-  }
-
-  #welcomeText h1 {
-    font-size: 1.2rem;
   }
 } 
 
@@ -340,13 +381,58 @@ animation: SlideUp 2s;
     width: 40vw
   }
   #welcomeText {
-    width: 30vw;
+    width: 40vw;
+  }
+  #welcomeText p {
+    font-size: 1.3rem;
   }
   .margin {
     margin-top:4rem;
   }
+
+  #heading {
+    text-align: center;
+  }
+
+  #composeMessageBtn {
+    display: none;
+  }
+  #sideNav {
+    display: none;
+  }
+  #openNav {
+    display: none;
+  }
+  #desktop {
+    display: flex;
+    display: -webkit-flex;
+    border-bottom: 1px solid #cac5c5;
+  }
+ #desktop .userInfo {
+   width: 250px;
+ }
+  #desktop .nav {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+
+  #desktop .nav a {
+    border: 2px solid #888888;
+    width: 9vw;
+    margin-left: 0;
+  }
+  #desktop .nav a:hover {
+  padding: 0;
+  }
 } 
 
+@media screen and (max-width:768px) {
+  .hidden-xs{
+    display: none;
+  }
+}
 @media screen and (min-width:1000px) {
   .card {
     width: 30vw;
@@ -358,9 +444,3 @@ animation: SlideUp 2s;
     width: 25vw
   }
 } 
-
-@media screen and (max-height: 450px) {
-  #sideNav {
-    font-size:0.7rem;
-  }
-}

@@ -16,6 +16,7 @@ if (signUpForm) {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
+    localStorage.email = email;
 
     if (password !== confirmPassword) display('Password do not match', 'fail');
     else {
@@ -48,6 +49,8 @@ if (signInForm) {
     notify('enable');
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+
+    localStorage.email = email;
 
     fetch('https://epicmail11.herokuapp.com/api/v1/auth/login', {
       method: 'POST',
@@ -105,9 +108,10 @@ if (resetPassword) {
 
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('authorization');
+    console.log(token);
 
     localStorage.token = token;
-    // const userToken = `Bearer ${token}`;
+    console.log(localStorage.token);
 
     if (password !== confirmPassword) display('Password do not match', 'fail');
     else {
