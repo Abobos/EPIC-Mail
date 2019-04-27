@@ -39,7 +39,7 @@ const modalClose = document.querySelector('#modalClose');
 const userInfos = document.querySelectorAll('.userInfo');
 
 openNav.addEventListener('click', () => {
-  sideNav.style.width = '250px';
+  sideNav.style.width = '70vw';
 });
 
 closeNav.addEventListener('click', () => {
