@@ -10,13 +10,12 @@
 }
 
 .card h1 {
-  font-size:0.8rem;
+  font-size:1rem;
   text-decoration: none;
 }
 
 .card a {
   text-decoration: none;
-  font-size:1.5rem;
 	color:var(--blue);
 }
 

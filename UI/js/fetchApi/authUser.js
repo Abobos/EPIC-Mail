@@ -64,7 +64,7 @@ if (signInForm) {
         if (response.status === 'failed') {
           display(response.error, 'fail');
         } else {
-          display('Signin was successful', 'success');
+          display('You are now logged In', 'success');
           setTimeout(() => {
             window.location.replace('inbox.html');
           }, 3000);
