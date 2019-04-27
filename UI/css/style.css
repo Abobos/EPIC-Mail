@@ -105,7 +105,7 @@ footer {
 	background-color:#f2f2f2;
 	}
 
-#Index {
+#index {
   background-image: url(https://source.unsplash.com/M5UD_FyuDl8);
   background-position: center;
   background-size: cover;
@@ -244,7 +244,7 @@ footer {
   
 .userInfo {
   padding: 2rem;
-  /* width:20vw; */
+  width:50vw;
   background:#b3d9ff;
 }
 
@@ -409,7 +409,7 @@ footer {
     border-bottom: 1px solid #cac5c5;
   }
  #desktop .userInfo {
-   width: 250px;
+   width: 40vw;
  }
   #desktop .nav {
     display: -webkit-flex;
