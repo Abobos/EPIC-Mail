@@ -12,8 +12,8 @@ class UserController {
       const existingUser = await db.query('SELECT * FROM users WHERE email = $1', [email]);
       if (existingUser.rows[0]) {
         return res.status(409).json({
-          status: 'failed',
-          error: 'User details already exists',
+          status: 'fail',
+          error: 'This email already exists',
         });
       }
       const hashPassword = bcrypt.hashSync(password, 10);
@@ -42,16 +42,16 @@ class UserController {
       const existingUser = await db.query('SELECT * FROM users WHERE email = $1', [email]);
       if (!existingUser.rows[0]) {
         return res.status(404).json({
-          status: 'failed',
-          error: 'User details not found',
+          status: 'fail',
+          error: 'Invalid credentials',
         });
       }
       const hashpassword = existingUser.rows[0].password;
       const hashValue = bcrypt.compareSync(req.body.password, hashpassword);
       if (!hashValue) {
         return res.status(401).json({
-          status: 'failed',
-          error: 'Incorrect password!',
+          status: 'fail',
+          error: 'Incorrect password',
         });
       }
       return res.status(200).json({
@@ -73,9 +73,9 @@ class UserController {
     const { firstname, email } = req.body;
     const token = await generateToken(req.body);
     const response = await sendEmail(email, firstname, token);
-    if (response === 'failed') {
+    if (response === 'fail') {
       return res.status(500).json({
-        status: 'failed',
+        status: 'fail',
         error: 'Network Issue: something went wrong',
       });
     }

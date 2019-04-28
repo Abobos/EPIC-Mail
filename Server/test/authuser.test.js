@@ -20,7 +20,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('firstName is required');
         done();
       });
@@ -38,7 +38,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('email is required');
         done();
       });
@@ -56,7 +56,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('lastName is required');
         done();
       });
@@ -74,7 +74,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('password is required');
         done();
       });
@@ -92,7 +92,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -110,7 +110,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -128,7 +128,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -146,7 +146,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -184,7 +184,7 @@ describe('POST /signup', () => {
       .end((req, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -223,8 +223,8 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(401);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
-        res.body.should.have.property('error').eql('Incorrect password!');
+        res.body.should.have.property('status').eql('fail');
+        res.body.should.have.property('error').eql('Incorrect password');
         done();
       });
   });
@@ -239,7 +239,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('password is required');
         done();
       });
@@ -255,7 +255,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('email is required');
         done();
       });
@@ -271,7 +271,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -287,7 +287,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -303,7 +303,7 @@ describe('POST /login', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });

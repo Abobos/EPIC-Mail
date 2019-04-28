@@ -4,7 +4,7 @@ import db from '../database/config/pool';
 const validateMessageDetails = async (req, res, next) => {
   if (!req.body.email) {
     return res.status(400).json({
-      status: 'failed',
+      status: 'fail',
       error: 'Recipient\'s email is required',
     });
   }
@@ -18,13 +18,13 @@ const validateMessageDetails = async (req, res, next) => {
   const { error } = Joi.validate(req.body, schema);
   if (error) {
     return res.status(400).json({
-      status: 'failed',
+      status: 'fail',
       error: (error.details) ? error.details[0].message.replace(/[""]+/g, '') : error.message,
     });
   }
   if ((req.body.email) === (req.decoded.email)) {
     return res.status(409).json({
-      status: 'failed',
+      status: 'fail',
       error: 'you cannot send a message to yourself',
     });
   }
@@ -33,7 +33,7 @@ const validateMessageDetails = async (req, res, next) => {
     const userDetails = await db.query('SELECT id FROM users WHERE email = $1', [email]);
     if (!userDetails.rows[0]) {
       return res.status(400).json({
-        status: 'failed',
+        status: 'fail',
         error: 'Receipient\'s email not found',
       });
     }
@@ -52,7 +52,7 @@ const validateMessageId = (req, res, next) => {
   req.params.messageId = id;
   if ((!id) || (/[^0-9]/g.test(id))) {
     return res.status(400).json({
-      status: 'failed',
+      status: 'fail',
       error: 'messageId is invalid',
     });
   }

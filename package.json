@@ -7,7 +7,7 @@
     "test": "cross-env NODE_ENV=test npm run migrate-db && cross-env NODE_ENV=test nyc mocha --require @babel/register ./Server/test/*.test.js --exit --timeout 100000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start-dev": "nodemon --exec babel-node ./Server/app.js",
-    "start": "npm run migrate && node build/app.js",
+    "start": "node build/app.js",
     "build": "babel Server --out-dir build",
     "migrate": "node ./build/database/table.js",
     "migrate-db": "babel-node ./Server/database/table.js"

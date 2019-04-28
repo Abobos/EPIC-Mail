@@ -26,8 +26,8 @@ const transformEmail = (req, res, next) => {
 const splitUsers = (req, res, next) => {
   if (!req.body.users) {
     return res.status(400).json({
-      status: 'failed',
-      error: '\'users\' is required: you haven\'t add any user',
+      status: 'fail',
+      error: 'Please enter prospective member\'s email(s)',
     });
   }
   const { users } = req.body;
@@ -39,7 +39,7 @@ const splitUsers = (req, res, next) => {
       validMemberEmails.push(memberEmail);
     } else {
       return res.status(400).json({
-        status: 'failed',
+        status: 'fail',
         error: `${memberEmail} is not a valid email`,
       });
     }

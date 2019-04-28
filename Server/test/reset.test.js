@@ -41,7 +41,7 @@ describe('Send Password Link', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('Invalid credentials');
         done();
       });
@@ -57,7 +57,7 @@ describe('Send Password Link', () => {
       .end((req, res) => {
         res.should.have.status(500);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('Network Issue: something went wrong');
         done();
       });
@@ -94,7 +94,7 @@ describe('Change Password', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });

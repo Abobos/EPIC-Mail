@@ -85,7 +85,7 @@ class messageController {
         });
       }
       return res.status(404).json({
-        status: 'failed',
+        status: 'fail',
         message: 'The email record with the given ID was not found',
       });
     } catch (e) {
@@ -110,7 +110,7 @@ class messageController {
         });
       }
       return res.status(404).json({
-        status: 'failed',
+        status: 'fail',
         message: 'The email record with the given ID was not found',
       });
     } catch (e) {

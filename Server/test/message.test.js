@@ -133,7 +133,7 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('you cannot send a message to yourself');
         done();
       });
@@ -153,7 +153,7 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -189,7 +189,7 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('subject is required');
         done();
       });
@@ -207,7 +207,7 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('message is required');
         done();
       });
@@ -225,7 +225,7 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('email is not valid');
         done();
       });
@@ -243,7 +243,7 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error');
         done();
       });
@@ -428,7 +428,7 @@ describe('GET /messages/<message-id>', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('messageId is invalid');
         done();
       });
@@ -442,7 +442,7 @@ describe('GET /messages/<message-id>', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('message').eql('The email record with the given ID was not found');
         done();
       });
@@ -475,7 +475,7 @@ describe('DELETE /messages/<message-id>', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('message').eql('The email record with the given ID was not found');
         done();
       });

@@ -6,7 +6,7 @@ class groupValidator {
     const { name } = req.body;
     if (!name) {
       return res.status(400).json({
-        status: 'failed',
+        status: 'fail',
         error: 'group name is required',
       });
     }
@@ -18,7 +18,7 @@ class groupValidator {
     const { error } = Joi.validate({ name: `${name}` }, schema);
     if (error) {
       return res.status(400).json({
-        status: 'failed',
+        status: 'fail',
         error: error.message,
       });
     }
@@ -26,7 +26,7 @@ class groupValidator {
       const result = await db.query('SELECT * FROM groups WHERE name = $1', [name]);
       if (result.rows[0]) {
         return res.status(409).json({
-          status: 'failed',
+          status: 'fail',
           error: 'group name already exists',
         });
       }
@@ -44,7 +44,7 @@ class groupValidator {
     req.params.groupId = id;
     if ((!id) || (/[^0-9]/g.test(id))) {
       return res.status(400).json({
-        status: 'failed',
+        status: 'fail',
         error: 'groupId is invalid',
       });
     }
@@ -52,7 +52,7 @@ class groupValidator {
       const result = await db.query('SELECT * FROM groups WHERE id = $1', [req.params.groupId]);
       if (result.rows[0]) return next();
       return res.status(404).json({
-        status: 'failed',
+        status: 'fail',
         error: 'The group with the given ID was not found',
       });
     } catch (err) {
@@ -67,7 +67,7 @@ class groupValidator {
       const result = await db.query('SELECT * FROM groups WHERE id =$1 AND ownerId = $2', [req.params.groupId, req.decoded.id]);
       if (result.rows[0]) return next();
       return res.status(409).json({
-        status: 'failed',
+        status: 'fail',
         error: 'You are not the owner of this group',
       });
     } catch (err) {
@@ -85,7 +85,7 @@ class groupValidator {
       for (const memberEmail of users) {
         if ((req.decoded.email) === memberEmail) {
           return res.status(409).json({
-            status: 'failed',
+            status: 'fail',
             error: 'You can\'t add yourself as a member of a group you own',
           });
         }
@@ -96,14 +96,14 @@ class groupValidator {
         }
         if (!getUserId.rows[0]) {
           return res.status(404).json({
-            status: 'failed',
+            status: 'fail',
             error: `${memberEmail} is not a registered user`,
           });
         }
         const userIdDuplicate = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND userId = $2', [req.params.groupId, memberId]);
         if (userIdDuplicate.rows[0]) {
           return res.status(409).json({
-            status: 'failed',
+            status: 'fail',
             error: `${memberEmail} already belongs to this group`,
           });
         }
@@ -125,7 +125,7 @@ class groupValidator {
     req.params.userId = id;
     if ((!id) || (/[^0-9]/g.test(id))) {
       return res.status(400).json({
-        status: 'failed',
+        status: 'fail',
         error: 'userId is invalid',
       });
     }
@@ -138,7 +138,7 @@ class groupValidator {
       const memberDetails = await db.query('SELECT * FROM groupmembers WHERE groupId = $1 AND (userId = $2 OR userId = $3)', [groupId, userId, req.decoded.id]);
       if (!memberDetails.rows[0]) {
         return res.status(404).json({
-          status: 'failed',
+          status: 'fail',
           error: 'User does not belong to this group',
         });
       }
@@ -158,7 +158,7 @@ class groupValidator {
     const { error } = Joi.validate(req.body, schema);
     if (error) {
       return res.status(400).json({
-        status: 'failed',
+        status: 'fail',
         error: error.details[0].message.replace(/[""]+/g, ''),
       });
     }

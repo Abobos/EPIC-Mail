@@ -81,7 +81,7 @@ describe('POST /groups', () => {
       .end((req, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('group name already exists');
         done();
       });
@@ -98,7 +98,7 @@ describe('POST /groups', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('group name is required');
         done();
       });
@@ -115,7 +115,7 @@ describe('POST /groups', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('group name is not valid');
         done();
       });
@@ -147,7 +147,7 @@ describe('PATCH /groups/:groupId/name', () => {
       .end((req, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('groupId is invalid');
         done();
       });
@@ -160,7 +160,7 @@ describe('PATCH /groups/:groupId/name', () => {
       .end((req, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('The group with the given ID was not found');
         done();
       });
@@ -173,7 +173,7 @@ describe('PATCH /groups/:groupId/name', () => {
       .end((req, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('You are not the owner of this group');
         done();
       });
@@ -209,7 +209,7 @@ describe('Add user to a group', () => {
       .end((err, res) => {
         res.should.have.status(404);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('gift@gmail.com is not a registered user');
         done();
       });
@@ -225,7 +225,7 @@ describe('Add user to a group', () => {
       .end((err, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('You can\'t add yourself as a member of a group you own');
         done();
       });
@@ -258,7 +258,7 @@ describe('Add user to a group', () => {
       .end((err, res) => {
         res.should.have.status(409);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('mosesmajor@gmail.com already belongs to this group');
         done();
       });
@@ -274,8 +274,8 @@ describe('Add user to a group', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
-        res.body.should.have.property('error').eql('\'users\' is required: you haven\'t add any user');
+        res.body.should.have.property('status').eql('fail');
+        res.body.should.have.property('error').eql('Please enter prospective member\'s email(s)');
         done();
       });
   });
@@ -290,7 +290,7 @@ describe('Add user to a group', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('blessingmakaraba@gmail is not a valid email');
         done();
       });
@@ -306,7 +306,7 @@ describe('DELETE a user from a group', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.should.be.an('object');
-        res.body.should.have.property('status').eql('failed');
+        res.body.should.have.property('status').eql('fail');
         res.body.should.have.property('error').eql('userId is invalid');
         done();
       });

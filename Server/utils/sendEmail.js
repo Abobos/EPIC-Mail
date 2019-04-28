@@ -31,7 +31,7 @@ const sendEmail = async (email, firstname, token) => {
       return 'success';
     }
   } catch (error) {
-    return 'failed';
+    return 'fail';
   }
 };
 
