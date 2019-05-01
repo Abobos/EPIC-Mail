@@ -86,7 +86,7 @@ class messageController {
       }
       return res.status(404).json({
         status: 'fail',
-        message: 'The email record with the given ID was not found',
+        error: 'The email record with the given ID was not found',
       });
     } catch (e) {
       return res.status(500).json({
@@ -104,14 +104,14 @@ class messageController {
           status: 'success',
           data: [
             {
-              message: 'message deleted successfully',
+              message: 'Message deleted successfully',
             },
           ],
         });
       }
       return res.status(404).json({
         status: 'fail',
-        message: 'The email record with the given ID was not found',
+        error: 'The email record with the given ID was not found',
       });
     } catch (e) {
       return res.status(500).json({
@@ -119,6 +119,54 @@ class messageController {
       });
     }
   }
+
+   static async getASentEmail(req, res) {
+    const messageId = Number(req.params.messageId);
+    const queryText = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, sent.senderId, sent.receiverId, messages.parentMessageId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.messageId = $1 AND sent.senderId = $2';
+    try {
+      const EmailRecord = await db.query(queryText, [messageId, req.decoded.id]);
+      if (EmailRecord.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+          data: EmailRecord.rows,
+        });
+      }
+      return res.status(404).json({
+        status: 'fail',
+        error: 'The email record with the given ID was not found',
+      });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+  }
+
+    static async deleteASentEmail(req, res) {
+    const messageId = Number(req.params.messageId);
+    try {
+      const deletedDetails = await db.query('DELETE FROM sent WHERE id = $1 AND senderId = $2 RETURNING *', [messageId, req.decoded.id]);
+      if (deletedDetails.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+          data: [
+            {
+              message: 'Message deleted successfully',
+            },
+          ],
+        });
+      }
+      return res.status(404).json({
+        status: 'fail',
+        error: 'The email record with the given ID was not found',
+      });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+  }
+
 }
 
 export default messageController;

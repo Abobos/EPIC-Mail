@@ -84,7 +84,7 @@ class UserController {
       data: [
         {
           message: 'Check your email for password reset link',
-          email: `${email}`,
+          email,
         },
       ],
     });

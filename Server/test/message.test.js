@@ -172,7 +172,8 @@ describe('POST /messages', () => {
       .end((req, res) => {
         res.should.have.status(401);
         res.should.be.an('object');
-        res.body.should.have.property('message').eql('Authentification failed');
+        res.body.should.have.property('status').eql('fail');
+        res.body.should.have.property('error').eql('Authentification failed');
         done();
       });
   });
@@ -443,7 +444,7 @@ describe('GET /messages/<message-id>', () => {
         res.should.have.status(404);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('fail');
-        res.body.should.have.property('message').eql('The email record with the given ID was not found');
+        res.body.should.have.property('error').eql('The email record with the given ID was not found');
         done();
       });
   });
@@ -462,7 +463,7 @@ describe('DELETE /messages/<message-id>', () => {
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
         res.body.data.should.have.an('array');
-        res.body.data[0].should.have.property('message').eql('message deleted successfully');
+        res.body.data[0].should.have.property('message').eql('Message deleted successfully');
         done();
       });
   });
@@ -476,7 +477,45 @@ describe('DELETE /messages/<message-id>', () => {
         res.should.have.status(404);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('fail');
-        res.body.should.have.property('message').eql('The email record with the given ID was not found');
+        res.body.should.have.property('error').eql('The email record with the given ID was not found');
+        done();
+      });
+  });
+});
+
+describe('GET a sent message', () => {
+  it('should return a status of 200 and show the particular sent message', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/messages/sent/1')
+      .set('Authorization', `Bearer ${senderToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.an('object');
+        res.body.data[0].should.have.property('id');
+        res.body.data[0].should.have.property('createdon');
+        done();
+      });
+  });
+});
+
+describe('DELETE a sent message', () => {
+  it('should return a status of 200 and delete a particular sent messages', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/messages/sent/1')
+      .set('Authorization', `Bearer ${senderToken}`)
+      .end((req, res) => {
+        res.should.have.status(200);
+        res.should.be.an('object');
+        res.body.should.have.property('status').eql('success');
+        res.body.should.have.property('data');
+        res.body.data.should.have.an('array');
+        res.body.data[0].should.have.property('message').eql('Message deleted successfully');
         done();
       });
   });

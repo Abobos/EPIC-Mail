@@ -12,5 +12,7 @@ router.get('/messages/unread', verifyToken, messageController.getUnreadEmails);
 router.get('/messages/sent', verifyToken, messageController.getSentEmails);
 router.get('/messages/:messageId', verifyToken, validateMessageId, messageController.getAnEmail);
 router.delete('/messages/:messageId', verifyToken, validateMessageId, messageController.deleteAnEmail);
+router.get('/messages/sent/:messageId', verifyToken, validateMessageId, messageController.getASentEmail);
+router.delete('/messages/sent/:messageId', verifyToken, validateMessageId, messageController.deleteASentEmail);
 
 export default router;

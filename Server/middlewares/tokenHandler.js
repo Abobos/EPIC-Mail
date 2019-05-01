@@ -10,7 +10,8 @@ const verifyToken = (req, res, next) => {
     return next();
   } catch (e) {
     return res.status(401).json({
-      message: 'Authentification failed',
+      status: 'fail',
+      error: 'Authentification failed',
     });
   }
 };
