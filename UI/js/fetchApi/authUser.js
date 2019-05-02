@@ -20,7 +20,7 @@ if (signUpForm) {
 
     if (password !== confirmPassword) display('Password do not match', 'fail');
     else {
-      fetch('https://epicmail11.herokuapp.com/api/v1/auth/signup', {
+      fetch('http://127.0.0.1:8080/api/v1/auth/signup', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
@@ -29,9 +29,10 @@ if (signUpForm) {
       })
         .then(res => res.json())
         .then((response) => {
-          if (response.status === 'failed') {
+          if (response.status === 'fail') {
             display(response.error, 'fail');
           } else {
+            localStorage.token = response.data[0].token;
             display('Your account has been created successfully', 'success');
             setTimeout(() => {
               window.location.replace('inbox.html');
@@ -52,7 +53,7 @@ if (signInForm) {
 
     localStorage.email = email;
 
-    fetch('https://epicmail11.herokuapp.com/api/v1/auth/login', {
+    fetch('http://127.0.0.1:8080/api/v1/auth/login', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -61,9 +62,10 @@ if (signInForm) {
     })
       .then(res => res.json())
       .then((response) => {
-        if (response.status === 'failed') {
+        if (response.status === 'fail') {
           display(response.error, 'fail');
         } else {
+          localStorage.token = response.data[0].token;
           display('You are now logged In', 'success');
           setTimeout(() => {
             window.location.replace('inbox.html');
@@ -80,7 +82,7 @@ if (forgotPassword) {
     notify('enable');
     const email = document.getElementById('email').value;
 
-    fetch('https://epicmail11.herokuapp.com/api/v1/auth/reset', {
+    fetch('http://127.0.0.1:8080/api/v1/auth/reset', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -89,7 +91,7 @@ if (forgotPassword) {
     })
       .then(res => res.json())
       .then((response) => {
-        if (response.status === 'failed') {
+        if (response.status === 'fail') {
           display(response.error, 'fail');
         } else {
           display(response.data[0].message, 'success');
@@ -108,14 +110,11 @@ if (resetPassword) {
 
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('authorization');
-    console.log(token);
-
     localStorage.token = token;
-    console.log(localStorage.token);
 
     if (password !== confirmPassword) display('Password do not match', 'fail');
     else {
-      fetch('https://epicmail11.herokuapp.com/api/v1/auth/change_password', {
+      fetch('http://127.0.0.1:8080/api/v1/auth/change_password', {
         method: 'POST',
         headers: { 'Content-type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({
@@ -124,16 +123,13 @@ if (resetPassword) {
       })
         .then(res => res.json())
         .then((response) => {
-          if (response.status === 'failed') {
+          if (response.status === 'fail') {
             display(response.error, 'fail');
-          } else if (response.status === 'success') {
+          } else  {
             display(response.data[0].message, 'success');
             setTimeout(() => {
               window.location.replace('inbox.html');
             }, 3000);
-          }
-          else {
-            display(response.message, 'fail');
           }
         }).catch((e) => { display('Something went wrong', 'fail'); });
     }

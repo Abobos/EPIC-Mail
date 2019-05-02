@@ -90,6 +90,7 @@
   display: none;
   top:4rem;
   padding: 0.6rem;
+  z-index: 3;
   -webkit-animation: fadeInOut 3.5s;
   animation: fadeInOut 3.5s;
 }
@@ -324,7 +325,6 @@ footer {
   border-bottom: 2px solid #cac5c5;
   padding: 1rem;
   width: 100vw;
-  resize: none;
 }
 
 .compose_group:focus {
@@ -333,8 +333,18 @@ footer {
   border-bottom: 2px solid #cac5c5;
 }
 
-#message {
+#messageField {
   height: 50vh;
+  resize: none;
+}
+
+.emptyDiv {
+  margin: 15rem auto;
+  text-align:center;
+  font-size: 1.3rem;
+}
+.emptyDiv p {
+  font-weight:bold;
 }
 @media screen and (min-width:500px) {
   .card {
