@@ -1,5 +1,4 @@
 import '@babel/polyfill';
-import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -7,7 +6,6 @@ import userRouter from './routes/userRoute';
 import messageRouter from './routes/messageRoute';
 import groupRouter from './routes/groupRoute';
 
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;

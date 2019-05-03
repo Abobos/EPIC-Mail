@@ -1,13 +1,11 @@
 import { Pool } from 'pg';
+import * as envConfig from './environments';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-let config = process.env.DATABASE_URL_DEV;
-
-if (process.env.NODE_ENV === 'test') config = process.env.DATABASE_URL_TEST;
-if (process.env.NODE_ENV === 'production') config = process.env.DATABASE_URL;
-
+const env = process.env.NODE_ENV || 'development';
+const config = process.env[envConfig[env].envVariable];
 const pool = new Pool({ connectionString: config });
 
 export default pool;
