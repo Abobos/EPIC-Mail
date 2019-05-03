@@ -103,8 +103,10 @@ footer {
   bottom: 0;
   letter-spacing: .08rem;
 	width:100vw;
-	background-color:#f2f2f2;
+  background-color:#e6e1e1;
+  font-weight: bold;
 	}
+
 
 #index {
   background-image: url(https://source.unsplash.com/M5UD_FyuDl8);
@@ -112,11 +114,11 @@ footer {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 100vh;
+ 
 }
 
 #welcome {
-  height: 75vh;
+  height: 100vh;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content:  center;
@@ -124,10 +126,12 @@ footer {
   -webkit-align-items:center;
   align-items: center;
   line-height: 2.5rem;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #welcomeText {
   width:80vw;
+  margin-bottom:5rem;
   text-align: center;
   -webkit-animation: SlideUp 2s;
   animation: SlideUp 2s;
@@ -346,6 +350,7 @@ footer {
 .emptyDiv p {
   font-weight:bold;
 }
+
 @media screen and (min-width:500px) {
   .card {
     width: 80vw;
@@ -396,11 +401,7 @@ footer {
   #welcomeText p {
     font-size: 1.3rem;
   }
-  .margin {
-    margin-top:4rem;
-  }
-
-  #heading {
+    #heading {
     text-align: center;
   }
 
@@ -418,11 +419,13 @@ footer {
     display: -webkit-flex;
     border-bottom: 1px solid #cac5c5;
   }
+
  #desktop .userInfo {
    padding:2rem;
    font-size: 1rem;
    width: 35vw;
  }
+
   #desktop .nav {
     display: -webkit-flex;
     display: flex;
@@ -435,6 +438,7 @@ footer {
     width: 9vw;
     margin-left: 0;
   }
+
   #desktop .nav a:hover {
   padding: 0;
   }

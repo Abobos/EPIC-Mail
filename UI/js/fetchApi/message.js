@@ -11,7 +11,7 @@ if (composeForm) {
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('messageField').value;
 
-    fetch('http://127.0.0.1:8080/api/v1/messages', {
+    fetch('https://epicmail11.herokuapp.com/api/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: userToken },
       body: JSON.stringify({
@@ -28,7 +28,7 @@ if (composeForm) {
 }
 
 const getUserInbox = () => {
-  fetch('http://127.0.0.1:8080/api/v1/messages', {
+  fetch('https://epicmail11.herokuapp.com/api/v1/messages', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -42,7 +42,7 @@ const getUserInbox = () => {
 };
 
 const getUserSent = () => {
-  fetch('http://127.0.0.1:8080/api/v1/messages/sent', {
+  fetch('https://epicmail11.herokuapp.com/api/v1/messages/sent', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -56,7 +56,7 @@ const getUserSent = () => {
 };
 
 const getAMessage = (messageId) => {
-  fetch(`http://127.0.0.1:8080/api/v1/messages/${messageId}`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/${messageId}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -70,7 +70,7 @@ const getAMessage = (messageId) => {
 };
 
 const deleteAMessage = (messageId) => {
-  fetch(`http://127.0.0.1:8080/api/v1/messages/${messageId}`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/${messageId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -80,8 +80,6 @@ const deleteAMessage = (messageId) => {
       else {
         display(response.data[0].message, 'success');
         clopen('inbox');
-        // empty('inbox');
-        // getUserInbox();
         setTimeout(() => {
           window.location.reload();
         }, 2000);
@@ -90,7 +88,7 @@ const deleteAMessage = (messageId) => {
 };
 
 const getASentMessage = (messageId) => {
-  fetch(`http://127.0.0.1:8080/api/v1/messages/sent/${messageId}`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/sent/${messageId}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -105,7 +103,7 @@ const getASentMessage = (messageId) => {
 
 
 const deleteASentMessage = (messageId) => {
-  fetch(`http://127.0.0.1:8080/api/v1/messages/sent/${messageId}`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/sent/${messageId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -115,8 +113,6 @@ const deleteASentMessage = (messageId) => {
       else {
         display(response.data[0].message, 'success');
         clopen('sent');
-        // empty('sent');
-        // getUserSent();
         setTimeout(() => {
           window.location.reload();
         }, 2000);

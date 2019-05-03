@@ -35,6 +35,7 @@ const modalBody = document.querySelector('#modalBody');
 const modalClose = document.querySelector('#modalClose');
 const modalTrash = document.querySelector('#modalTrash');
 const userInfos = document.querySelectorAll('.userInfo');
+// const createGroup = docueme
 
 openNav.addEventListener('click', () => {
   sideNav.style.width = '300px';
@@ -136,16 +137,11 @@ const openModal = (messageDetails, divId) => {
   closeModal(div);
 };
 
-const clopen= (divId) => {
+const clopen = (divId) => {
   modal.classList.add('hide');
   const div = document.getElementById(divId);
   div.classList.remove('hide');
 };
-
-// const empty = (divId) => {
-//   const div = document.getElementById(divId);
-//   div.innerHTML = '';
-// };
 
 userInfos.forEach((userInfo) => {
   const { email } = localStorage;

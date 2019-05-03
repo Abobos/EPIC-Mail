@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" type="text/css"  href="css/style.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="../../font-awesome/css/font-awesome.min.css" type="text/css"> -->
     <title>EPIC-Mail | Inbox</title>
   </head>
 
@@ -65,7 +65,19 @@
           <!-- <div id="draft" class="viewPage hide">
           </div> -->
 
-          <div id="group" class="viewPage hide">
+          <div id="group" class="margin viewPage hide">
+            <button type="button" id="createGroup">Create Group</button>
+          </div>
+
+
+          <div id="createGroupModal" class="hide">
+            <span id="closeCreateGroup">&times;</span>
+            <span id="modalHeading"><h3>Create Group</h3></span>
+              <form id="createGroup" >
+                <input type="text" id="name" class="compose_group" placeholder="Group Name"/>
+                <input type="submit" id="submit" class="btn_display" value="create group" data-notice="Processing...."/>
+              </form>
+            </div>
           </div>
 
           <div id="modal" class="hide">
