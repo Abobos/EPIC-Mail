@@ -114,11 +114,10 @@ footer {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
- 
 }
 
 #welcome {
-  height: 100vh;
+  height: 89vh;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content:  center;
