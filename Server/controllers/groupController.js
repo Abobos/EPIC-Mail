@@ -96,7 +96,7 @@ class groupController {
       const groups = [];
       for (const memberId of memberIds) {
         const { rows } = await db.query(queryStatement, [groupId, memberId, 'member']);
-          groups.push(rows[0]);
+        groups.push(rows[0]);
       }
       const groupInfo = groups.map((group) => {
         const info = {

@@ -62,7 +62,7 @@ describe('Send Password Link', () => {
         done();
       });
   });
-  
+
   // it('should return a status of 200 when message is sent', (done) => {
   //   chai
   //     .request(app)
@@ -109,7 +109,8 @@ describe('Change Password', () => {
       .send({
         password: 'bluewaters3',
       })
-      .end((req, res) => {
+      .end((err, res) => {
+        if (err) console.log(err);
         res.should.have.status(200);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
