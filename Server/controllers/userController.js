@@ -51,7 +51,7 @@ class UserController {
       if (!hashValue) {
         return res.status(401).json({
           status: 'fail',
-          error: 'Incorrect password',
+          error: 'Invalid credentials',
         });
       }
       return res.status(200).json({

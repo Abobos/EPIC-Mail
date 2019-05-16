@@ -6,7 +6,6 @@ import userRouter from './routes/userRoute';
 import messageRouter from './routes/messageRoute';
 import groupRouter from './routes/groupRoute';
 
-
 const app = express();
 const port = process.env.PORT || 8080;
 

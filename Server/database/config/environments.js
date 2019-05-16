@@ -1,13 +1,13 @@
-  const development = {
-    envVariable: 'DATABASE_URL_DEV',
-  };
+const development = {
+  envVariable: 'DATABASE_URL_DEV',
+};
 
-   const test = {
-    envVariable: 'DATABASE_URL_TEST',
-  };
+const test = {
+  envVariable: 'DATABASE_URL_TEST',
+};
   
-  const production = {
-    envVariable: 'DATABASE_URL',
-  };
+const production = {
+  envVariable: 'DATABASE_URL',
+};
 
 export { development, test, production };

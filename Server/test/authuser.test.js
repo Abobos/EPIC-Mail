@@ -224,7 +224,7 @@ describe('POST /login', () => {
         res.should.have.status(401);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('fail');
-        res.body.should.have.property('error').eql('Incorrect password');
+        res.body.should.have.property('error').eql('Invalid credentials');
         done();
       });
   });
