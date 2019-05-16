@@ -24,3 +24,5 @@ after_script:
 
 after_success:
   - npm run coverage
+  - npm install codeclimate-test-reporter
+  - codeclimate-test-reporter < coverage/Icov.info
