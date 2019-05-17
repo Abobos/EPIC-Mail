@@ -6,7 +6,6 @@ let viewThirdMessage = document.getElementById('viewThirdMessage');
 function view(){
     let messageId = this.attributes['data-type'].value;
     let message = document.getElementById(messageId);
-
     message.classList.toggle('hide');
 }
 

@@ -29,7 +29,7 @@ class groupController {
 
   static async getGroups(req, res) {
     try {
-      const allGroups = await db.query('SELECT id, name, role FROM groups WHERE ownerId= $1 ORDER BY id', [req.decoded.id]);
+      const allGroups = await db.query('SELECT groups.id, groups.name, groupmembers.userRole FROM groups, groupmembers WHERE groups.id = groupmembers.groupId AND groupmembers.userId = $1 ORDER BY groups.id', [req.decoded.id]);
       return res.status(200).json({
         status: 'success',
         data: allGroups.rows,
