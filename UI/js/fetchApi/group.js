@@ -6,7 +6,7 @@ if (createGroupForm) {
     e.preventDefault();
     notify('enable', createGroupForm);
     const name = document.getElementById('name').value;
-    fetch('http://127.0.0.1:8080/api/v1/groups', {
+    fetch('https://epicmail11.herokuapp.com/api/v1/groups', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: Token },
       body: JSON.stringify({ name }),
@@ -21,7 +21,7 @@ if (createGroupForm) {
 }
 
 const getUserGroups = () => {
-  fetch('http://127.0.0.1:8080/api/v1/groups', {
+  fetch('https://epicmail11.herokuapp.com/api/v1/groups', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: Token },
     cache: 'reload',
@@ -35,7 +35,7 @@ const getUserGroups = () => {
 };
 
 const deleteGroup = (groupId) => {
-  fetch(`http://127.0.0.1:8080/api/v1/groups/${groupId}`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
