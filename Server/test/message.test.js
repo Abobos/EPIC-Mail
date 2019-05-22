@@ -359,7 +359,7 @@ describe('GET /messages/unread', () => {
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
         res.body.should.have.property('data');
-        res.body.data.should.be.an('array').that.is.empty;
+        res.body.data.should.be.an('array');
         done();
       });
   });

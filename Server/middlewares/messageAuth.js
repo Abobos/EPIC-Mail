@@ -38,6 +38,7 @@ const validateMessageDetails = async (req, res, next) => {
       });
     }
     req.body.receiverId = userDetails.rows[0].id;
+    req.body.receiverEmail = email;
     return next();
   } catch (e) {
     return res.status(500).json({

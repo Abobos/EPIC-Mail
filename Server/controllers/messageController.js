@@ -3,13 +3,14 @@ import db from '../database/config/pool';
 class messageController {
   static async sendEmail(req, res) {
     const senderId = req.decoded.id;
+    const senderEmail = req.decoded.email;
     const { subject, message } = req.body;
-    const { receiverId } = req.body;
+    const { receiverId, receiverEmail } = req.body;
     try {
       const createdMessage = await db.query('INSERT INTO messages (subject, message) VALUES ($1, $2) RETURNING *', [subject, message]);
       const messageId = createdMessage.rows[0].id;
-      await db.query('INSERT INTO inbox (senderId, receiverId, messageId) VALUES ($1, $2, $3)', [senderId, receiverId, messageId]);
-      await db.query('INSERT INTO sent (senderId, receiverId, messageId) VALUES ($1, $2, $3)', [senderId, receiverId, messageId]);
+      await db.query('INSERT INTO inbox (senderId, senderEmail, receiverId, messageId) VALUES ($1, $2, $3, $4)', [senderId, senderEmail, receiverId, messageId]);
+      await db.query('INSERT INTO sent (senderId, receiverId, receiverEmail, messageId) VALUES ($1, $2, $3, $4)', [senderId, receiverId, receiverEmail, messageId]);
       return res.status(200).json({
         status: 'success',
         data: createdMessage.rows,
@@ -22,10 +23,9 @@ class messageController {
   }
 
   static async getReceivedEmails(req, res) {
-    const queryText = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 ORDER BY messages.id';
+    const queryText = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, inbox.senderEmail, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 ORDER BY messages.id DESC';
     try {
       const receivedMessages = await db.query(queryText, [req.decoded.id]);
-      await db.query('UPDATE inbox SET status = $1 WHERE receiverId = $2', ['read', req.decoded.id]);
       if (receivedMessages.rows) {
         return res.status(200).json({
           status: 'success',
@@ -40,7 +40,7 @@ class messageController {
   }
 
   static async getUnreadEmails(req, res) {
-    const queryStatement = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 AND inbox.status = $2 ORDER BY messages.id';
+    const queryStatement = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, inbox.senderEmail, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.receiverId = $1 AND inbox.status = $2 ORDER BY messages.id DESC';
     try {
       const unreadMessages = await db.query(queryStatement, [req.decoded.id, 'unread']);
       if (unreadMessages.rows) {
@@ -57,7 +57,7 @@ class messageController {
   }
 
   static async getSentEmails(req, res) {
-    const queryStatement = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, sent.senderId, sent.receiverId, messages.parentMessageId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.senderId = $1 ORDER BY messages.id';
+    const queryStatement = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, sent.senderId, sent.receiverId, sent.receiverEmail, messages.parentMessageId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.senderId = $1 ORDER BY messages.id DESC';
     try {
       const sentMessages = await db.query(queryStatement, [req.decoded.id]);
       if (sentMessages.rows) {
@@ -75,9 +75,10 @@ class messageController {
 
   static async getAnEmail(req, res) {
     const messageId = Number(req.params.messageId);
-    const queryText = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.messageId = $1 AND inbox.receiverId = $2';
+    const queryText = 'SELECT messages.id, inbox.createdOn, messages.subject, messages.message, inbox.senderId, inbox.receiverId, inbox.senderEmail, messages.parentMessageId, inbox.status FROM messages INNER JOIN inbox ON messages.id=inbox.messageId WHERE inbox.messageId = $1 AND inbox.receiverId = $2 ORDER by messages.id';
     try {
       const EmailRecord = await db.query(queryText, [messageId, req.decoded.id]);
+      await db.query('UPDATE inbox SET status = $1 WHERE messageId = $2', ['read', messageId]);
       if (EmailRecord.rows[0]) {
         return res.status(200).json({
           status: 'success',
@@ -122,7 +123,7 @@ class messageController {
 
    static async getASentEmail(req, res) {
     const messageId = Number(req.params.messageId);
-    const queryText = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, sent.senderId, sent.receiverId, messages.parentMessageId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.messageId = $1 AND sent.senderId = $2';
+    const queryText = 'SELECT messages.id, sent.createdOn, messages.subject, messages.message, sent.senderId, sent.receiverId, sent.receiverEmail, messages.parentMessageId, sent.status FROM messages INNER JOIN sent ON messages.id=sent.messageId WHERE sent.messageId = $1 AND sent.senderId = $2';
     try {
       const EmailRecord = await db.query(queryText, [messageId, req.decoded.id]);
       if (EmailRecord.rows[0]) {
