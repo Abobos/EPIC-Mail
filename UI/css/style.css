@@ -1,37 +1,37 @@
 @import "navbar.css";
 
 .card {
-  text-align:center;
+  text-align: center;
   margin: 0 auto;
   width: 100vw;
-  padding:30px;
-  -webkit-box-shadow:5px 5px 3px #888888, -5px -5px 3px #888888;
+  padding: 30px;
+  -webkit-box-shadow: 5px 5px 3px #888888, -5px -5px 3px #888888;
   box-shadow: 5px 5px 3px #888888, -5px -5px 3px #888888;
 }
 
 .card h1 {
-  font-size:1rem;
+  font-size: 1rem;
   text-decoration: none;
 }
 
 .card a {
   text-decoration: none;
-	color:var(--blue);
+  color: var(--blue);
 }
 
 .margin {
-  margin-top:2rem;
+  margin-top: 2rem;
 }
 
 .form_group {
   width: 80vw;
   padding: 10px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .form_group:focus {
-	outline: none;
-	border-bottom: 2px solid var(--blue);
+  outline: none;
+  border-bottom: 2px solid var(--blue);
 }
 
 .btn_display {
@@ -39,10 +39,10 @@
   display: block;
   width: 80vw;
   margin: 20px auto 0;
-  text-align:center;
+  text-align: center;
   padding: 7px;
-  border:3px solid var(--blue);
-  color:var(--white);
+  border: 3px solid var(--blue);
+  color: var(--white);
   background-color: var(--blue);
   text-decoration: none;
 }
@@ -53,12 +53,12 @@
 
 .btn {
   cursor: pointer;
-  text-align:center;
+  text-align: center;
   border-radius: 0.5rem;
   padding: 0.8rem;
   font-size: 1rem;
-  border:3px solid var(--white);
-  color:var(--white);
+  border: 3px solid var(--white);
+  color: var(--white);
   text-decoration: none;
   box-shadow: 5px 5px 3px #888888, -5px -5px 3px #888888;
 }
@@ -85,28 +85,27 @@
   color: white;
   padding: 0.6rem;
   position: fixed;
-  width:100vw;
+  width: 100vw;
   text-align: center;
   display: none;
-  top:4rem;
+  top: 4rem;
   padding: 0.6rem;
-  z-index: 3;
+  z-index: 7;
   -webkit-animation: fadeInOut 3.5s;
   animation: fadeInOut 3.5s;
 }
 
 footer {
-	text-align:center;
-  padding:10px;
-  font-size:0.8rem;
-  position:fixed;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.8rem;
+  position: fixed;
   bottom: 0;
-  letter-spacing: .08rem;
-	width:100vw;
-  background-color:#e6e1e1;
+  letter-spacing: 0.08rem;
+  width: 100vw;
+  background-color: #e6e1e1;
   font-weight: bold;
-	}
-
+}
 
 #index {
   background-image: url(https://source.unsplash.com/M5UD_FyuDl8);
@@ -117,20 +116,20 @@ footer {
 }
 
 #welcome {
-  height: 89vh;
+  height: 90vh;
   display: -webkit-flex;
   display: flex;
-  -webkit-justify-content:  center;
+  -webkit-justify-content: center;
   justify-content: center;
-  -webkit-align-items:center;
+  -webkit-align-items: center;
   align-items: center;
   line-height: 2.5rem;
   background: rgba(0, 0, 0, 0.5);
 }
 
 #welcomeText {
-  width:80vw;
-  margin-bottom:5rem;
+  width: 80vw;
+  margin-bottom: 5rem;
   text-align: center;
   -webkit-animation: SlideUp 2s;
   animation: SlideUp 2s;
@@ -140,36 +139,47 @@ footer {
   font-size: 1.5rem;
 }
 
-#welcomeText h1, #welcomeText p {
+#welcomeText h1,
+#welcomeText p {
   color: white;
 }
 
 @keyframes fadeInOut {
-  0%, 50% { opacity: 1 }
-  100% { opacity: 0 }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes SlideUp {
-	from {
-		transform: translateY(400px);
-	}
-	to {
-		transform: translateY(0);
-	}
+  from {
+    transform: translateY(400px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @-webkit-keyframes fadeInOut {
-  0%, 50% { opacity: 1 }
-  100% { opacity: 0 }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @-webkit-keyframes SlideUp {
-	from {
-		-webkit-transform: translateY(400px);
-	}
-	to {
-		-webkit-transform: translateY(0);
-	}
+  from {
+    -webkit-transform: translateY(400px);
+  }
+  to {
+    -webkit-transform: translateY(0);
+  }
 }
 
 #userHeading {
@@ -185,14 +195,24 @@ footer {
 }
 
 #openNav {
-  -webkit-flex:1;
-  flex:1;
+  -webkit-flex: 1;
+  flex: 1;
   cursor: pointer;
 }
 
 #heading {
-  -webkit-flex:1.5;
-  flex:1.5;
+  -webkit-flex: 1.5;
+  flex: 1.5;
+}
+
+#logout a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+}
+
+#logout i {
+  font-size: 0.8rem;
 }
 
 #sideNav {
@@ -200,33 +220,33 @@ footer {
   height: 100vh;
   position: fixed;
   overflow-x: hidden;
-  z-index:1;
-  width:0;
-  -webkit-transition: .4s;
-  transition: .4s;
+  z-index: 1;
+  width: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 #closeNav {
   font-weight: bolder;
-  font-size:1.5rem;
+  font-size: 1.5rem;
   position: absolute;
-  top:0;
+  top: 0;
   right: 1rem;
   cursor: pointer;
 }
 
 .nav {
   list-style-type: none;
-  width:100vw;
+  width: 100vw;
 }
 
 .nav a {
   text-decoration: none;
   text-align: center;
-  color:black;
+  color: black;
   display: inline-block;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   margin-left: 1rem;
 }
 
@@ -237,7 +257,7 @@ footer {
 
 .nav {
   padding: 1rem;
-  margin-top:1rem;
+  margin-top: 1rem;
 }
 .navTabs i {
   margin-right: 1rem;
@@ -245,27 +265,27 @@ footer {
 .navTabs {
   margin-bottom: 2rem;
 }
-  
+
 .userInfo {
   padding: 1rem;
   font-size: 0.8rem;
-  background:#b3d9ff;
+  background: #b3d9ff;
 }
 
 #inbox {
-  height:1px;
+  height: 1px;
 }
-
 .message {
   border: 1px solid #cac5c5;
   padding: 16px;
-  -webkit-transition: .3s;
-  transition: .3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
   cursor: pointer;
 }
 
-.messageBody {
+.messageBody p {
   white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
 }
 .message:hover {
@@ -278,39 +298,39 @@ footer {
 
 #composeMessageBtn {
   background-color: var(--blue);
-  color:white;
-  border-radius: 4rem;
-  padding: .9rem;
+  color: white;
+  border-radius: 50%;
+  padding: 0.9rem;
   font-size: 1rem;
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
-  cursor:pointer;
-} 
+  cursor: pointer;
+}
 
 #composeMessageBtn:hover {
   background-color: #1787f6;
 }
-
 #modal {
   background: white;
   position: fixed;
   padding: 1rem;
   text-align: justify;
-  line-height:1.8rem;
+  line-height: 1.8rem;
   height: 100vh;
   width: 100vw;
 }
 
 #modalSubject {
-  border-bottom: 1px solid #cac5c5; 
+  border-bottom: 1px solid #cac5c5;
 }
 
 #modalBody {
   margin-top: 0.8rem;
 }
 
-#modalClose, #modalTrash {
+#modalClose,
+#modalTrash {
   font-size: 1.4rem;
   cursor: pointer;
 }
@@ -319,7 +339,14 @@ footer {
   font-weight: bolder;
   font-size: 1.5rem;
   position: absolute;
-  right: 30px;
+  right: 2rem;
+}
+
+#modal>h4 {
+  position:absolute;
+  top: 0.8rem;
+  text-align:center;
+  left: 7rem;
 }
 
 .compose_group {
@@ -343,14 +370,55 @@ footer {
 
 .emptyDiv {
   margin: 15rem auto;
-  text-align:center;
+  text-align: center;
   font-size: 1.3rem;
 }
 .emptyDiv p {
-  font-weight:bold;
+  font-weight: bold;
 }
 
-@media screen and (min-width:500px) {
+#group ul {
+  margin: 0;
+  padding: 0;
+}
+
+#group ul li {
+  list-style-type: none;
+  border-bottom: 1px solid #cac5c5;
+  padding: 1.3rem;
+}
+
+.dropdownParent {
+  position: relative;
+  border: none;
+}
+
+.dropdown {
+  display: none;
+  background-color: white;
+  z-index: 5;
+  position: absolute;
+  border: 1px solid #8888;
+  top: 0.8rem;
+  width:10rem;
+  left:10rem;
+  -webkit-box-shadow: 2px 2px 3px #888888, -2px -2x 3px #888888;
+  box-shadow: 2px 2px 3px #888888, -2px -2px 3px #888888;
+}
+
+.dropdownParent:hover .dropdown {
+  display: block;
+}
+
+.dropdown>li {
+ height: 0.8rem;
+}
+
+.dropdown>li:hover {
+  background: #f2f2f2;
+}
+
+@media screen and (min-width: 500px) {
   .card {
     width: 80vw;
   }
@@ -360,7 +428,7 @@ footer {
   }
 
   .btn_display {
-    width: 70vw
+    width: 70vw;
   }
 
   #welcomeText {
@@ -368,11 +436,11 @@ footer {
   }
 
   footer {
-  font-size:1rem;
+    font-size: 1rem;
   }
-} 
+}
 
-@media screen and (min-width:600px) {
+@media screen and (min-width: 600px) {
   .card {
     width: 65vw;
   }
@@ -380,11 +448,11 @@ footer {
     width: 50vw;
   }
   .btn_display {
-    width: 50vw
+    width: 50vw;
   }
-} 
+}
 
-@media screen and (min-width:768px) {
+@media screen and (min-width: 768px) {
   .card {
     width: 50vw;
   }
@@ -392,7 +460,7 @@ footer {
     width: 40vw;
   }
   .btn_display {
-    width: 40vw
+    width: 40vw;
   }
   #welcomeText {
     width: 40vw;
@@ -400,7 +468,7 @@ footer {
   #welcomeText p {
     font-size: 1.3rem;
   }
-    #heading {
+  #heading {
     text-align: center;
   }
 
@@ -419,11 +487,11 @@ footer {
     border-bottom: 1px solid #cac5c5;
   }
 
- #desktop .userInfo {
-   padding:2rem;
-   font-size: 1rem;
-   width: 35vw;
- }
+  #desktop .userInfo {
+    padding: 2rem;
+    font-size: 1rem;
+    width: 35vw;
+  }
 
   #desktop .nav {
     display: -webkit-flex;
@@ -439,16 +507,16 @@ footer {
   }
 
   #desktop .nav a:hover {
-  padding: 0;
+    padding: 0;
   }
-} 
+}
 
-@media screen and (max-width:768px) {
-  .hidden-xs{
+@media screen and (max-width: 768px) {
+  .hidden-xs {
     display: none;
   }
 }
-@media screen and (min-width:1000px) {
+@media screen and (min-width: 1000px) {
   .card {
     width: 30vw;
   }
@@ -456,6 +524,6 @@ footer {
     width: 25vw;
   }
   .btn_display {
-    width: 25vw
+    width: 25vw;
   }
-} 
+}

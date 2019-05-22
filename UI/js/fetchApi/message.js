@@ -5,13 +5,12 @@ const userPage = document.querySelector('#userPage');
 if (composeForm) {
   composeForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    localStorage.value = submit.value;
-    notify('enable');
+    notify('enable', composeForm);
     const email = document.getElementById('email').value;
     const subject = document.getElementById('subject').value;
     const message = document.getElementById('messageField').value;
 
-    fetch('https://epicmail11.herokuapp.com/api/v1/messages', {
+    fetch('http://127.0.0.1:8080/api/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: userToken },
       body: JSON.stringify({
@@ -22,13 +21,16 @@ if (composeForm) {
         if (response.status === 'fail') display(response.error, 'fail');
         else {
           display('Message sent successfully', 'success');
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         }
       }).catch((e) => { display('Something went wrong', 'fail'); });
   });
 }
 
 const getUserInbox = () => {
-  fetch('https://epicmail11.herokuapp.com/api/v1/messages', {
+  fetch('http://127.0.0.1:8080/api/v1/messages', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -42,7 +44,7 @@ const getUserInbox = () => {
 };
 
 const getUserSent = () => {
-  fetch('https://epicmail11.herokuapp.com/api/v1/messages/sent', {
+  fetch('http://127.0.0.1:8080/api/v1/messages/sent', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -55,8 +57,23 @@ const getUserSent = () => {
     }).catch((e) => { display('Something went wrong', 'fail'); });
 };
 
-const getAMessage = (messageId) => {
-  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/${messageId}`, {
+const getUserUnread = () => {
+  fetch('http://127.0.0.1:8080/api/v1/messages/unread', {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Authorization: userToken },
+    cache: 'reload',
+  }).then(res => res.json())
+    .then((response) => {
+      if (!response.data[0]) renderEmpty('unread');
+      else {
+        render(response.data, 'unread');
+      }
+    }).catch((e) => { display('Something went wrong', 'fail'); });
+};
+
+
+const getAnInboxMessage = (messageId) => {
+  fetch(`http://127.0.0.1:8080/api/v1/messages/${messageId}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -69,8 +86,8 @@ const getAMessage = (messageId) => {
     }).catch((e) => { display('Something went wrong', 'fail'); });
 };
 
-const deleteAMessage = (messageId) => {
-  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/${messageId}`, {
+const deleteAnInboxMessage = (messageId) => {
+  fetch(`http://127.0.0.1:8080/api/v1/messages/${messageId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -82,13 +99,46 @@ const deleteAMessage = (messageId) => {
         clopen('inbox');
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
+      }
+    }).catch((e) => {  display('Something went wrong', 'fail');  });
+};
+
+
+const getAnUnreadMessage = (messageId) => {
+  fetch(`http://127.0.0.1:8080/api/v1/messages/${messageId}`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Authorization: userToken },
+    cache: 'reload',
+  }).then(res => res.json())
+    .then((response) => {
+      if (response.status === 'fail') display(response.error, 'fail');
+      else {
+        openModal(response.data[0], 'unread');
       }
     }).catch((e) => { display('Something went wrong', 'fail'); });
 };
 
+const deleteAnUnreadMessage = (messageId) => {
+  fetch(`http://127.0.0.1:8080/api/v1/messages/${messageId}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json', Authorization: userToken },
+    cache: 'reload',
+  }).then(res => res.json())
+    .then((response) => {
+      if (response.status === 'fail') display(response.error, 'fail');
+      else {
+        display(response.data[0].message, 'success');
+        clopen('unread');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    }).catch((e) => {  display('Something went wrong', 'fail');  });
+};
+
 const getASentMessage = (messageId) => {
-  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/sent/${messageId}`, {
+  fetch(`http://127.0.0.1:8080/api/v1/messages/sent/${messageId}`, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -103,7 +153,7 @@ const getASentMessage = (messageId) => {
 
 
 const deleteASentMessage = (messageId) => {
-  fetch(`https://epicmail11.herokuapp.com/api/v1/messages/sent/${messageId}`, {
+  fetch(`http://127.0.0.1:8080/api/v1/messages/sent/${messageId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', Authorization: userToken },
     cache: 'reload',
@@ -115,10 +165,10 @@ const deleteASentMessage = (messageId) => {
         clopen('sent');
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 1000);
       }
     }).catch((e) => { display('Something went wrong', 'fail'); });
 };
 
 
-userPage.addEventListener('load', getUserInbox(), getUserSent());
+userPage.addEventListener('load', grantAccess(), getUserInbox(), getUserSent(), getUserUnread());

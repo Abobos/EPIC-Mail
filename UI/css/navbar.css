@@ -24,7 +24,7 @@ nav {
 }
 
 img {
-  width: 9vw;
+  max-width: 40px;
   height: auto;
 }
 
@@ -38,27 +38,7 @@ img {
 }
 
 @media screen and (min-width:500px) {
-  img {
-    width: 10vw;
-  }
   .navbar_brand {
   font-size: 1.7rem;
-  }
-} 
-
-@media screen and (min-width:600px) {
-  img {
-    width: 9vw;
-  }
-} 
-@media screen and (min-width:768px) {
-  img {
-    width: 8vw;
-  }
-} 
-
-@media screen and (min-width:1000px) {
-  img {
-    width: 5vw;
   }
 } 

@@ -1,12 +1,23 @@
-const notify = (state) => {
-  const submit = document.getElementById('submit');
-  const submitData = submit.dataset.notice;
-  const { value } = localStorage;
+const grantAccess = () => {
+  const { token } = localStorage;
+  if (!token) window.location.replace('index.html');
+};
+
+const notify = (state, formType) => {
   if (state === 'enable') {
+    const { submit } = formType.elements;
+    localStorage.formId = formType.id;
+    localStorage.value = submit.value;
+    const submitData = submit.dataset.notice;
     submit.value = submitData;
   } else {
-    submit.value = value;
-    localStorage.removeItem('value');
+    const { formId } = localStorage;
+    if (formId) {
+      const submitElement = document.querySelector(`#${formId} #submit`);
+      submitElement.value = localStorage.value;
+      localStorage.removeItem('formId');
+      localStorage.removeItem('value');
+    }
   }
 };
 
@@ -35,10 +46,9 @@ const modalBody = document.querySelector('#modalBody');
 const modalClose = document.querySelector('#modalClose');
 const modalTrash = document.querySelector('#modalTrash');
 const userInfos = document.querySelectorAll('.userInfo');
-// const createGroup = docueme
 
 openNav.addEventListener('click', () => {
-  sideNav.style.width = '300px';
+  sideNav.style.width = '250px';
 });
 
 closeNav.addEventListener('click', () => {
@@ -51,7 +61,11 @@ window.addEventListener('click', (e) => {
   }
 });
 
-const clearDisplayPage = () => {
+const createElement = element => document.createElement(element);
+const append = (parent, child) => parent.appendChild(child);
+const capitalize = text => text.charAt(0).toUpperCase() + text.slice(1);
+
+const clearDOM = () => {
   viewPages.forEach((viewPage) => {
     viewPage.classList.add('hide');
   });
@@ -61,13 +75,13 @@ navLinks.forEach((navLink) => {
   navLink.addEventListener('click', (e) => {
     if (e.target.classList.contains('userView')) {
       const id = e.target.dataset.value;
-      const Id = id.charAt(0).toUpperCase() + id.slice(1);
+      const Id = capitalize(id);
       heading.textContent = Id;
       const pageDivs = document.getElementById(id);
       if (pageDivs) {
         composeMessageBtn.classList.remove('hide');
       }
-      clearDisplayPage();
+      clearDOM();
       pageDivs.classList.remove('hide');
       modal.classList.add('hide');
     }
@@ -75,7 +89,7 @@ navLinks.forEach((navLink) => {
 });
 
 composeMessageBtn.addEventListener('click', () => {
-  clearDisplayPage();
+  clearDOM();
   heading.textContent = 'Compose';
   composeMessageBtn.classList.add('hide');
   composeMessage.classList.remove('hide');
@@ -86,16 +100,33 @@ const closeModal = (div) => {
     openNav.classList.remove('hide');
     composeMessageBtn.classList.remove('hide');
     modal.classList.add('hide');
-    clearDisplayPage();
+    clearDOM();
     div.classList.remove('hide');
   });
+};
+
+const renderEmpty = (divid) => {
+  const div = document.getElementById(divid);
+  const divId = capitalize(divid);
+  div.innerHTML = `<div class="emptyDiv">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <p>${divId} is empty</p>
+                    </div>`;
 };
 
 const render = (datas, divId) => {
   const div = document.getElementById(divId);
   datas.forEach((data) => {
     if (divId === 'inbox') {
-      div.innerHTML += `<div class="message" onclick='getAMessage(${data.id})'>
+      div.innerHTML += `<div class="message" onclick='getAnInboxMessage(${data.id})'>
+                          <div class="messageSubject">
+                            <b>${data.subject}</b>
+                          </div>
+                          <div class="messageBody">
+                            <p>${data.message}</p>
+                        </div>`;
+    }  else if (divId === 'unread') {
+      div.innerHTML += `<div class="message" onclick='getAnUnreadMessage(${data.id})'>
                           <div class="messageSubject">
                             <b>${data.subject}</b>
                           </div>
@@ -114,20 +145,50 @@ const render = (datas, divId) => {
   });
 };
 
-const renderEmpty = (divid) => {
-  const div = document.getElementById(divid);
-  const divId = divid.charAt(0).toUpperCase() + divid.slice(1);
-  div.innerHTML = `<div class="emptyDiv">
-                    <i class="fa fa-exclamation-circle"></i>
-                    <p>${divId} is empty</p>
-                    </div>`;
+const createGroupOption = (group, dropDown, textContent) => {
+  const option = createElement('li');
+  option.setAttribute('id', `${group.id}`);
+  option.textContent = textContent;
+  if (textContent === 'Edit group Name') option.setAttribute('onclick', `editGroupName(${group.id})`);
+  else if (textContent === 'Delete group') option.setAttribute('onclick', `deleteGroup(${group.id})`);
+  else if (textContent === 'Add user(s)') option.setAttribute('onclick', `addUsers(${group.id})`);
+  return append(dropDown, option);
+};
+
+const renderGroup = (groupDatas, groupTemplateId) => {
+  const groupTemplate = document.querySelector(`#${groupTemplateId}`);
+  const ul = createElement('ul');
+  groupDatas.forEach((groupData) => {
+    const li = createElement('li');
+    li.setAttribute('id', `${groupData.id}`);
+    li.setAttribute('class', 'dropdownParent');
+    li.textContent = `${groupData.name}`;
+    append(ul, li);
+    append(groupTemplate, ul);
+    const currentGroup = document.getElementById(`${groupData.id}`);
+    const dropDown = createElement('ul');
+    dropDown.setAttribute('class', 'dropdown');
+    createGroupOption(currentGroup, dropDown, 'Edit group Name');
+    createGroupOption(currentGroup, dropDown, 'Delete group');
+    createGroupOption(currentGroup, dropDown, 'Add user(s)');
+    createGroupOption(currentGroup, dropDown, 'Send message');
+    append(currentGroup, dropDown);
+    console.log(currentGroup);
+  });
 };
 
 const openModal = (messageDetails, divId) => {
+  console.log(modal);
   modalSubject.innerHTML = `<b>${messageDetails.subject}</b>`;
   modalBody.innerHTML = `<p>${messageDetails.message}</p>`;
-  if (divId === 'inbox') modalTrash.setAttribute('onclick', `deleteAMessage(${messageDetails.id})`);
-  else {
+  if (divId === 'inbox') {
+    modal.children[1].textContent = `From: ${messageDetails.senderemail}`;
+    modalTrash.setAttribute('onclick', `deleteAnInboxMessage(${messageDetails.id})`);
+  } else if (divId === 'unread') {
+    modal.children[1].textContent = `From: ${messageDetails.senderemail}`;
+    modalTrash.setAttribute('onclick', `deleteAnUnreadMessage(${messageDetails.id})`);
+  } else if (divId === 'sent') {
+    modal.children[1].textContent = `To: ${messageDetails.receiveremail}`;
     modalTrash.setAttribute('onclick', `deleteASentMessage(${messageDetails.id})`);
   }
   const div = document.getElementById(divId);
@@ -145,9 +206,8 @@ const clopen = (divId) => {
 
 userInfos.forEach((userInfo) => {
   const { email } = localStorage;
-  const boldTag = document.createElement('b');
-  const entityEmail = document.createTextNode(email);
-  boldTag.appendChild(entityEmail);
+  const boldTag = createElement('b');
+  boldTag.textContent = email;
   userInfo.insertBefore(boldTag, userInfo.firstChild);
 });
 

@@ -1,18 +1,17 @@
 module.exports = {
- "extends": "airbnb-base",
- "env": {
-  "browser": true
- },
- "rules": {
-   "no-restricted-syntax": [
-    "off",
-     {
-       "selector": "ForOfStatement",
-       "message": "iterators/generators require regenerator-runtime, which is too heavyweight for this guide to allow them. Seperately, loops should be avoided in favor of array iterations."
-     }
-   ],
-   "no-await-in-loop": [
-     "off",
-   ]
- },
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": "airbnb-base",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+    }
 };
