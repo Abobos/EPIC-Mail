@@ -13,4 +13,3 @@ const pool = new Pool({ connectionString: config });
 // .catch(e => console.log('something went wrong'));
 
 export default pool;
-
