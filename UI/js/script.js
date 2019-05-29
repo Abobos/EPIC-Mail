@@ -46,6 +46,9 @@ const modalBody = document.querySelector('#modalBody');
 const modalClose = document.querySelector('#modalClose');
 const modalTrash = document.querySelector('#modalTrash');
 const userInfos = document.querySelectorAll('.userInfo');
+const groupModal = document.querySelector('.modal');
+const groupModalCloseBtn = document.querySelector('.modal .closeBtn');
+const modalContents = document.querySelectorAll('.modal-content');
 
 openNav.addEventListener('click', () => {
   sideNav.style.width = '250px';
@@ -145,14 +148,34 @@ const render = (datas, divId) => {
   });
 };
 
+const displayModal = (data, groupUniqueId) => {
+  modalContents.forEach((modalContent) => {
+    modalContent.classList.add('hide');
+  });
+  const groupModalBodyContent = document.querySelector(`#${data}`);
+  groupModalBodyContent.setAttribute('data-id', `${groupUniqueId}`);
+  groupModal.classList.remove('hide');
+  groupModalBodyContent.classList.remove('hide');
+  handleRequest(groupModalBodyContent);
+};
+
+groupModalCloseBtn.addEventListener('click', () => {
+  groupModal.classList.add('hide');
+});
+
+window.addEventListener('click', ({ target }) => {
+  if (target === groupModal) groupModal.classList.add('hide');
+});
+
 const createGroupOption = (group, dropDown, textContent) => {
   const option = createElement('li');
   option.setAttribute('id', `${group.id}`);
   option.textContent = textContent;
-  if (textContent === 'Edit group Name') option.setAttribute('onclick', `editGroupName(${group.id})`);
+  if (textContent === 'Edit group Name') option.setAttribute('onclick', `displayModal('editGroupName', ${group.id})`);
   else if (textContent === 'Delete group') option.setAttribute('onclick', `deleteGroup(${group.id})`);
-  else if (textContent === 'Add user(s)') option.setAttribute('onclick', `addUsers(${group.id})`);
-  return append(dropDown, option);
+  else if (textContent === 'Add user(s)') option.setAttribute('onclick', `displayModal('addUsers', ${group.id})`);
+  else if (textContent === 'Send message') option.setAttribute('onclick', `displayModal('sendMessage', ${group.id})`);
+  append(dropDown, option);
 };
 
 const renderGroup = (groupDatas, groupTemplateId) => {
@@ -173,12 +196,10 @@ const renderGroup = (groupDatas, groupTemplateId) => {
     createGroupOption(currentGroup, dropDown, 'Add user(s)');
     createGroupOption(currentGroup, dropDown, 'Send message');
     append(currentGroup, dropDown);
-    console.log(currentGroup);
   });
 };
 
 const openModal = (messageDetails, divId) => {
-  console.log(modal);
   modalSubject.innerHTML = `<b>${messageDetails.subject}</b>`;
   modalBody.innerHTML = `<p>${messageDetails.message}</p>`;
   if (divId === 'inbox') {
@@ -198,11 +219,11 @@ const openModal = (messageDetails, divId) => {
   closeModal(div);
 };
 
-const clopen = (divId) => {
-  modal.classList.add('hide');
-  const div = document.getElementById(divId);
-  div.classList.remove('hide');
-};
+// const clopen = (divId) => {
+//   modal.classList.add('hide');
+//   const div = document.getElementById(divId);
+//   div.classList.remove('hide');
+// };
 
 userInfos.forEach((userInfo) => {
   const { email } = localStorage;
@@ -218,3 +239,5 @@ logoutBtn.forEach((logout) => {
     window.location.href = 'index.html';
   });
 });
+
+grantAccess();

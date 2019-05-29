@@ -313,7 +313,7 @@ footer {
 }
 #modal {
   background: white;
-  position: fixed;
+  position: relative;
   padding: 1rem;
   text-align: justify;
   line-height: 1.8rem;
@@ -343,7 +343,7 @@ footer {
 }
 
 #modal>h4 {
-  position:absolute;
+  position: absolute;
   top: 0.8rem;
   text-align:center;
   left: 7rem;
@@ -396,12 +396,12 @@ footer {
 .dropdown {
   display: none;
   background-color: white;
-  z-index: 5;
+  z-index: 3;
   position: absolute;
   border: 1px solid #8888;
   top: 0.8rem;
-  width:10rem;
-  left:10rem;
+  width: 13rem;
+  left: 10rem;
   -webkit-box-shadow: 2px 2px 3px #888888, -2px -2x 3px #888888;
   box-shadow: 2px 2px 3px #888888, -2px -2px 3px #888888;
 }
@@ -415,7 +415,31 @@ footer {
 }
 
 .dropdown>li:hover {
+  cursor: pointer;
   background: #f2f2f2;
+}
+
+#sendMessage #messageField {
+  width: 24rem;
+  margin: auto;
+  height: 30vh;
+  border: 3px solid black;
+ 
+}
+
+#sendMessage #subject {
+  border: 3px solid black;
+}
+@media screen and (max-width: 420px) {
+  #modal>h4 {
+    left: 4rem;
+    font-size: 0.8rem;
+  }
+
+  .dropdown {
+    left: 3rem;
+  }
+
 }
 
 @media screen and (min-width: 500px) {
