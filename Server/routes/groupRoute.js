@@ -27,6 +27,10 @@ router.post('/groups/:groupId/users',
   splitUsers,
   Auth.scruntinize,
   groupController.addUsers);
+router.get('/groups/:groupId/users',
+  verifyToken,
+  Auth.validateGroupId,
+  groupController.getGroupMembers);
 router.delete('/groups/:groupId/users/:userId',
   verifyToken,
   Auth.validateGroupId,

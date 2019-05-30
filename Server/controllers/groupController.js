@@ -117,6 +117,23 @@ class groupController {
     }
   }
 
+static async getGroupMembers(req, res) {
+    const groupId = Number(req.params.groupId);
+    const queryStatement = 'SELECT groupmembers.id, groupmembers.userId, users.firstname, users.lastname FROM groupmembers, users WHERE users.id=groupmembers.userId AND groupmembers.groupId = $1 ORDER BY groupmembers.id';
+    try {
+      const { rows } = await db.query(queryStatement, [groupId]);
+      return res.status(200).json({
+        status: 'success',
+        data: rows,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        error: 'Something went wrong',
+      });
+    }
+  }
+
+
   static async deleteUser(req, res) {
     const groupId = Number(req.params.groupId);
     const userId = Number(req.params.userId);
