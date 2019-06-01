@@ -47,23 +47,7 @@ describe('Send Password Link', () => {
       });
   });
 
-  // it('should return a status of 500 when network fails', (done) => {
-  //   chai
-  //     .request(app)
-  //     .post('/api/v1/auth/reset')
-  //     .send({
-  //       email: 'suspieabobo@yahoo.com',
-  //     })
-  //     .end((req, res) => {
-  //       res.should.have.status(500);
-  //       res.should.be.an('object');
-  //       res.body.should.have.property('status').eql('success');
-  //       res.body.should.have.property('error').eql('Network Issue: something went wrong');
-  //       done();
-  //     });
-  // });
-
-  it('should return a status of 200 when message is sent', (done) => {
+  it('should return a status of 500 when network fails', (done) => {
     chai
       .request(app)
       .post('/api/v1/auth/reset')
@@ -71,17 +55,33 @@ describe('Send Password Link', () => {
         email: 'suspieabobo@yahoo.com',
       })
       .end((req, res) => {
-        res.should.have.status(200);
+        res.should.have.status(500);
         res.should.be.an('object');
         res.body.should.have.property('status').eql('success');
-        res.body.should.have.property('data');
-        res.body.data.should.have.an('array');
-        res.body.data[0].should.have.property('message');
-        res.body.data[0].should.have.property('email');
+        res.body.should.have.property('error').eql('Network Issue: something went wrong');
         done();
       });
   });
-});
+
+//   it('should return a status of 200 when message is sent', (done) => {
+//     chai
+//       .request(app)
+//       .post('/api/v1/auth/reset')
+//       .send({
+//         email: 'suspieabobo@yahoo.com',
+//       })
+//       .end((req, res) => {
+//         res.should.have.status(200);
+//         res.should.be.an('object');
+//         res.body.should.have.property('status').eql('success');
+//         res.body.should.have.property('data');
+//         res.body.data.should.have.an('array');
+//         res.body.data[0].should.have.property('message');
+//         res.body.data[0].should.have.property('email');
+//         done();
+//       });
+//   });
+// });
 
 describe('Change Password', () => {
   it('should return a status of 400 when password is not valid', (done) => {
