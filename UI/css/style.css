@@ -388,6 +388,23 @@ footer {
   padding: 1.3rem;
 }
 
+#groupMembers ul {
+  margin: 0;
+  padding: 0;
+}
+
+#groupMembers ul li {
+  position: relative;
+  list-style-type: none;
+  border-bottom: 1px solid #cac5c5;
+  padding: 1.3rem;
+}
+
+#groupMemberDeleteButton {
+  position: absolute;
+  right: 1rem;
+}
+
 .dropdownParent {
   position: relative;
   border: none;
@@ -473,6 +490,10 @@ footer {
   }
   .btn_display {
     width: 50vw;
+  }
+  #groupMemberDeleteButton {
+    position: absolute;
+    right: 10rem;
   }
 }
 

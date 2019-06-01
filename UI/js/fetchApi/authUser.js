@@ -16,7 +16,7 @@ if (signUpForm) {
 
     if (password !== confirmPassword) display('Password do not match', 'fail');
     else {
-      fetch('http://127.0.0.1:8080/api/v1/auth/signup', {
+      fetch('https://epicmail11.herokuapp.com/api/v1/auth/signup', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({
@@ -48,7 +48,7 @@ if (signInForm) {
     const password = document.getElementById('password').value;
 
 
-    fetch('http://127.0.0.1:8080/api/v1/auth/login', {
+    fetch('https://epicmail11.herokuapp.com/api/v1/auth/login', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -77,7 +77,7 @@ if (forgotPassword) {
     notify('enable', forgotPassword);
     const email = document.getElementById('email').value;
 
-    fetch('http://127.0.0.1:8080/api/v1/auth/reset', {
+    fetch('https://epicmail11.herokuapp.com/api/v1/auth/reset', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -108,7 +108,7 @@ if (resetPassword) {
 
     if (password !== confirmPassword) display('Password do not match', 'fail');
     else {
-      fetch('http://127.0.0.1:8080/api/v1/auth/change_password', {
+      fetch('https://epicmail11.herokuapp.com/api/v1/auth/change_password', {
         method: 'POST',
         headers: { 'Content-type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({

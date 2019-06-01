@@ -7,7 +7,7 @@ if (createGroupForm) {
     e.preventDefault();
     notify('enable', createGroupForm);
     const name = document.getElementById('name').value;
-    fetch('http://127.0.0.1:8080/api/v1/groups', {
+    fetch('https://epicmail11.herokuapp.com/api/v1/groups', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: Token },
       body: JSON.stringify({ name }),
@@ -22,7 +22,7 @@ if (createGroupForm) {
 }
 
 const getUserGroups = () => {
-  fetch('http://127.0.0.1:8080/api/v1/groups', {
+  fetch('https://epicmail11.herokuapp.com/api/v1/groups', {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: Token },
     cache: 'reload',
@@ -36,7 +36,7 @@ const getUserGroups = () => {
 };
 
 const deleteGroup = (groupId) => {
-  fetch(`http://127.0.0.1:8080/api/v1/groups/${groupId}`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', Authorization: Token },
     cache: 'reload',
@@ -54,7 +54,7 @@ const deleteGroup = (groupId) => {
 
 const editGroupName = (groupId) => {
   const name = document.querySelector('#editGroupName #name').value;
-  fetch(`http://127.0.0.1:8080/api/v1/groups/${groupId}/name`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}/name`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json', Authorization: Token },
     body: JSON.stringify({ name }),
@@ -73,7 +73,7 @@ const editGroupName = (groupId) => {
 const addUser = (groupId) => {
   const users = document.querySelector('#addUsers #users').value;
   console.log(users, groupId);
-  fetch(`http://127.0.0.1:8080/api/v1/groups/${groupId}/users`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: Token },
     body: JSON.stringify({ users }),
@@ -89,7 +89,7 @@ const addUser = (groupId) => {
 const sendMessage = (groupId) => {
   const subject = document.querySelector('#sendMessage #subject').value;
   const message = document.querySelector('#sendMessage #messageField').value;
-  fetch(`http://127.0.0.1:8080/api/v1/groups/${groupId}/messages`, {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}/messages`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: Token },
     body: JSON.stringify({ subject, message }),
@@ -125,6 +125,37 @@ const handleRequest = (groupOptionContent) => {
       sendMessage(groupId);
     });
   }
+};
+
+const getGroupMembers = (groupId) => {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}/users`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Authorization: Token },
+    cache: 'reload',
+  }).then(res => res.json())
+    .then((response) => {
+      if (!response.data[0]) renderEmptyGroup();
+      else {
+        renderGroupMembers(response.data, groupId);
+      }
+    }).catch((e) => { display('Something went wrong', 'fail'); });
+};
+
+const deleteGroupMember = (memberId, groupId) => {
+  fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}/users/${memberId}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json', Authorization: Token },
+    cache: 'reload',
+  }).then(res => res.json())
+    .then((response) => {
+      if (response.status === 'fail') display(response.error, 'fail');
+      else {
+        display(response.data[0].message, 'success');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      }
+    }).catch((e) => { display('Something went wrong', 'fail'); });
 };
 
 getUserGroups();

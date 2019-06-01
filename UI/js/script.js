@@ -1,6 +1,6 @@
 const grantAccess = () => {
-  const { token } = localStorage;
-  if (!token) window.location.replace('index.html');
+  const { token, email } = localStorage;
+  if (!token && !email) window.location.replace('index.html');
 };
 
 const notify = (state, formType) => {
@@ -117,6 +117,14 @@ const renderEmpty = (divid) => {
                     </div>`;
 };
 
+const renderEmptyGroup = () => {
+  const div = document.getElementById('groupMembers');
+  div.innerHTML = `<div class="emptyDiv">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <p>No Group Members</p>
+                    </div>`;
+};
+
 const render = (datas, divId) => {
   const div = document.getElementById(divId);
   datas.forEach((data) => {
@@ -171,10 +179,11 @@ const createGroupOption = (group, dropDown, textContent) => {
   const option = createElement('li');
   option.setAttribute('id', `${group.id}`);
   option.textContent = textContent;
-  if (textContent === 'Edit group Name') option.setAttribute('onclick', `displayModal('editGroupName', ${group.id})`);
+  if (textContent === 'Edit group name') option.setAttribute('onclick', `displayModal('editGroupName', ${group.id})`);
   else if (textContent === 'Delete group') option.setAttribute('onclick', `deleteGroup(${group.id})`);
   else if (textContent === 'Add user(s)') option.setAttribute('onclick', `displayModal('addUsers', ${group.id})`);
   else if (textContent === 'Send message') option.setAttribute('onclick', `displayModal('sendMessage', ${group.id})`);
+  else if (textContent === 'Group members') option.setAttribute('onclick', `getGroupMembers(${group.id})`);
   append(dropDown, option);
 };
 
@@ -191,11 +200,30 @@ const renderGroup = (groupDatas, groupTemplateId) => {
     const currentGroup = document.getElementById(`${groupData.id}`);
     const dropDown = createElement('ul');
     dropDown.setAttribute('class', 'dropdown');
-    createGroupOption(currentGroup, dropDown, 'Edit group Name');
+    createGroupOption(currentGroup, dropDown, 'Edit group name');
     createGroupOption(currentGroup, dropDown, 'Delete group');
     createGroupOption(currentGroup, dropDown, 'Add user(s)');
     createGroupOption(currentGroup, dropDown, 'Send message');
+    createGroupOption(currentGroup, dropDown, 'Group members');
     append(currentGroup, dropDown);
+  });
+};
+
+const renderGroupMembers = (datas, groupId) => {
+  clearDOM();
+  const groupMembers = document.querySelector('#groupMembers');
+  const ul = createElement('ul');
+  datas.forEach((data) => {
+    const li = createElement('li');
+    li.textContent = `${data.firstname} ${data.lastname}`;
+    const deleteButton = createElement('i');
+    deleteButton.setAttribute('class', 'fa fa-trash');
+    deleteButton.setAttribute('id', 'groupMemberDeleteButton');
+    deleteButton.setAttribute('onclick', `deleteGroupMember(${data.userid}, ${groupId})`);
+    append(li, deleteButton);
+    append(ul, li);
+    append(groupMembers, ul);
+    groupMembers.classList.remove('hide');
   });
 };
 
@@ -218,12 +246,6 @@ const openModal = (messageDetails, divId) => {
   modal.classList.remove('hide');
   closeModal(div);
 };
-
-// const clopen = (divId) => {
-//   modal.classList.add('hide');
-//   const div = document.getElementById(divId);
-//   div.classList.remove('hide');
-// };
 
 userInfos.forEach((userInfo) => {
   const { email } = localStorage;
