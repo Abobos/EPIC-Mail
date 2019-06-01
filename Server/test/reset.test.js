@@ -62,6 +62,7 @@ describe('Send Password Link', () => {
         done();
       });
   });
+});
 
 //   it('should return a status of 200 when message is sent', (done) => {
 //     chai
