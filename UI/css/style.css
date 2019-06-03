@@ -201,8 +201,8 @@ footer {
 }
 
 #heading {
-  -webkit-flex: 1.5;
-  flex: 1.5;
+  -webkit-flex: 2;
+  flex: 2;
 }
 
 #logout a {
@@ -416,9 +416,9 @@ footer {
   z-index: 3;
   position: absolute;
   border: 1px solid #8888;
-  top: 0.8rem;
+  top: 3rem;
+  left: 3rem;;
   width: 13rem;
-  left: 10rem;
   -webkit-box-shadow: 2px 2px 3px #888888, -2px -2x 3px #888888;
   box-shadow: 2px 2px 3px #888888, -2px -2px 3px #888888;
 }
@@ -453,10 +453,12 @@ footer {
     font-size: 0.8rem;
   }
 
-  .dropdown {
-    left: 3rem;
+  #sendMessage #messageField {
+  width: 18rem;
+  margin: auto;
+  height: 30vh;
+  border: 3px solid black;
   }
-
 }
 
 @media screen and (min-width: 500px) {
@@ -553,6 +555,11 @@ footer {
 
   #desktop .nav a:hover {
     padding: 0;
+  }
+
+  .dropdown {
+    top: 0.8rem;
+    left: 10rem;
   }
 }
 
