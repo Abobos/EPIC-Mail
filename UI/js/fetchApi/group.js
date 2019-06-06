@@ -72,7 +72,6 @@ const editGroupName = (groupId) => {
 
 const addUser = (groupId) => {
   const users = document.querySelector('#addUsers #users').value;
-  console.log(users, groupId);
   fetch(`https://epicmail11.herokuapp.com/api/v1/groups/${groupId}/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: Token },

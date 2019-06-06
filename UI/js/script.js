@@ -1,6 +1,6 @@
 const grantAccess = () => {
   const { token, email } = localStorage;
-  if (!token && !email) window.location.replace('index.html');
+  if (!token || !email) window.location.replace('index.html');
 };
 
 const notify = (state, formType) => {
@@ -212,6 +212,9 @@ const renderGroup = (groupDatas, groupTemplateId) => {
 const renderGroupMembers = (datas, groupId) => {
   clearDOM();
   const groupMembers = document.querySelector('#groupMembers');
+  while (groupMembers.firstChild) {
+    groupMembers.removeChild(groupMembers.firstChild);
+  }
   const ul = createElement('ul');
   datas.forEach((data) => {
     const li = createElement('li');
