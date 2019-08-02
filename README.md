@@ -1,7 +1,5 @@
 [![Build Status](https://travis-ci.org/Abobos/EPIC-Mail.svg?branch=develop)](https://travis-ci.org/Abobos/EPIC-Mail)
 [![Coverage Status](https://coveralls.io/repos/github/Abobos/EPIC-Mail/badge.svg?branch=develop)](https://coveralls.io/github/Abobos/EPIC-Mail?branch=develop)
-[![Maintainability](https://api.codeclimate.com/v1/badges/481cdcad78699e9ffe5d/maintainability)](https://codeclimate.com/github/Abobos/EPIC-Mail/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/481cdcad78699e9ffe5d/test_coverage)](https://codeclimate.com/github/Abobos/EPIC-Mail/test_coverage)
 
 ### EPIC-Mail
 EPIC Mail is a web application that helps people exchange messages and informaion over the internet.
